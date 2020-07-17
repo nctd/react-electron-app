@@ -11,7 +11,10 @@ function navBar() {
     <Layout>
       <Header style={{ position: "fixed", zIndex: 1, width: "100%" }}>
         <div className="logo">
-          <img src="logo.png" style={{ height: 50 }} />
+          <img
+            src="sercoin.png"
+            style={{ height: 57, verticalAlign: "initial" }}
+          />
         </div>
       </Header>
     </Layout>
