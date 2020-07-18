@@ -1,7 +1,9 @@
 import React, { useCallback, useState } from "react";
 import _ from "lodash";
-import { Form, Button, Steps } from "antd";
+import { Form, Button, Steps, ConfigProvider } from "antd";
 import FormBuilder from "antd-form-builder";
+import locale from "antd/lib/date-picker/locale/es_ES";
+import moment from "moment";
 const { Step } = Steps;
 const DateView = ({ value }) => (value ? value.format("MMM Do YYYY") : "N/A");
 
@@ -11,29 +13,27 @@ const formCliente = {
   columns: 2,
   fields: [
     {
-      key: "name.first",
+      key: "cliente.nombre",
       label: "Nombre o razon social",
       clear: "both",
       required: true,
     },
     {
-      key: "direccion",
+      key: "cliente.direccion",
       label: "Dirección",
-      colSpan: 1,
     },
     {
-      key: "comuna",
+      key: "cliente.comuna",
       label: "Comuna",
-      clear: "right",
+      // labelCol: { span: 6 },
     },
     {
-      key: "telefono",
+      key: "cliente.telefono",
       label: "Telefono",
     },
     {
-      key: "email",
+      key: "cliente.email",
       label: "Correo Electronico",
-      clear: "right",
     },
   ],
 };
@@ -50,7 +50,55 @@ const formExtintor = {
     {
       key: "extintor.marca",
       label: "Marca",
+    },
+    {
+      key: "extintor.tipo",
+      label: "Tipo",
+      widget: "radio-group",
+      forwardRef: true,
+      options: ["Recargable", "No recargable"],
+    },
+    {
+      key: "extintor.agente",
+      label: "Agente de extinción",
       colSpan: 1,
+      extra: "Naturaleza agente de extinción (NCh1430, cláusula 5)",
+      clear: "both",
+    },
+    {
+      key: "extintor.p_trabajo",
+      label: "Presión de trabajo",
+    },
+    {
+      key: "extintor.p_prueba",
+      label: "Presión de prueba",
+    },
+    {
+      key: "extintor.fabricacion",
+      label: "Fabricación del cílindro ",
+      placeholder: "Seleccionar fecha",
+      widget: "date-picker",
+      widgetProps: {
+        style: { width: "100%" },
+        // picker: "month",
+        locale: moment.locale(locale, {
+          months: "Enero_Febrero_Marzo_Abril_Mayo_Junio_Julio_Agosto_Septiembre_Octubre_Noviembre_Diciembre".split(
+            "_"
+          ),
+          monthsShort: "Ene._Feb._Mar._Abr._May._Jun._Jul._Ago._Sept._Oct._Nov._Dic.".split(
+            "_"
+          ),
+          monthsParseExact: true,
+          weekdaysShort: "dom._lun._mar._mie._jue._vie._sáb.".split("_"),
+          weekdaysMin: "Do_Lu_Ma_Mi_Ju_Vi_Sá".split("_"),
+          weekdaysParseExact: true,
+          week: {
+            dow: 1,
+          },
+        }),
+        format: "DD/MM/YYYY",
+      },
+      wrapperCol: { span: 8 },
     },
   ],
 };
