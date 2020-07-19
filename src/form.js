@@ -14,26 +14,31 @@ const formCliente = {
   fields: [
     {
       key: "cliente.nombre",
-      label: "Nombre o razon social",
+      label: "Nombre o razón social",
       clear: "both",
-      required: true,
+      // required: true,
+      wrapperCol: { span: 12 },
     },
     {
       key: "cliente.direccion",
       label: "Dirección",
+      wrapperCol: { span: 12 },
     },
     {
       key: "cliente.comuna",
       label: "Comuna",
+      wrapperCol: { span: 12 },
       // labelCol: { span: 6 },
     },
     {
       key: "cliente.telefono",
       label: "Telefono",
+      wrapperCol: { span: 12 },
     },
     {
       key: "cliente.email",
       label: "Correo Electronico",
+      wrapperCol: { span: 12 },
     },
   ],
 };
@@ -45,11 +50,14 @@ const formExtintor = {
       key: "extintor.id",
       label: "N° de identificacion",
       clear: "both",
-      required: true,
+      // required: true,
+      wrapperCol: { span: 12 },
     },
     {
       key: "extintor.marca",
       label: "Marca",
+      clear: "both",
+      wrapperCol: { span: 12 },
     },
     {
       key: "extintor.tipo",
@@ -60,18 +68,20 @@ const formExtintor = {
     },
     {
       key: "extintor.agente",
-      label: "Agente de extinción",
-      colSpan: 1,
-      extra: "Naturaleza agente de extinción (NCh1430, cláusula 5)",
+      label: "Naturaleza agente de extinción",
+      extra: "NCh1430, cláusula 5",
       clear: "both",
+      wrapperCol: { span: 12 },
     },
     {
       key: "extintor.p_trabajo",
       label: "Presión de trabajo",
+      wrapperCol: { span: 12 },
     },
     {
       key: "extintor.p_prueba",
       label: "Presión de prueba",
+      wrapperCol: { span: 12 },
     },
     {
       key: "extintor.fabricacion",
@@ -80,7 +90,33 @@ const formExtintor = {
       widget: "date-picker",
       widgetProps: {
         style: { width: "100%" },
-        // picker: "month",
+        picker: "month",
+        locale: moment.locale(locale, {
+          months: "Enero_Febrero_Marzo_Abril_Mayo_Junio_Julio_Agosto_Septiembre_Octubre_Noviembre_Diciembre".split(
+            "_"
+          ),
+          monthsShort: "Ene._Feb._Mar._Abr._May._Jun._Jul._Ago._Sept._Oct._Nov._Dic.".split(
+            "_"
+          ),
+          monthsParseExact: true,
+          weekdaysShort: "dom._lun._mar._mie._jue._vie._sáb.".split("_"),
+          weekdaysMin: "Do_Lu_Ma_Mi_Ju_Vi_Sá".split("_"),
+          weekdaysParseExact: true,
+          week: {
+            dow: 1,
+          },
+        }),
+        format: "MM/YYYY",
+      },
+      wrapperCol: { span: 8 },
+    },
+    {
+      key: "extintor.fecha_servicio",
+      label: "Fecha del servicio",
+      placeholder: "Seleccionar fecha",
+      widget: "date-picker",
+      widgetProps: {
+        style: { width: "100%" },
         locale: moment.locale(locale, {
           months: "Enero_Febrero_Marzo_Abril_Mayo_Junio_Julio_Agosto_Septiembre_Octubre_Noviembre_Diciembre".split(
             "_"
@@ -99,6 +135,24 @@ const formExtintor = {
         format: "DD/MM/YYYY",
       },
       wrapperCol: { span: 8 },
+    },
+  ],
+};
+
+const formServicio = {
+  columns: 1,
+  fields: [
+    {
+      label: "Servicios",
+      key: "checkbox-servicio",
+      widget: "checkbox-group",
+      options: [
+        "Revisión",
+        "Mantenimiento",
+        "Recarga",
+        "Prueba de presión interna",
+      ],
+      wrapperCol: { span: 12 },
     },
   ],
 };
@@ -258,6 +312,47 @@ export default () => {
           <fieldset>
             <legend>Extintor</legend>
             <FormBuilder form={form} meta={formExtintor} />
+          </fieldset>
+        </div>
+        <Form.Item className="form-footer" style={{ textAlign: "right" }}>
+          {currentStep > 0 && (
+            <Button
+              onClick={handleBack}
+              style={{ float: "left", marginTop: "5px" }}
+            >
+              Atras
+            </Button>
+          )}
+          <Button>Cancelar</Button>&nbsp; &nbsp;
+          <Button
+            type="primary"
+            onClick={isReview ? () => form.submit() : handleNext}
+          >
+            {isReview ? "Guardar" : "Siguiente"}
+          </Button>
+        </Form.Item>
+      </Form>
+    );
+  } else if (currentStep === 1) {
+    return (
+      <Form
+        layout="horizontal"
+        form={form}
+        onValuesChange={form.handleValuesChange}
+        onFinish={handleFinish}
+      >
+        <Steps current={currentStep}>
+          {newWizardMeta.steps.map((s) => (
+            <Step key={s.title} title={s.title} />
+          ))}
+        </Steps>
+
+        <div
+          style={{ background: "#f7f7f7", padding: "20px", margin: "30px 0" }}
+        >
+          <fieldset>
+            <legend>Servicio realizado</legend>
+            <FormBuilder form={form} meta={formServicio} />
           </fieldset>
         </div>
         <Form.Item className="form-footer" style={{ textAlign: "right" }}>
