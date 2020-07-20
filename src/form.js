@@ -140,22 +140,75 @@ const formExtintor = {
 };
 
 const formServicio = {
-  columns: 1,
+  columns: 4,
+  formItemLayout: null,
   fields: [
     {
-      label: "Servicios",
-      key: "checkbox-servicio",
-      widget: "checkbox-group",
-      options: [
-        "Revisión",
-        "Mantenimiento",
-        "Recarga",
-        "Prueba de presión interna",
-      ],
+      key: "revision",
+      label: "Revisión",
+      widget: "checkbox",
+      formItemLayout: {
+        labelCol: { span: 16 },
+        wrapperCol: { span: 16 },
+      },
+    },
+    {
+      key: "checkbox.mantenimiento",
+      label: "Mantenimiento",
+      widget: "checkbox",
+      formItemLayout: {
+        labelCol: { span: 16 },
+        wrapperCol: { span: 16 },
+      },
+    },
+    {
+      key: "checkbox.recarga",
+      label: "Recarga",
+      widget: "checkbox",
+      formItemLayout: {
+        labelCol: { span: 16 },
+        wrapperCol: { span: 16 },
+      },
+    },
+    {
+      key: "checkbox.presion",
+      label: "Prueba de presión interna",
+      widget: "checkbox",
+      formItemLayout: {
+        labelCol: { span: 16 },
+        wrapperCol: { span: 16 },
+      },
+    },
+  ],
+};
+
+const formRevision = {
+  columns: 2,
+  fields: [
+    {
+      key: "revision.nombre",
+      label: "Persona a cargo de la revision",
+      clear: "both",
+      // required: true,
       wrapperCol: { span: 12 },
     },
   ],
 };
+
+// const formServicio = [
+//   {
+//     label: "Servicios",
+//     key: "checkbox-servicio",
+//     widget: "checkbox-group",
+//     options: [
+//       "Revisión",
+//       "Mantenimiento",
+//       "Recarga",
+//       "Prueba de presión interna",
+//     ],
+//     wrapperCol: { span: 12 },
+//   },
+// ];
 
 const wizardMeta = {
   steps: [
@@ -233,6 +286,7 @@ const wizardMeta = {
 export default () => {
   const [form] = FormBuilder.useForm();
   const [currentStep, setCurrentStep] = useState(0);
+  // const forceUpdate = FormBuilder.useForceUpdate()
   const handleFinish = useCallback(() => {
     console.log("Submit: ", form.getFieldsValue(true));
   }, [form]);
@@ -244,7 +298,6 @@ export default () => {
   if (form.getFieldValue("noAccountInfo")) {
     _.pullAt(newWizardMeta.steps, 1);
   }
-
   // Generate a general review step
   const reviewFields = [];
   newWizardMeta.steps.forEach((s, i) => {
@@ -288,6 +341,30 @@ export default () => {
   const isReview = currentStep === stepsLength - 1;
 
   // TODO:
+  // const servicios = form.getFieldValue("checkbox-servicio");
+  // const test = { ...servicios };
+  // if (JSON.stringify(test).includes("Recarga")) {
+  //   formServicio.push({
+  //     key: "otherFruit",
+  //     label: "Other",
+  //   });
+  // }
+
+  if (form && form.getFieldValue("revision")) {
+    console.log("test");
+    formServicio.push({
+      render() {
+        return (
+          <fieldset>
+            <legend>Revisión</legend>
+          </fieldset>
+        );
+      },
+    });
+    // formServicio.fields.splice(4, 1);
+    // formServicio.fields.splice(4, 1);
+  }
+
   if (currentStep === 0) {
     return (
       <Form
