@@ -153,7 +153,7 @@ const formServicio = {
       },
     },
     {
-      key: "checkbox.mantenimiento",
+      key: "mantenimiento",
       label: "Mantenimiento",
       widget: "checkbox",
       formItemLayout: {
@@ -162,7 +162,7 @@ const formServicio = {
       },
     },
     {
-      key: "checkbox.recarga",
+      key: "recarga",
       label: "Recarga",
       widget: "checkbox",
       formItemLayout: {
@@ -171,7 +171,7 @@ const formServicio = {
       },
     },
     {
-      key: "checkbox.presion",
+      key: "presion",
       label: "Prueba de presión interna",
       widget: "checkbox",
       formItemLayout: {
@@ -182,18 +182,7 @@ const formServicio = {
   ],
 };
 
-const formRevision = {
-  columns: 2,
-  fields: [
-    {
-      key: "revision.nombre",
-      label: "Persona a cargo de la revision",
-      clear: "both",
-      // required: true,
-      wrapperCol: { span: 12 },
-    },
-  ],
-};
+const formRevision = [];
 
 // const formServicio = [
 //   {
@@ -349,20 +338,21 @@ export default () => {
   //     label: "Other",
   //   });
   // }
+  const testform = { ...form };
 
-  if (form && form.getFieldValue("revision")) {
-    console.log("test");
-    formServicio.push({
-      render() {
-        return (
-          <fieldset>
-            <legend>Revisión</legend>
-          </fieldset>
-        );
-      },
-    });
-    // formServicio.fields.splice(4, 1);
-    // formServicio.fields.splice(4, 1);
+  if (
+    form.getFieldInstance("revision") &&
+    !form.getFieldInstance("revision").props["checked"]
+  ) {
+    if (!form.getFieldInstance("test1")) {
+      formRevision.push({
+        key: "test1",
+        label: "Other",
+      });
+    }
+  }
+  if (!form.getFieldValue("revision")) {
+    formRevision.pop({ key: "test1" });
   }
 
   if (currentStep === 0) {
@@ -430,6 +420,9 @@ export default () => {
           <fieldset>
             <legend>Servicio realizado</legend>
             <FormBuilder form={form} meta={formServicio} />
+          </fieldset>
+          <fieldset>
+            <FormBuilder form={testform} meta={formRevision} />
           </fieldset>
         </div>
         <Form.Item className="form-footer" style={{ textAlign: "right" }}>
