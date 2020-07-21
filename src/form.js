@@ -447,13 +447,10 @@ export default () => {
 
   if (!form.getFieldValue("revision")) {
     formRevision.forEach((e) => {
-      console.log(e);
+      const key = e.key;
+      testform.setFieldsValue({ [key]: null });
     });
     formRevision = [];
-
-    // form.resetFields();
-
-    // formRevision.pop({ id: "fr_revision" });
   }
 
   if (currentStep === 0) {
