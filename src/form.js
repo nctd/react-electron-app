@@ -345,55 +345,116 @@ export default () => {
           key: "fr_revision1",
           label: "Persona que realizó la revisión",
           formItemLayout: {
-            labelCol: { span: 4 },
+            labelCol: { span: 5 },
             wrapperCol: { span: 8 },
           },
         },
         {
           key: "fr_revision2",
           label: "Norma Chilena aplicada",
+          formItemLayout: {
+            labelCol: { span: 5 },
+            wrapperCol: { span: 8 },
+          },
         },
-
         {
           key: "fr_revision3",
           label: "Se utilizó el manual del fabricante o armador",
           widget: "radio-group",
-          forwardRef: true,
+          // forwardRef: true,
           options: ["Si", "No"],
+          labelCol: { span: 5 },
         },
         {
           key: "fr_revision4",
           label: "Razon de la revisión",
           widget: "radio-group",
+          // forwardRef: true,
           options: ["Puesta en servicio", "Según programa", "Otra"],
-          onChange: (e) => {
-            console.log(e.target.value);
-            fnTest(e.target.value);
+          labelCol: { span: 5 },
+        },
+        {
+          key: "fr_revision5",
+          label: "Comentarios",
+          widget: "textarea",
+          formItemLayout: {
+            labelCol: { span: 5 },
+            wrapperCol: { span: 8 },
           },
+        },
+        {
+          key: "fr_revision6",
+          render() {
+            return (
+              <fieldset>
+                <legend>Resultados de la revisión</legend>
+              </fieldset>
+            );
+          },
+        },
+        {
+          key: "fr_revision7",
+          label: "Cumple con NCh2056, 4.2.2",
+          widget: "radio-group",
+          options: ["Si", "No"],
+          labelCol: { span: 5 },
+        },
+        {
+          key: "fr_revision8",
+          label: "Requiere de correcciones",
+          // tooltip: "Detallar correciones en comentarios",
+          widget: "radio-group",
+          options: ["Si", "No"],
+          labelCol: { span: 5 },
+        },
+        {
+          key: "fr_revision9",
+          label: "Requiere de mantenimiento",
+          widget: "radio-group",
+          options: ["Si", "No"],
+          labelCol: { span: 5 },
+        },
+        {
+          key: "fr_revision10",
+          label: "Retirar de servicio",
+          widget: "radio-group",
+          options: ["Si", "No"],
+          labelCol: { span: 5 },
+        },
+        {
+          key: "fr_revision11",
+          label: "Dar de baja",
+          widget: "radio-group",
+          options: ["Si", "No"],
+          labelCol: { span: 5 },
+        },
+        {
+          key: "fr_revision12",
+          label: "Comentarios",
+          widget: "textarea",
+          formItemLayout: {
+            labelCol: { span: 5 },
+            wrapperCol: { span: 8 },
+          },
+          placeholder: "Detallar resultados de la revisión",
         }
       );
     }
   }
-
-  // console.log(form.getFieldValue("fr_revision1"));
-
-  const fnTest = (Target) => {
-    console.log(Target);
-  };
+  // if (form.getFieldValue("revision")) {
+  //   console.log(form.getFieldValue("fr_revision4"));
+  // }
 
   if (!form.getFieldValue("revision")) {
-    // formRevision.pop({ id: "fr_revision" });
+    formRevision.forEach((e) => {
+      console.log(e);
+    });
     formRevision = [];
 
     // form.resetFields();
-  }
 
-  // if (
-  //   form.getFieldValue("revision") &&
-  //   form.getFieldValue("fr_revision4") === "Otra"
-  // ) {
-  //   console.log("TEST");
-  // }
+    // formRevision.pop({ id: "fr_revision" });
+  }
 
   if (currentStep === 0) {
     return (
