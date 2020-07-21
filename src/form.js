@@ -1,6 +1,6 @@
 import React, { useCallback, useState } from "react";
 import _ from "lodash";
-import { Form, Button, Steps, ConfigProvider } from "antd";
+import { Form, Button, Steps, ConfigProvider, Input } from "antd";
 import FormBuilder from "antd-form-builder";
 import locale from "antd/lib/date-picker/locale/es_ES";
 import moment from "moment";
@@ -182,22 +182,7 @@ const formServicio = {
   ],
 };
 
-const formRevision = [];
-
-// const formServicio = [
-//   {
-//     label: "Servicios",
-//     key: "checkbox-servicio",
-//     widget: "checkbox-group",
-//     options: [
-//       "Revisión",
-//       "Mantenimiento",
-//       "Recarga",
-//       "Prueba de presión interna",
-//     ],
-//     wrapperCol: { span: 12 },
-//   },
-// ];
+let formRevision = [];
 
 const wizardMeta = {
   steps: [
@@ -344,16 +329,71 @@ export default () => {
     form.getFieldInstance("revision") &&
     !form.getFieldInstance("revision").props["checked"]
   ) {
-    if (!form.getFieldInstance("test1")) {
-      formRevision.push({
-        key: "test1",
-        label: "Other",
-      });
+    if (!form.getFieldInstance("fr_revision1")) {
+      formRevision.push(
+        {
+          key: "fr_revision",
+          render() {
+            return (
+              <fieldset>
+                <legend>Revisión</legend>
+              </fieldset>
+            );
+          },
+        },
+        {
+          key: "fr_revision1",
+          label: "Persona que realizó la revisión",
+          formItemLayout: {
+            labelCol: { span: 4 },
+            wrapperCol: { span: 8 },
+          },
+        },
+        {
+          key: "fr_revision2",
+          label: "Norma Chilena aplicada",
+        },
+
+        {
+          key: "fr_revision3",
+          label: "Se utilizó el manual del fabricante o armador",
+          widget: "radio-group",
+          forwardRef: true,
+          options: ["Si", "No"],
+        },
+        {
+          key: "fr_revision4",
+          label: "Razon de la revisión",
+          widget: "radio-group",
+          options: ["Puesta en servicio", "Según programa", "Otra"],
+          onChange: (e) => {
+            console.log(e.target.value);
+            fnTest(e.target.value);
+          },
+        }
+      );
     }
   }
+
+  // console.log(form.getFieldValue("fr_revision1"));
+
+  const fnTest = (Target) => {
+    console.log(Target);
+  };
+
   if (!form.getFieldValue("revision")) {
-    formRevision.pop({ key: "test1" });
+    // formRevision.pop({ id: "fr_revision" });
+    formRevision = [];
+
+    // form.resetFields();
   }
+
+  // if (
+  //   form.getFieldValue("revision") &&
+  //   form.getFieldValue("fr_revision4") === "Otra"
+  // ) {
+  //   console.log("TEST");
+  // }
 
   if (currentStep === 0) {
     return (
