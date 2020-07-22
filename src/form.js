@@ -183,6 +183,7 @@ const formServicio = {
 };
 
 let formRevision = [];
+let formMantenimiento = [];
 
 const wizardMeta = {
   steps: [
@@ -314,15 +315,6 @@ export default () => {
   };
   const isReview = currentStep === stepsLength - 1;
 
-  // TODO:
-  // const servicios = form.getFieldValue("checkbox-servicio");
-  // const test = { ...servicios };
-  // if (JSON.stringify(test).includes("Recarga")) {
-  //   formServicio.push({
-  //     key: "otherFruit",
-  //     label: "Other",
-  //   });
-  // }
   const testform = { ...form };
 
   if (
@@ -345,7 +337,7 @@ export default () => {
           key: "fr_revision1",
           label: "Persona que realizó la revisión",
           formItemLayout: {
-            labelCol: { span: 5 },
+            labelCol: { span: 9 },
             wrapperCol: { span: 8 },
           },
         },
@@ -353,7 +345,7 @@ export default () => {
           key: "fr_revision2",
           label: "Norma Chilena aplicada",
           formItemLayout: {
-            labelCol: { span: 5 },
+            labelCol: { span: 9 },
             wrapperCol: { span: 8 },
           },
         },
@@ -363,7 +355,7 @@ export default () => {
           widget: "radio-group",
           // forwardRef: true,
           options: ["Si", "No"],
-          labelCol: { span: 5 },
+          labelCol: { span: 9 },
         },
         {
           key: "fr_revision4",
@@ -371,14 +363,14 @@ export default () => {
           widget: "radio-group",
           // forwardRef: true,
           options: ["Puesta en servicio", "Según programa", "Otra"],
-          labelCol: { span: 5 },
+          labelCol: { span: 9 },
         },
         {
           key: "fr_revision5",
           label: "Comentarios",
           widget: "textarea",
           formItemLayout: {
-            labelCol: { span: 5 },
+            labelCol: { span: 9 },
             wrapperCol: { span: 8 },
           },
         },
@@ -397,53 +389,50 @@ export default () => {
           label: "Cumple con NCh2056, 4.2.2",
           widget: "radio-group",
           options: ["Si", "No"],
-          labelCol: { span: 5 },
+          labelCol: { span: 9 },
         },
         {
           key: "fr_revision8",
           label: "Requiere de correcciones",
-          // tooltip: "Detallar correciones en comentarios",
+          // tooltip: "Detallar correcciones en comentarios",
           widget: "radio-group",
           options: ["Si", "No"],
-          labelCol: { span: 5 },
+          labelCol: { span: 9 },
         },
         {
           key: "fr_revision9",
           label: "Requiere de mantenimiento",
           widget: "radio-group",
           options: ["Si", "No"],
-          labelCol: { span: 5 },
+          labelCol: { span: 9 },
         },
         {
           key: "fr_revision10",
           label: "Retirar de servicio",
           widget: "radio-group",
           options: ["Si", "No"],
-          labelCol: { span: 5 },
+          labelCol: { span: 9 },
         },
         {
           key: "fr_revision11",
           label: "Dar de baja",
           widget: "radio-group",
           options: ["Si", "No"],
-          labelCol: { span: 5 },
+          labelCol: { span: 9 },
         },
         {
           key: "fr_revision12",
           label: "Comentarios",
           widget: "textarea",
           formItemLayout: {
-            labelCol: { span: 5 },
+            labelCol: { span: 9 },
             wrapperCol: { span: 8 },
           },
-          placeholder: "Detallar resultados de la revisión",
+          placeholder: "Detallar necesidades de mantenimiento",
         }
       );
     }
   }
-  // if (form.getFieldValue("revision")) {
-  //   console.log(form.getFieldValue("fr_revision4"));
-  // }
 
   if (!form.getFieldValue("revision")) {
     formRevision.forEach((e) => {
@@ -451,6 +440,168 @@ export default () => {
       testform.setFieldsValue({ [key]: null });
     });
     formRevision = [];
+  }
+
+  //TODO: REFACTORIZAR PUSH EN LOS FORM
+
+  if (
+    form.getFieldInstance("mantenimiento") &&
+    !form.getFieldInstance("mantenimiento").props["checked"]
+  ) {
+    if (!form.getFieldInstance("fr_mant1")) {
+      formMantenimiento.push(
+        {
+          key: "fr_mant",
+          render() {
+            return (
+              <fieldset>
+                <legend>Mantenimiento</legend>
+              </fieldset>
+            );
+          },
+        },
+        {
+          key: "fr_mant1",
+          label: "Persona que realizó el mantenimiento",
+          formItemLayout: {
+            labelCol: { span: 9 },
+            wrapperCol: { span: 8 },
+          },
+        },
+        {
+          key: "fr_mant2",
+          label: "Normas Chilenas aplicadas",
+          formItemLayout: {
+            labelCol: { span: 9 },
+            wrapperCol: { span: 8 },
+          },
+        },
+        {
+          key: "fr_mant3",
+          label: "Se utilizó el manual del fabricante o armador",
+          widget: "radio-group",
+          // forwardRef: true,
+          options: ["Si", "No"],
+          labelCol: { span: 9 },
+        },
+        {
+          key: "fr_mant4",
+          label: "Razon del mantenimiento",
+          widget: "radio-group",
+          // forwardRef: true,
+          options: [
+            "Como consecuencia de la revisión",
+            "Según programa",
+            "Otra",
+          ],
+          labelCol: { span: 9 },
+        },
+        {
+          key: "fr_mant5",
+          label: "Comentarios",
+          widget: "textarea",
+          formItemLayout: {
+            labelCol: { span: 9 },
+            wrapperCol: { span: 8 },
+          },
+          placeholder: "Detallar razon del mantenimiento",
+        },
+        {
+          key: "fr_mant6",
+          render() {
+            return (
+              <fieldset>
+                <legend>Acciones realizadas</legend>
+              </fieldset>
+            );
+          },
+        },
+        {
+          key: "fr_mant7",
+          label:
+            "Equipo recuperación/vaciado agente de extinción es el adecuado",
+          widget: "radio-group",
+          options: ["Si", "No"],
+          labelCol: { span: 9 },
+        },
+        {
+          key: "fr_mant8",
+          label: "Reemplazo de partes",
+          widget: "radio-group",
+          options: ["Si", "No"],
+          labelCol: { span: 9 },
+        },
+        {
+          key: "fr_mant9",
+          label: "Repuestos según manual del fabricante, armador o importador",
+          widget: "radio-group",
+          options: ["Si", "No"],
+          labelCol: { span: 9 },
+        },
+        {
+          key: "fr_mant10",
+          label:
+            "Indicador de presión de reemplazo cumple con normas (NCH1180/5; NCh2056)",
+          widget: "radio-group",
+          options: ["Si", "No"],
+          labelCol: { span: 9 },
+        },
+        {
+          key: "fr_mant11",
+          label: "Examen interno del cilindro/tanque",
+          widget: "radio-group",
+          options: ["Si", "No"],
+          labelCol: { span: 9 },
+        },
+        {
+          key: "fr_mant12",
+          label: "Examen interno del cartucho/botellín",
+          widget: "radio-group",
+          options: ["Si", "No"],
+          labelCol: { span: 9 },
+        },
+        {
+          key: "fr_mant13",
+          label: "Recarga/reemplazo agente de extinción",
+          widget: "radio-group",
+          options: ["Si", "No"],
+          labelCol: { span: 9 },
+        },
+        {
+          key: "fr_mant14",
+          label: "Se adoptaron medidas de seguridad",
+          widget: "radio-group",
+          options: ["Si", "No"],
+          labelCol: { span: 9 },
+        },
+        {
+          key: "fr_mant15",
+          label: "Se usaron elementos de protección personal",
+          widget: "radio-group",
+          options: ["Si", "No"],
+          labelCol: { span: 9 },
+        },
+        {
+          key: "fr_mant16",
+          label: "Comentarios",
+          widget: "textarea",
+          formItemLayout: {
+            labelCol: { span: 9 },
+            wrapperCol: { span: 8 },
+          },
+          placeholder:
+            "Detallar partes y piezas reemplazadas; observaciones examen interno, medidas de seguridad adoptadas, agemte de extinción",
+        }
+      );
+    }
+  }
+
+  if (!form.getFieldValue("mantenimiento")) {
+    formMantenimiento.forEach((e) => {
+      const key = e.key;
+      testform.setFieldsValue({ [key]: null });
+    });
+    formMantenimiento = [];
   }
 
   if (currentStep === 0) {
@@ -521,6 +672,9 @@ export default () => {
           </fieldset>
           <fieldset>
             <FormBuilder form={testform} meta={formRevision} />
+          </fieldset>
+          <fieldset>
+            <FormBuilder form={testform} meta={formMantenimiento} />
           </fieldset>
         </div>
         <Form.Item className="form-footer" style={{ textAlign: "right" }}>
