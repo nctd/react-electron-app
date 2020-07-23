@@ -192,6 +192,15 @@ let formMantenimiento = [];
 let formRecarga = [];
 let formPresion = [];
 let initialPanes = [];
+const testPanes = [
+  { title: "Tab 1", content: "Content of Tab 1", key: "1" },
+  { title: "Tab 2", content: "Content of Tab 2", key: "2" },
+  {
+    title: "Tab 3",
+    content: "Content of Tab 3",
+    key: "3",
+  },
+];
 
 const wizardMeta = {
   steps: [
@@ -315,12 +324,29 @@ export default () => {
     form.validateFields().then(() => {
       setCurrentStep(currentStep + 1);
     });
+    console.log(initialPanes);
   };
+
   const handleBack = () => {
     form.validateFields().then(() => {
       setCurrentStep(currentStep - 1);
     });
+    console.log(initialPanes);
+    if (form.getFieldValue("revision")) {
+      form.setFieldsValue(createRevision(formRevision));
+
+      initialPanes.push({
+        title: "Revision",
+        content: (
+          <fieldset>
+            <FormBuilder form={testform} meta={formRevision} />
+          </fieldset>
+        ),
+        key: "1",
+      });
+    }
   };
+
   const isReview = currentStep === stepsLength - 1;
 
   const testform = { ...form };
@@ -355,7 +381,6 @@ export default () => {
       initialPanes.findIndex(({ key }) => key == "1"),
       1
     );
-    console.log(initialPanes);
   }
 
   //TODO: REFACTORIZAR PUSH EN LOS FORM
@@ -475,6 +500,10 @@ export default () => {
             <legend>Extintor</legend>
             <FormBuilder form={form} meta={formExtintor} />
           </fieldset>
+          <fieldset>
+            <legend>Servicio realizado</legend>
+            <FormBuilder form={form} meta={formServicio} />
+          </fieldset>
         </div>
         <Form.Item className="form-footer" style={{ textAlign: "right" }}>
           {currentStep > 0 && (
@@ -512,40 +541,13 @@ export default () => {
         <div
           style={{ background: "#f7f7f7", padding: "20px", margin: "30px 0" }}
         >
-          <fieldset>
-            <legend>Servicio realizado</legend>
-            <FormBuilder form={form} meta={formServicio} />
-          </fieldset>
-
           <Tabs type="card" size="large">
-            {initialPanes.map((pane) => (
+            {testPanes.map((pane) => (
               <TabPane tab={pane.title} key={pane.key}>
                 {pane.content}
               </TabPane>
             ))}
           </Tabs>
-          {/* <Tabs centered="true">
-            <TabPane tab="Revision" key="1">
-              <fieldset>
-                <FormBuilder form={testform} meta={formRevision} />
-              </fieldset>
-            </TabPane>
-            <TabPane tab="Mantenimiento" key="2">
-              <fieldset>
-                <FormBuilder form={testform} meta={formMantenimiento} />
-              </fieldset>
-            </TabPane>
-            <TabPane tab="Recarga" key="3">
-              <fieldset>
-                <FormBuilder form={testform} meta={formRecarga} />
-              </fieldset>
-            </TabPane>
-            <TabPane tab="Prueba de presion" key="4">
-              <fieldset>
-                <FormBuilder form={testform} meta={formPresion} />
-              </fieldset>
-            </TabPane>
-          </Tabs> */}
         </div>
         <Form.Item className="form-footer" style={{ textAlign: "right" }}>
           {currentStep > 0 && (
