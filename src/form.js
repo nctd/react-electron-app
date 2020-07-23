@@ -1,9 +1,14 @@
 import React, { useCallback, useState } from "react";
 import _ from "lodash";
-import { Form, Button, Steps, ConfigProvider, Input } from "antd";
+import { Form, Button, Steps, ConfigProvider, Tabs } from "antd";
 import FormBuilder from "antd-form-builder";
 import locale from "antd/lib/date-picker/locale/es_ES";
 import moment from "moment";
+import { render } from "@testing-library/react";
+import { createRevision } from "./formRevision";
+import { createMantenimiento } from "./formMantenimiento";
+import { createPresion } from "./formPresion";
+import { createRecarga } from "./formRecarga";
 const { Step } = Steps;
 const DateView = ({ value }) => (value ? value.format("MMM Do YYYY") : "N/A");
 
@@ -185,7 +190,8 @@ const formServicio = {
 let formRevision = [];
 let formMantenimiento = [];
 let formRecarga = [];
-let formPrueba = [];
+let formPresion = [];
+let initialPanes = [];
 
 const wizardMeta = {
   steps: [
@@ -319,120 +325,23 @@ export default () => {
 
   const testform = { ...form };
 
+  const { TabPane } = Tabs;
+
   if (
     form.getFieldInstance("revision") &&
     !form.getFieldInstance("revision").props["checked"]
   ) {
     if (!form.getFieldInstance("fr_revision1")) {
-      formRevision.push(
-        {
-          key: "fr_revision",
-          render() {
-            return (
-              <fieldset>
-                <legend>Revisión</legend>
-              </fieldset>
-            );
-          },
-        },
-        {
-          key: "fr_revision1",
-          label: "Persona que realizó la revisión",
-          formItemLayout: {
-            labelCol: { span: 9 },
-            wrapperCol: { span: 8 },
-          },
-        },
-        {
-          key: "fr_revision2",
-          label: "Norma Chilena aplicada",
-          formItemLayout: {
-            labelCol: { span: 9 },
-            wrapperCol: { span: 8 },
-          },
-        },
-        {
-          key: "fr_revision3",
-          label: "Se utilizó el manual del fabricante o armador",
-          widget: "radio-group",
-          // forwardRef: true,
-          options: ["Si", "No"],
-          labelCol: { span: 9 },
-        },
-        {
-          key: "fr_revision4",
-          label: "Razon de la revisión",
-          widget: "radio-group",
-          // forwardRef: true,
-          options: ["Puesta en servicio", "Según programa", "Otra"],
-          labelCol: { span: 9 },
-        },
-        {
-          key: "fr_revision5",
-          label: "Comentarios",
-          widget: "textarea",
-          formItemLayout: {
-            labelCol: { span: 9 },
-            wrapperCol: { span: 8 },
-          },
-        },
-        {
-          key: "fr_revision6",
-          render() {
-            return (
-              <fieldset>
-                <legend>Resultados de la revisión</legend>
-              </fieldset>
-            );
-          },
-        },
-        {
-          key: "fr_revision7",
-          label: "Cumple con NCh2056, 4.2.2",
-          widget: "radio-group",
-          options: ["Si", "No"],
-          labelCol: { span: 9 },
-        },
-        {
-          key: "fr_revision8",
-          label: "Requiere de correcciones",
-          // tooltip: "Detallar correcciones en comentarios",
-          widget: "radio-group",
-          options: ["Si", "No"],
-          labelCol: { span: 9 },
-        },
-        {
-          key: "fr_revision9",
-          label: "Requiere de mantenimiento",
-          widget: "radio-group",
-          options: ["Si", "No"],
-          labelCol: { span: 9 },
-        },
-        {
-          key: "fr_revision10",
-          label: "Retirar de servicio",
-          widget: "radio-group",
-          options: ["Si", "No"],
-          labelCol: { span: 9 },
-        },
-        {
-          key: "fr_revision11",
-          label: "Dar de baja",
-          widget: "radio-group",
-          options: ["Si", "No"],
-          labelCol: { span: 9 },
-        },
-        {
-          key: "fr_revision12",
-          label: "Comentarios",
-          widget: "textarea",
-          formItemLayout: {
-            labelCol: { span: 9 },
-            wrapperCol: { span: 8 },
-          },
-          placeholder: "Detallar necesidades de mantenimiento",
-        }
-      );
+      createRevision(formRevision);
+      initialPanes.push({
+        title: "Revision",
+        content: (
+          <fieldset>
+            <FormBuilder form={testform} meta={formRevision} />
+          </fieldset>
+        ),
+        key: "1",
+      });
     }
   }
 
@@ -442,6 +351,11 @@ export default () => {
       testform.setFieldsValue({ [key]: null });
     });
     formRevision = [];
+    initialPanes.splice(
+      initialPanes.findIndex(({ key }) => key == "1"),
+      1
+    );
+    console.log(initialPanes);
   }
 
   //TODO: REFACTORIZAR PUSH EN LOS FORM
@@ -451,150 +365,16 @@ export default () => {
     !form.getFieldInstance("mantenimiento").props["checked"]
   ) {
     if (!form.getFieldInstance("fr_mant1")) {
-      formMantenimiento.push(
-        {
-          key: "fr_mant",
-          render() {
-            return (
-              <fieldset>
-                <legend>Mantenimiento</legend>
-              </fieldset>
-            );
-          },
-        },
-        {
-          key: "fr_mant1",
-          label: "Persona que realizó el mantenimiento",
-          formItemLayout: {
-            labelCol: { span: 9 },
-            wrapperCol: { span: 8 },
-          },
-        },
-        {
-          key: "fr_mant2",
-          label: "Normas Chilenas aplicadas",
-          formItemLayout: {
-            labelCol: { span: 9 },
-            wrapperCol: { span: 8 },
-          },
-        },
-        {
-          key: "fr_mant3",
-          label: "Se utilizó el manual del fabricante o armador",
-          widget: "radio-group",
-          // forwardRef: true,
-          options: ["Si", "No"],
-          labelCol: { span: 9 },
-        },
-        {
-          key: "fr_mant4",
-          label: "Razon del mantenimiento",
-          widget: "radio-group",
-          // forwardRef: true,
-          options: [
-            "Como consecuencia de la revisión",
-            "Según programa",
-            "Otra",
-          ],
-          labelCol: { span: 9 },
-        },
-        {
-          key: "fr_mant5",
-          label: "Comentarios",
-          widget: "textarea",
-          formItemLayout: {
-            labelCol: { span: 9 },
-            wrapperCol: { span: 8 },
-          },
-          placeholder: "Detallar razon del mantenimiento",
-        },
-        {
-          key: "fr_mant6",
-          render() {
-            return (
-              <fieldset>
-                <legend>Acciones realizadas</legend>
-              </fieldset>
-            );
-          },
-        },
-        {
-          key: "fr_mant7",
-          label:
-            "Equipo recuperación/vaciado agente de extinción es el adecuado",
-          widget: "radio-group",
-          options: ["Si", "No"],
-          labelCol: { span: 9 },
-        },
-        {
-          key: "fr_mant8",
-          label: "Reemplazo de partes",
-          widget: "radio-group",
-          options: ["Si", "No"],
-          labelCol: { span: 9 },
-        },
-        {
-          key: "fr_mant9",
-          label: "Repuestos según manual del fabricante, armador o importador",
-          widget: "radio-group",
-          options: ["Si", "No"],
-          labelCol: { span: 9 },
-        },
-        {
-          key: "fr_mant10",
-          label:
-            "Indicador de presión de reemplazo cumple con normas (NCH1180/5; NCh2056)",
-          widget: "radio-group",
-          options: ["Si", "No"],
-          labelCol: { span: 9 },
-        },
-        {
-          key: "fr_mant11",
-          label: "Examen interno del cilindro/tanque",
-          widget: "radio-group",
-          options: ["Si", "No"],
-          labelCol: { span: 9 },
-        },
-        {
-          key: "fr_mant12",
-          label: "Examen interno del cartucho/botellín",
-          widget: "radio-group",
-          options: ["Si", "No"],
-          labelCol: { span: 9 },
-        },
-        {
-          key: "fr_mant13",
-          label: "Recarga/reemplazo agente de extinción",
-          widget: "radio-group",
-          options: ["Si", "No"],
-          labelCol: { span: 9 },
-        },
-        {
-          key: "fr_mant14",
-          label: "Se adoptaron medidas de seguridad",
-          widget: "radio-group",
-          options: ["Si", "No"],
-          labelCol: { span: 9 },
-        },
-        {
-          key: "fr_mant15",
-          label: "Se usaron elementos de protección personal",
-          widget: "radio-group",
-          options: ["Si", "No"],
-          labelCol: { span: 9 },
-        },
-        {
-          key: "fr_mant16",
-          label: "Comentarios",
-          widget: "textarea",
-          formItemLayout: {
-            labelCol: { span: 9 },
-            wrapperCol: { span: 8 },
-          },
-          placeholder:
-            "Detallar partes y piezas reemplazadas; observaciones examen interno, medidas de seguridad adoptadas, agemte de extinción",
-        }
-      );
+      createMantenimiento(formMantenimiento);
+      initialPanes.push({
+        title: "Mantenimiento",
+        content: (
+          <fieldset>
+            <FormBuilder form={testform} meta={formMantenimiento} />
+          </fieldset>
+        ),
+        key: "2",
+      });
     }
   }
 
@@ -604,6 +384,10 @@ export default () => {
       testform.setFieldsValue({ [key]: null });
     });
     formMantenimiento = [];
+    initialPanes.splice(
+      initialPanes.findIndex(({ key }) => key == "2"),
+      1
+    );
   }
 
   if (
@@ -611,83 +395,16 @@ export default () => {
     !form.getFieldInstance("recarga").props["checked"]
   ) {
     if (!form.getFieldInstance("fr_recarga1")) {
-      formRecarga.push(
-        {
-          key: "fr_recarga",
-          render() {
-            return (
-              <fieldset>
-                <legend>Recarga</legend>
-              </fieldset>
-            );
-          },
-        },
-        {
-          key: "fr_recarga1",
-          label: "Persona que realizó la recarga",
-          formItemLayout: {
-            labelCol: { span: 9 },
-            wrapperCol: { span: 8 },
-          },
-        },
-        {
-          key: "fr_recarga2",
-          label: "Normas Chilenas aplicadas",
-          formItemLayout: {
-            labelCol: { span: 9 },
-            wrapperCol: { span: 8 },
-          },
-        },
-        {
-          key: "fr_recarga3",
-          label: "Se utilizó el manual del fabricante o armador",
-          widget: "radio-group",
-          // forwardRef: true,
-          options: ["Si", "No"],
-          labelCol: { span: 9 },
-        },
-        {
-          key: "fr_recarga4",
-          label: "Agente de extinción utilizado",
-          formItemLayout: {
-            labelCol: { span: 9 },
-            wrapperCol: { span: 8 },
-          },
-        },
-        {
-          key: "fr_recarga5",
-          label: "Masa extintor antes de la recarga (Kg)",
-          formItemLayout: {
-            labelCol: { span: 9 },
-            wrapperCol: { span: 8 },
-          },
-        },
-        {
-          key: "fr_recarga6",
-          label: "Masa extintor después de la recarga (Kg)",
-          formItemLayout: {
-            labelCol: { span: 9 },
-            wrapperCol: { span: 8 },
-          },
-        },
-        {
-          key: "fr_recarga7",
-          label: "Verificación de estanqueidad después de la recarga",
-          widget: "radio-group",
-          // forwardRef: true,
-          options: ["Si", "No", "No aplica"],
-          labelCol: { span: 9 },
-        },
-        {
-          key: "fr_recarga9",
-          label: "Comentarios",
-          widget: "textarea",
-          formItemLayout: {
-            labelCol: { span: 9 },
-            wrapperCol: { span: 8 },
-          },
-        }
-      );
+      createRecarga(formRecarga);
+      initialPanes.push({
+        title: "Recarga",
+        content: (
+          <fieldset>
+            <FormBuilder form={testform} meta={formRecarga} />
+          </fieldset>
+        ),
+        key: "3",
+      });
     }
   }
 
@@ -697,6 +414,40 @@ export default () => {
       testform.setFieldsValue({ [key]: null });
     });
     formRecarga = [];
+    initialPanes.splice(
+      initialPanes.findIndex(({ key }) => key == "3"),
+      1
+    );
+  }
+
+  if (
+    form.getFieldInstance("presion") &&
+    !form.getFieldInstance("presion").props["checked"]
+  ) {
+    if (!form.getFieldInstance("fr_presion1")) {
+      createPresion(formPresion);
+      initialPanes.push({
+        title: "Prueba de presión interna",
+        content: (
+          <fieldset>
+            <FormBuilder form={testform} meta={formPresion} />
+          </fieldset>
+        ),
+        key: "4",
+      });
+    }
+  }
+
+  if (!form.getFieldValue("presion")) {
+    formPresion.forEach((e) => {
+      const key = e.key;
+      testform.setFieldsValue({ [key]: null });
+    });
+    formPresion = [];
+    initialPanes.splice(
+      initialPanes.findIndex(({ key }) => key == "4"),
+      1
+    );
   }
 
   if (currentStep === 0) {
@@ -765,15 +516,36 @@ export default () => {
             <legend>Servicio realizado</legend>
             <FormBuilder form={form} meta={formServicio} />
           </fieldset>
-          <fieldset>
-            <FormBuilder form={testform} meta={formRevision} />
-          </fieldset>
-          <fieldset>
-            <FormBuilder form={testform} meta={formMantenimiento} />
-          </fieldset>
-          <fieldset>
-            <FormBuilder form={testform} meta={formRecarga} />
-          </fieldset>
+
+          <Tabs type="card" size="large">
+            {initialPanes.map((pane) => (
+              <TabPane tab={pane.title} key={pane.key}>
+                {pane.content}
+              </TabPane>
+            ))}
+          </Tabs>
+          {/* <Tabs centered="true">
+            <TabPane tab="Revision" key="1">
+              <fieldset>
+                <FormBuilder form={testform} meta={formRevision} />
+              </fieldset>
+            </TabPane>
+            <TabPane tab="Mantenimiento" key="2">
+              <fieldset>
+                <FormBuilder form={testform} meta={formMantenimiento} />
+              </fieldset>
+            </TabPane>
+            <TabPane tab="Recarga" key="3">
+              <fieldset>
+                <FormBuilder form={testform} meta={formRecarga} />
+              </fieldset>
+            </TabPane>
+            <TabPane tab="Prueba de presion" key="4">
+              <fieldset>
+                <FormBuilder form={testform} meta={formPresion} />
+              </fieldset>
+            </TabPane>
+          </Tabs> */}
         </div>
         <Form.Item className="form-footer" style={{ textAlign: "right" }}>
           {currentStep > 0 && (
