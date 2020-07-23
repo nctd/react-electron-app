@@ -191,16 +191,7 @@ let formRevision = [];
 let formMantenimiento = [];
 let formRecarga = [];
 let formPresion = [];
-let initialPanes = [];
-const testPanes = [
-  { title: "Tab 1", content: "Content of Tab 1", key: "1" },
-  { title: "Tab 2", content: "Content of Tab 2", key: "2" },
-  {
-    title: "Tab 3",
-    content: "Content of Tab 3",
-    key: "3",
-  },
-];
+// let initialPanes = [];
 
 const wizardMeta = {
   steps: [
@@ -324,27 +315,12 @@ export default () => {
     form.validateFields().then(() => {
       setCurrentStep(currentStep + 1);
     });
-    console.log(initialPanes);
   };
 
   const handleBack = () => {
     form.validateFields().then(() => {
       setCurrentStep(currentStep - 1);
     });
-    console.log(initialPanes);
-    if (form.getFieldValue("revision")) {
-      form.setFieldsValue(createRevision(formRevision));
-
-      initialPanes.push({
-        title: "Revision",
-        content: (
-          <fieldset>
-            <FormBuilder form={testform} meta={formRevision} />
-          </fieldset>
-        ),
-        key: "1",
-      });
-    }
   };
 
   const isReview = currentStep === stepsLength - 1;
@@ -353,21 +329,60 @@ export default () => {
 
   const { TabPane } = Tabs;
 
+  let initialPanes = [
+    {
+      title: "Revision",
+      content: (
+        <fieldset>
+          <FormBuilder form={testform} meta={formRevision} />
+        </fieldset>
+      ),
+      key: "1",
+    },
+    {
+      title: "Mantenimiento",
+      content: (
+        <fieldset>
+          <FormBuilder form={testform} meta={formMantenimiento} />
+        </fieldset>
+      ),
+      key: "2",
+    },
+    {
+      title: "Recarga",
+      content: (
+        <fieldset>
+          <FormBuilder form={testform} meta={formRecarga} />
+        </fieldset>
+      ),
+      key: "3",
+    },
+    {
+      title: "Prueba de presión interna",
+      content: (
+        <fieldset>
+          <FormBuilder form={testform} meta={formPresion} />
+        </fieldset>
+      ),
+      key: "4",
+    },
+  ];
+
   if (
     form.getFieldInstance("revision") &&
     !form.getFieldInstance("revision").props["checked"]
   ) {
     if (!form.getFieldInstance("fr_revision1")) {
       createRevision(formRevision);
-      initialPanes.push({
-        title: "Revision",
-        content: (
-          <fieldset>
-            <FormBuilder form={testform} meta={formRevision} />
-          </fieldset>
-        ),
-        key: "1",
-      });
+      // initialPanes.push({
+      //   title: "Revision",
+      //   content: (
+      //     <fieldset>
+      //       <FormBuilder form={testform} meta={formRevision} />
+      //     </fieldset>
+      //   ),
+      //   key: "1",
+      // });
     }
   }
 
@@ -391,15 +406,15 @@ export default () => {
   ) {
     if (!form.getFieldInstance("fr_mant1")) {
       createMantenimiento(formMantenimiento);
-      initialPanes.push({
-        title: "Mantenimiento",
-        content: (
-          <fieldset>
-            <FormBuilder form={testform} meta={formMantenimiento} />
-          </fieldset>
-        ),
-        key: "2",
-      });
+      // initialPanes.push({
+      //   title: "Mantenimiento",
+      //   content: (
+      //     <fieldset>
+      //       <FormBuilder form={testform} meta={formMantenimiento} />
+      //     </fieldset>
+      //   ),
+      //   key: "2",
+      // });
     }
   }
 
@@ -421,15 +436,15 @@ export default () => {
   ) {
     if (!form.getFieldInstance("fr_recarga1")) {
       createRecarga(formRecarga);
-      initialPanes.push({
-        title: "Recarga",
-        content: (
-          <fieldset>
-            <FormBuilder form={testform} meta={formRecarga} />
-          </fieldset>
-        ),
-        key: "3",
-      });
+      // initialPanes.push({
+      //   title: "Recarga",
+      //   content: (
+      //     <fieldset>
+      //       <FormBuilder form={testform} meta={formRecarga} />
+      //     </fieldset>
+      //   ),
+      //   key: "3",
+      // });
     }
   }
 
@@ -451,15 +466,15 @@ export default () => {
   ) {
     if (!form.getFieldInstance("fr_presion1")) {
       createPresion(formPresion);
-      initialPanes.push({
-        title: "Prueba de presión interna",
-        content: (
-          <fieldset>
-            <FormBuilder form={testform} meta={formPresion} />
-          </fieldset>
-        ),
-        key: "4",
-      });
+      // initialPanes.push({
+      //   title: "Prueba de presión interna",
+      //   content: (
+      //     <fieldset>
+      //       <FormBuilder form={testform} meta={formPresion} />
+      //     </fieldset>
+      //   ),
+      //   key: "4",
+      // });
     }
   }
 
@@ -542,7 +557,7 @@ export default () => {
           style={{ background: "#f7f7f7", padding: "20px", margin: "30px 0" }}
         >
           <Tabs type="card" size="large">
-            {testPanes.map((pane) => (
+            {initialPanes.map((pane) => (
               <TabPane tab={pane.title} key={pane.key}>
                 {pane.content}
               </TabPane>
