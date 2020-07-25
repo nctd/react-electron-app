@@ -153,8 +153,7 @@ const formServicio = {
       label: "Revisión",
       widget: "checkbox",
       formItemLayout: {
-        labelCol: { span: 16 },
-        wrapperCol: { span: 16 },
+        labelCol: { span: 8 },
       },
     },
     {
@@ -162,8 +161,7 @@ const formServicio = {
       label: "Mantenimiento",
       widget: "checkbox",
       formItemLayout: {
-        labelCol: { span: 16 },
-        wrapperCol: { span: 16 },
+        labelCol: { span: 8 },
       },
     },
     {
@@ -171,8 +169,7 @@ const formServicio = {
       label: "Recarga",
       widget: "checkbox",
       formItemLayout: {
-        labelCol: { span: 16 },
-        wrapperCol: { span: 16 },
+        labelCol: { span: 8 },
       },
     },
     {
@@ -180,8 +177,7 @@ const formServicio = {
       label: "Prueba de presión interna",
       widget: "checkbox",
       formItemLayout: {
-        labelCol: { span: 16 },
-        wrapperCol: { span: 16 },
+        labelCol: { span: 10 },
       },
     },
   ],
@@ -191,77 +187,33 @@ let formRevision = [];
 let formMantenimiento = [];
 let formRecarga = [];
 let formPresion = [];
-// let initialPanes = [];
 
 const wizardMeta = {
   steps: [
     {
       title: "Registro de cliente",
-      formMeta: {
-        columns: 2,
-        fields: [
-          {
-            key: "name.first",
-            label: "Nombre o razon social",
-            clear: "both",
-            required: true,
-          },
-          // {
-          //   key: "direccion",
-          //   label: "Dirección",
-          //   colSpan: 1,
-          // },
-          // {
-          //   key: "comuna",
-          //   label: "Comuna",
-          //   clear: "right",
-          // },
-          // {
-          //   key: "telefono",
-          //   label: "Telefono",
-          // },
-          // {
-          //   key: "email",
-          //   label: "Correo Electronico",
-          //   clear: "right",
-          // },
-          // {
-          //   key: "extintor.id",
-          //   label: "N° de identificacion del extintor",
-          //   clear: "both",
-          //   // labelCol: { span: 12 },
-          // },
-          // {
-          //   key: "noAccountInfo",
-          //   label: "No Account Info",
-          //   widget: "switch",
-          //   dynamic: true,
-          //   tooltip: "Switch on to remove account step",
-          // },
-        ],
-      },
+      formMeta: formCliente,
     },
     {
       title: "Servicio",
-      formMeta: {
-        columns: 2,
-        fields: [
-          {
-            key: "email",
-            label: "Email",
-            clear: "right",
-            rules: [{ type: "email", message: "Invalid email" }],
-          },
-          {
-            key: "security",
-            label: "Security Question",
-            widget: "select",
-            placeholder: "Select a question...",
-            options: ["What's your pet's name?", "Your nick name?"],
-          },
-          { key: "answer", label: "Security Answer" },
-        ],
-      },
+      formMeta: formServicio,
+    },
+  ],
+};
+
+const resumeForm = {
+  steps: [
+    {
+      title: "Registro de cliente",
+      formMeta: formCliente,
+    },
+    {
+      title: "Extintor",
+      formMeta: formExtintor,
+    },
+    {
+      title: "Servicio",
+      formMeta: formServicio,
     },
   ],
 };
@@ -278,12 +230,10 @@ export default () => {
   const newWizardMeta = JSON.parse(JSON.stringify(wizardMeta));
   // In a wizard, every field should be preserved when swtich steps.
   // newWizardMeta.steps.forEach(s => s.formMeta.fields.forEach(f => (f.preserve = true)))
-  if (form.getFieldValue("noAccountInfo")) {
-    _.pullAt(newWizardMeta.steps, 1);
-  }
+
   // Generate a general review step
   const reviewFields = [];
-  newWizardMeta.steps.forEach((s, i) => {
+  resumeForm.steps.forEach((s, i) => {
     reviewFields.push(
       {
         key: "review" + i,
@@ -315,12 +265,23 @@ export default () => {
     form.validateFields().then(() => {
       setCurrentStep(currentStep + 1);
     });
+    console.log(currentStep);
+    if (currentStep == 1) {
+      formServicio.fields[3].formItemLayout = {
+        labelCol: { span: 8 },
+      };
+      formExtintor.fields[3].extra = null;
+    }
   };
 
   const handleBack = () => {
     form.validateFields().then(() => {
       setCurrentStep(currentStep - 1);
     });
+    formServicio.fields[3].formItemLayout = {
+      labelCol: { span: 10 },
+    };
+    formExtintor.fields[3].extra = "NCh1430, cláusula 5";
   };
 
   const isReview = currentStep === stepsLength - 1;
@@ -329,7 +290,7 @@ export default () => {
 
   const { TabPane } = Tabs;
 
-  let initialPanes = [
+  const initialPanes = [
     {
       title: "Revision",
       content: (
@@ -368,21 +329,63 @@ export default () => {
     },
   ];
 
+  // console.log(formServicio);
+
+  let cliente;
+  let extintor;
+  let revision;
+  let mant;
+  let recarga;
+  let presion;
+  let dataForms = [];
+  if (form.getFieldValue("cliente")) {
+    cliente = form.getFieldValue("cliente");
+    extintor = form.getFieldValue("extintor");
+    revision = form.getFieldValue("revision") ? "Si" : "No";
+    mant = form.getFieldValue("mantenimiento") ? "Si" : "No";
+    recarga = form.getFieldValue("recarga") ? "Si" : "No";
+    presion = form.getFieldValue("presion") ? "Si" : "No";
+
+    let fabricacion = "N/A";
+    if (extintor.fabricacion != undefined) {
+      fabricacion = moment(extintor.fabricacion).format("MM/YYYY");
+    }
+    let fecha_servicio = "N/A";
+    if (extintor.fecha_servicio != undefined) {
+      fecha_servicio = moment(extintor.fecha_servicio).format("DD/MM/YYYY");
+    }
+    console.log(extintor);
+    dataForms = {
+      cliente: {
+        nombre: cliente.nombre == "" ? "N/A" : cliente.nombre,
+        direccion: cliente.direccion,
+        telefono: cliente.telefono,
+        comuna: cliente.comuna,
+        email: cliente.email,
+      },
+      extintor: {
+        id: extintor.id,
+        marca: extintor.marca,
+        tipo: extintor.tipo,
+        agente: extintor.agente,
+        p_trabajo: extintor.p_trabajo,
+        p_prueba: extintor.p_prueba,
+        fabricacion: fabricacion,
+        fecha_servicio: fecha_servicio,
+      },
+      revision: revision,
+      mantenimiento: mant,
+      recarga: recarga,
+      presion: presion,
+    };
+  }
+
   if (
     form.getFieldInstance("revision") &&
     !form.getFieldInstance("revision").props["checked"]
   ) {
     if (!form.getFieldInstance("fr_revision1")) {
       createRevision(formRevision);
-      // initialPanes.push({
-      //   title: "Revision",
-      //   content: (
-      //     <fieldset>
-      //       <FormBuilder form={testform} meta={formRevision} />
-      //     </fieldset>
-      //   ),
-      //   key: "1",
-      // });
     }
   }
 
@@ -406,15 +409,6 @@ export default () => {
   ) {
     if (!form.getFieldInstance("fr_mant1")) {
       createMantenimiento(formMantenimiento);
-      // initialPanes.push({
-      //   title: "Mantenimiento",
-      //   content: (
-      //     <fieldset>
-      //       <FormBuilder form={testform} meta={formMantenimiento} />
-      //     </fieldset>
-      //   ),
-      //   key: "2",
-      // });
     }
   }
 
@@ -436,15 +430,6 @@ export default () => {
   ) {
     if (!form.getFieldInstance("fr_recarga1")) {
       createRecarga(formRecarga);
-      // initialPanes.push({
-      //   title: "Recarga",
-      //   content: (
-      //     <fieldset>
-      //       <FormBuilder form={testform} meta={formRecarga} />
-      //     </fieldset>
-      //   ),
-      //   key: "3",
-      // });
     }
   }
 
@@ -466,15 +451,6 @@ export default () => {
   ) {
     if (!form.getFieldInstance("fr_presion1")) {
       createPresion(formPresion);
-      // initialPanes.push({
-      //   title: "Prueba de presión interna",
-      //   content: (
-      //     <fieldset>
-      //       <FormBuilder form={testform} meta={formPresion} />
-      //     </fieldset>
-      //   ),
-      //   key: "4",
-      // });
     }
   }
 
@@ -604,6 +580,7 @@ export default () => {
             viewMode={currentStep === stepsLength - 1}
             form={form}
             meta={newWizardMeta.steps[currentStep].formMeta}
+            initialValues={dataForms}
           />
         </div>
         <Form.Item className="form-footer" style={{ textAlign: "right" }}>
