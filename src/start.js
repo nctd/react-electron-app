@@ -1,4 +1,4 @@
-const { app, BrowserWindow } = require("electron");
+const { app, BrowserWindow, Tray } = require("electron");
 
 const path = require("path");
 const url = require("url");
@@ -8,13 +8,14 @@ let mainWindow;
 
 function createWindow() {
   mainWindow = new BrowserWindow({
-    width: 800,
-    height: 600,
+    icon: path.join(__dirname, "/../public/icon_sercoin.ico"),
     webPreferences: {
       nodeIntegration: true,
     },
   });
-
+  mainWindow.maximize();
+  mainWindow.setResizable(false);
+  mainWindow.on("unmaximize", () => mainWindow.maximize());
   mainWindow.removeMenu();
 
   mainWindow.webContents.openDevTools();

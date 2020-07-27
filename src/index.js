@@ -1,6 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import "antd/dist/antd.css";
+// import "antd/dist/antd.css";
+import "./custom-antd.css";
 import "./index.css";
 import Header from "./header";
 import Forms from "./form";

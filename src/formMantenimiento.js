@@ -41,7 +41,7 @@ export const createMantenimiento = (meta) => {
         labelCol: { span: 9 },
         wrapperCol: { span: 8 },
       },
-      placeholder: "Detallar razon del mantenimiento",
+      placeholder: "Detallar razón del mantenimiento",
     },
     {
       key: "fr_mant6",
@@ -126,7 +126,7 @@ export const createMantenimiento = (meta) => {
         wrapperCol: { span: 8 },
       },
       placeholder:
-        "Detallar partes y piezas reemplazadas; observaciones examen interno, medidas de seguridad adoptadas, agemte de extinción",
+        "Detallar partes y piezas reemplazadas; observaciones examen interno, medidas de seguridad adoptadas, agente de extinción",
     }
   );
 };

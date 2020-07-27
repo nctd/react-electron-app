@@ -32,6 +32,40 @@ code {
   padding-top: 80px;
 } */
 
+/* .ant-steps-item-finish .ant-steps-item-icon {
+  border-color: #fb4404;
+}
+.ant-steps-item-finish .ant-steps-item-icon > .ant-steps-icon {
+  color: #fb4404;
+}
+
+.ant-steps-item-process .ant-steps-item-icon {
+  background: #fb4404;
+  border-color: #fb4404;
+}
+
+.ant-steps-item-finish
+  > .ant-steps-item-container
+  > .ant-steps-item-content
+  > .ant-steps-item-title::after {
+  background-color: #fb4404;
+}
+
+.ant-btn-primary {
+  background-color: #fb4404;
+  border-color: #fb4404;
+}
+.ant-btn-primary:hover,
+.ant-btn-primary:focus {
+  background: #fb4404;
+  border-color: #fb4404;
+}
+
+.ant-input:focus,
+.ant-input-focused {
+  border-color: #fb4404;
+} */
+
 #root {
   padding: 100px;
 }

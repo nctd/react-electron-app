@@ -1,6 +1,6 @@
 import React, { useCallback, useState } from "react";
 import _ from "lodash";
-import { Form, Button, Steps, ConfigProvider, Tabs } from "antd";
+import { Form, Button, Steps, Tabs, Modal } from "antd";
 import FormBuilder from "antd-form-builder";
 import locale from "antd/lib/date-picker/locale/es_ES";
 import moment from "moment";
@@ -13,6 +13,21 @@ const { Step } = Steps;
 const DateView = ({ value }) => (value ? value.format("MMM Do YYYY") : "N/A");
 
 FormBuilder.defineWidget("date-view", DateView);
+
+const checkServicios = (form) => {
+  const values = form.getFieldsValue("revision");
+  if (
+    values.revision != true &&
+    values.mantenimiento != true &&
+    values.recarga != true &&
+    values.presion != true
+  ) {
+    return Modal.error({
+      title: "Error",
+      content: "Seleccione un servicio",
+    });
+  }
+};
 
 const formCliente = {
   columns: 2,
@@ -37,12 +52,56 @@ const formCliente = {
     },
     {
       key: "cliente.telefono",
-      label: "Telefono",
+      label: "Teléfono",
       wrapperCol: { span: 12 },
     },
     {
       key: "cliente.email",
-      label: "Correo Electronico",
+      label: "Correo electrónico",
+      wrapperCol: { span: 12 },
+    },
+  ],
+};
+
+const formRepresentante = {
+  columns: 2,
+  fields: [
+    {
+      key: "representante.nombre",
+      label: "Nombre representante de la empresa",
+      clear: "both",
+      wrapperCol: { span: 12 },
+    },
+    {
+      key: "representante.telefono",
+      label: "Teléfono",
+      wrapperCol: { span: 12 },
+    },
+    {
+      key: "representante.email",
+      label: "Correo electrónico",
+      wrapperCol: { span: 12 },
+    },
+  ],
+};
+
+const formContacto = {
+  columns: 2,
+  fields: [
+    {
+      key: "contacto.nombre",
+      label: "Nombre contacto en la empresa",
+      clear: "both",
+      wrapperCol: { span: 12 },
+    },
+    {
+      key: "contacto.telefono",
+      label: "Teléfono",
+      wrapperCol: { span: 12 },
+    },
+    {
+      key: "contacto.email",
+      label: "Correo electrónico",
       wrapperCol: { span: 12 },
     },
   ],
@@ -262,10 +321,14 @@ export default () => {
   const stepsLength = newWizardMeta.steps.length;
 
   const handleNext = () => {
+    if (currentStep == 0) {
+      if (checkServicios(form)) return;
+    }
+
     form.validateFields().then(() => {
       setCurrentStep(currentStep + 1);
     });
-    console.log(currentStep);
+
     if (currentStep == 1) {
       formServicio.fields[3].formItemLayout = {
         labelCol: { span: 8 },
@@ -329,8 +392,6 @@ export default () => {
     },
   ];
 
-  // console.log(formServicio);
-
   let cliente;
   let extintor;
   let revision;
@@ -354,7 +415,6 @@ export default () => {
     if (extintor.fecha_servicio != undefined) {
       fecha_servicio = moment(extintor.fecha_servicio).format("DD/MM/YYYY");
     }
-    console.log(extintor);
     dataForms = {
       cliente: {
         nombre: cliente.nombre == "" ? "N/A" : cliente.nombre,
@@ -488,6 +548,14 @@ export default () => {
             <FormBuilder form={form} meta={formCliente} />
           </fieldset>
           <fieldset>
+            <legend>Información del representante</legend>
+            <FormBuilder form={form} meta={formRepresentante} />
+          </fieldset>
+          <fieldset>
+            <legend>Contacto</legend>
+            <FormBuilder form={form} meta={formContacto} />
+          </fieldset>
+          <fieldset>
             <legend>Extintor</legend>
             <FormBuilder form={form} meta={formExtintor} />
           </fieldset>
@@ -604,3 +672,6 @@ export default () => {
     );
   }
 };
+
+// TODO: CAMBIAR COLORES
+// TODO: SELECT OBLIGATORIO SERVICIOS
