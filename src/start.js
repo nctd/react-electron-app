@@ -8,14 +8,16 @@ let mainWindow;
 
 function createWindow() {
   mainWindow = new BrowserWindow({
+    minWidth: 1600,
     icon: path.join(__dirname, "/../public/icon_sercoin.ico"),
+    useContentSize: true,
     webPreferences: {
       nodeIntegration: true,
     },
   });
   mainWindow.maximize();
-  mainWindow.setResizable(false);
-  mainWindow.on("unmaximize", () => mainWindow.maximize());
+  // mainWindow.setResizable(false);
+  // mainWindow.on("unmaximize", () => mainWindow.maximize());
   mainWindow.removeMenu();
 
   mainWindow.webContents.openDevTools();
