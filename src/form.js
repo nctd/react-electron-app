@@ -1,21 +1,23 @@
-import React, { useCallback, useState } from "react";
-import _ from "lodash";
-import { Form, Button, Steps, Tabs, Modal } from "antd";
-import FormBuilder from "antd-form-builder";
-import locale from "antd/lib/date-picker/locale/es_ES";
-import moment from "moment";
-import { render } from "@testing-library/react";
-import { createRevision } from "./formRevision";
-import { createMantenimiento } from "./formMantenimiento";
-import { createPresion } from "./formPresion";
-import { createRecarga } from "./formRecarga";
-const { Step } = Steps;
-const DateView = ({ value }) => (value ? value.format("MMM Do YYYY") : "N/A");
+import React, { useCallback, useState } from 'react';
+import _ from 'lodash';
+import { Form, Button, Steps, Tabs, Modal } from 'antd';
+import FormBuilder from 'antd-form-builder';
+import locale from 'antd/lib/date-picker/locale/es_ES';
+import moment from 'moment';
+import { createRevision } from './forms/formRevision';
+import { createMantenimiento } from './forms/formMantenimiento';
+import { createPresion } from './forms/formPresion';
+import { createRecarga } from './forms/formRecarga';
+import { test1 } from './app';
 
-FormBuilder.defineWidget("date-view", DateView);
+const { Step } = Steps;
+const DateView = ({ value }) =>
+  value ? value.format('MMM Do YYYY') : 'N/A';
+
+FormBuilder.defineWidget('date-view', DateView);
 
 const checkServicios = (form) => {
-  const values = form.getFieldsValue("revision");
+  const values = form.getFieldsValue('revision');
   if (
     values.revision != true &&
     values.mantenimiento != true &&
@@ -23,8 +25,8 @@ const checkServicios = (form) => {
     values.presion != true
   ) {
     return Modal.error({
-      title: "Error",
-      content: "Seleccione un servicio",
+      title: 'Error',
+      content: 'Seleccione un servicio',
     });
   }
 };
@@ -33,31 +35,31 @@ const formCliente = {
   columns: 2,
   fields: [
     {
-      key: "cliente.nombre",
-      label: "Nombre o razón social",
-      clear: "both",
+      key: 'cliente.nombre',
+      label: 'Nombre o razón social',
+      clear: 'both',
       // required: true,
       wrapperCol: { span: 12 },
     },
     {
-      key: "cliente.direccion",
-      label: "Dirección",
+      key: 'cliente.direccion',
+      label: 'Dirección',
       wrapperCol: { span: 12 },
     },
     {
-      key: "cliente.comuna",
-      label: "Comuna",
+      key: 'cliente.comuna',
+      label: 'Comuna',
       wrapperCol: { span: 12 },
       // labelCol: { span: 6 },
     },
     {
-      key: "cliente.telefono",
-      label: "Teléfono",
+      key: 'cliente.telefono',
+      label: 'Teléfono',
       wrapperCol: { span: 12 },
     },
     {
-      key: "cliente.email",
-      label: "Correo electrónico",
+      key: 'cliente.email',
+      label: 'Correo electrónico',
       wrapperCol: { span: 12 },
     },
   ],
@@ -67,19 +69,19 @@ const formRepresentante = {
   columns: 2,
   fields: [
     {
-      key: "representante.nombre",
-      label: "Nombre representante de la empresa",
-      clear: "both",
+      key: 'representante.nombre',
+      label: 'Nombre representante de la empresa',
+      clear: 'both',
       wrapperCol: { span: 12 },
     },
     {
-      key: "representante.telefono",
-      label: "Teléfono",
+      key: 'representante.telefono',
+      label: 'Teléfono',
       wrapperCol: { span: 12 },
     },
     {
-      key: "representante.email",
-      label: "Correo electrónico",
+      key: 'representante.email',
+      label: 'Correo electrónico',
       wrapperCol: { span: 12 },
     },
   ],
@@ -89,19 +91,19 @@ const formContacto = {
   columns: 2,
   fields: [
     {
-      key: "contacto.nombre",
-      label: "Nombre contacto en la empresa",
-      clear: "both",
+      key: 'contacto.nombre',
+      label: 'Nombre contacto en la empresa',
+      clear: 'both',
       wrapperCol: { span: 12 },
     },
     {
-      key: "contacto.telefono",
-      label: "Teléfono",
+      key: 'contacto.telefono',
+      label: 'Teléfono',
       wrapperCol: { span: 12 },
     },
     {
-      key: "contacto.email",
-      label: "Correo electrónico",
+      key: 'contacto.email',
+      label: 'Correo electrónico',
       wrapperCol: { span: 12 },
     },
   ],
@@ -111,92 +113,92 @@ const formExtintor = {
   columns: 2,
   fields: [
     {
-      key: "extintor.id",
-      label: "N° de identificacion",
-      clear: "both",
+      key: 'extintor.id',
+      label: 'N° de identificacion',
+      clear: 'both',
       // required: true,
       wrapperCol: { span: 12 },
     },
     {
-      key: "extintor.marca",
-      label: "Marca",
-      clear: "both",
+      key: 'extintor.marca',
+      label: 'Marca',
+      clear: 'both',
       wrapperCol: { span: 12 },
     },
     {
-      key: "extintor.tipo",
-      label: "Tipo",
-      widget: "radio-group",
+      key: 'extintor.tipo',
+      label: 'Tipo',
+      widget: 'radio-group',
       forwardRef: true,
-      options: ["Recargable", "No recargable"],
+      options: ['Recargable', 'No recargable'],
     },
     {
-      key: "extintor.agente",
-      label: "Naturaleza agente de extinción",
-      extra: "NCh1430, cláusula 5",
-      clear: "both",
+      key: 'extintor.agente',
+      label: 'Naturaleza agente de extinción',
+      extra: 'NCh1430, cláusula 5',
+      clear: 'both',
       wrapperCol: { span: 12 },
     },
     {
-      key: "extintor.p_trabajo",
-      label: "Presión de trabajo",
+      key: 'extintor.p_trabajo',
+      label: 'Presión de trabajo',
       wrapperCol: { span: 12 },
     },
     {
-      key: "extintor.p_prueba",
-      label: "Presión de prueba",
+      key: 'extintor.p_prueba',
+      label: 'Presión de prueba',
       wrapperCol: { span: 12 },
     },
     {
-      key: "extintor.fabricacion",
-      label: "Fabricación del cílindro ",
-      placeholder: "Seleccionar fecha",
-      widget: "date-picker",
+      key: 'extintor.fabricacion',
+      label: 'Fabricación del cílindro ',
+      placeholder: 'Seleccionar fecha',
+      widget: 'date-picker',
       widgetProps: {
-        style: { width: "100%" },
-        picker: "month",
+        style: { width: '100%' },
+        picker: 'month',
         locale: moment.locale(locale, {
-          months: "Enero_Febrero_Marzo_Abril_Mayo_Junio_Julio_Agosto_Septiembre_Octubre_Noviembre_Diciembre".split(
-            "_"
+          months: 'Enero_Febrero_Marzo_Abril_Mayo_Junio_Julio_Agosto_Septiembre_Octubre_Noviembre_Diciembre'.split(
+            '_'
           ),
-          monthsShort: "Ene._Feb._Mar._Abr._May._Jun._Jul._Ago._Sept._Oct._Nov._Dic.".split(
-            "_"
+          monthsShort: 'Ene._Feb._Mar._Abr._May._Jun._Jul._Ago._Sept._Oct._Nov._Dic.'.split(
+            '_'
           ),
           monthsParseExact: true,
-          weekdaysShort: "dom._lun._mar._mie._jue._vie._sáb.".split("_"),
-          weekdaysMin: "Do_Lu_Ma_Mi_Ju_Vi_Sá".split("_"),
+          weekdaysShort: 'dom._lun._mar._mie._jue._vie._sáb.'.split('_'),
+          weekdaysMin: 'Do_Lu_Ma_Mi_Ju_Vi_Sá'.split('_'),
           weekdaysParseExact: true,
           week: {
             dow: 1,
           },
         }),
-        format: "MM/YYYY",
+        format: 'MM/YYYY',
       },
       wrapperCol: { span: 8 },
     },
     {
-      key: "extintor.fecha_servicio",
-      label: "Fecha del servicio",
-      placeholder: "Seleccionar fecha",
-      widget: "date-picker",
+      key: 'extintor.fecha_servicio',
+      label: 'Fecha del servicio',
+      placeholder: 'Seleccionar fecha',
+      widget: 'date-picker',
       widgetProps: {
-        style: { width: "100%" },
+        style: { width: '100%' },
         locale: moment.locale(locale, {
-          months: "Enero_Febrero_Marzo_Abril_Mayo_Junio_Julio_Agosto_Septiembre_Octubre_Noviembre_Diciembre".split(
-            "_"
+          months: 'Enero_Febrero_Marzo_Abril_Mayo_Junio_Julio_Agosto_Septiembre_Octubre_Noviembre_Diciembre'.split(
+            '_'
           ),
-          monthsShort: "Ene._Feb._Mar._Abr._May._Jun._Jul._Ago._Sept._Oct._Nov._Dic.".split(
-            "_"
+          monthsShort: 'Ene._Feb._Mar._Abr._May._Jun._Jul._Ago._Sept._Oct._Nov._Dic.'.split(
+            '_'
           ),
           monthsParseExact: true,
-          weekdaysShort: "dom._lun._mar._mie._jue._vie._sáb.".split("_"),
-          weekdaysMin: "Do_Lu_Ma_Mi_Ju_Vi_Sá".split("_"),
+          weekdaysShort: 'dom._lun._mar._mie._jue._vie._sáb.'.split('_'),
+          weekdaysMin: 'Do_Lu_Ma_Mi_Ju_Vi_Sá'.split('_'),
           weekdaysParseExact: true,
           week: {
             dow: 1,
           },
         }),
-        format: "DD/MM/YYYY",
+        format: 'DD/MM/YYYY',
       },
       wrapperCol: { span: 8 },
     },
@@ -208,33 +210,33 @@ const formServicio = {
   formItemLayout: null,
   fields: [
     {
-      key: "revision",
-      label: "Revisión",
-      widget: "checkbox",
+      key: 'revision',
+      label: 'Revisión',
+      widget: 'checkbox',
       formItemLayout: {
         labelCol: { span: 8 },
       },
     },
     {
-      key: "mantenimiento",
-      label: "Mantenimiento",
-      widget: "checkbox",
+      key: 'mantenimiento',
+      label: 'Mantenimiento',
+      widget: 'checkbox',
       formItemLayout: {
         labelCol: { span: 8 },
       },
     },
     {
-      key: "recarga",
-      label: "Recarga",
-      widget: "checkbox",
+      key: 'recarga',
+      label: 'Recarga',
+      widget: 'checkbox',
       formItemLayout: {
         labelCol: { span: 8 },
       },
     },
     {
-      key: "presion",
-      label: "Prueba de presión interna",
-      widget: "checkbox",
+      key: 'presion',
+      label: 'Prueba de presión interna',
+      widget: 'checkbox',
       formItemLayout: {
         labelCol: { span: 10 },
       },
@@ -250,11 +252,11 @@ let formPresion = [];
 const wizardMeta = {
   steps: [
     {
-      title: "Registro de cliente",
+      title: 'Registro de cliente',
       formMeta: formCliente,
     },
     {
-      title: "Servicio",
+      title: 'Servicio',
       formMeta: formServicio,
     },
   ],
@@ -263,15 +265,15 @@ const wizardMeta = {
 const resumeForm = {
   steps: [
     {
-      title: "Registro de cliente",
+      title: 'Registro de cliente',
       formMeta: formCliente,
     },
     {
-      title: "Extintor",
+      title: 'Extintor',
       formMeta: formExtintor,
     },
     {
-      title: "Servicio",
+      title: 'Servicio',
       formMeta: formServicio,
     },
   ],
@@ -282,7 +284,7 @@ export default () => {
   const [currentStep, setCurrentStep] = useState(0);
   // const forceUpdate = FormBuilder.useForceUpdate()
   const handleFinish = useCallback(() => {
-    console.log("Submit: ", form.getFieldsValue(true));
+    console.log('Submit: ', form.getFieldsValue(true));
   }, [form]);
 
   // Clone the meta for dynamic change
@@ -295,7 +297,7 @@ export default () => {
   resumeForm.steps.forEach((s, i) => {
     reviewFields.push(
       {
-        key: "review" + i,
+        key: 'review' + i,
         colSpan: 2,
         render() {
           return (
@@ -310,8 +312,8 @@ export default () => {
   });
 
   newWizardMeta.steps.push({
-    key: "review",
-    title: "Resumen",
+    key: 'review',
+    title: 'Resumen',
     formMeta: {
       columns: 2,
       fields: reviewFields,
@@ -344,7 +346,7 @@ export default () => {
     formServicio.fields[3].formItemLayout = {
       labelCol: { span: 10 },
     };
-    formExtintor.fields[3].extra = "NCh1430, cláusula 5";
+    formExtintor.fields[3].extra = 'NCh1430, cláusula 5';
   };
 
   const isReview = currentStep === stepsLength - 1;
@@ -355,40 +357,40 @@ export default () => {
 
   const initialPanes = [
     {
-      title: "Revision",
+      title: 'Revision',
       content: (
         <fieldset>
           <FormBuilder form={testform} meta={formRevision} />
         </fieldset>
       ),
-      key: "1",
+      key: '1',
     },
     {
-      title: "Mantenimiento",
+      title: 'Mantenimiento',
       content: (
         <fieldset>
           <FormBuilder form={testform} meta={formMantenimiento} />
         </fieldset>
       ),
-      key: "2",
+      key: '2',
     },
     {
-      title: "Recarga",
+      title: 'Recarga',
       content: (
         <fieldset>
           <FormBuilder form={testform} meta={formRecarga} />
         </fieldset>
       ),
-      key: "3",
+      key: '3',
     },
     {
-      title: "Prueba de presión interna",
+      title: 'Prueba de presión interna',
       content: (
         <fieldset>
           <FormBuilder form={testform} meta={formPresion} />
         </fieldset>
       ),
-      key: "4",
+      key: '4',
     },
   ];
 
@@ -399,25 +401,27 @@ export default () => {
   let recarga;
   let presion;
   let dataForms = [];
-  if (form.getFieldValue("cliente")) {
-    cliente = form.getFieldValue("cliente");
-    extintor = form.getFieldValue("extintor");
-    revision = form.getFieldValue("revision") ? "Si" : "No";
-    mant = form.getFieldValue("mantenimiento") ? "Si" : "No";
-    recarga = form.getFieldValue("recarga") ? "Si" : "No";
-    presion = form.getFieldValue("presion") ? "Si" : "No";
+  if (form.getFieldValue('cliente')) {
+    cliente = form.getFieldValue('cliente');
+    extintor = form.getFieldValue('extintor');
+    revision = form.getFieldValue('revision') ? 'Si' : 'No';
+    mant = form.getFieldValue('mantenimiento') ? 'Si' : 'No';
+    recarga = form.getFieldValue('recarga') ? 'Si' : 'No';
+    presion = form.getFieldValue('presion') ? 'Si' : 'No';
 
-    let fabricacion = "N/A";
+    let fabricacion = 'N/A';
     if (extintor.fabricacion != undefined) {
-      fabricacion = moment(extintor.fabricacion).format("MM/YYYY");
+      fabricacion = moment(extintor.fabricacion).format('MM/YYYY');
     }
-    let fecha_servicio = "N/A";
+    let fecha_servicio = 'N/A';
     if (extintor.fecha_servicio != undefined) {
-      fecha_servicio = moment(extintor.fecha_servicio).format("DD/MM/YYYY");
+      fecha_servicio = moment(extintor.fecha_servicio).format(
+        'DD/MM/YYYY'
+      );
     }
     dataForms = {
       cliente: {
-        nombre: cliente.nombre == "" ? "N/A" : cliente.nombre,
+        nombre: cliente.nombre == '' ? 'N/A' : cliente.nombre,
         direccion: cliente.direccion,
         telefono: cliente.telefono,
         comuna: cliente.comuna,
@@ -441,22 +445,22 @@ export default () => {
   }
 
   if (
-    form.getFieldInstance("revision") &&
-    !form.getFieldInstance("revision").props["checked"]
+    form.getFieldInstance('revision') &&
+    !form.getFieldInstance('revision').props['checked']
   ) {
-    if (!form.getFieldInstance("fr_revision1")) {
+    if (!form.getFieldInstance('fr_revision1')) {
       createRevision(formRevision);
     }
   }
 
-  if (!form.getFieldValue("revision")) {
+  if (!form.getFieldValue('revision')) {
     formRevision.forEach((e) => {
       const key = e.key;
       testform.setFieldsValue({ [key]: null });
     });
     formRevision = [];
     initialPanes.splice(
-      initialPanes.findIndex(({ key }) => key == "1"),
+      initialPanes.findIndex(({ key }) => key == '1'),
       1
     );
   }
@@ -464,68 +468,77 @@ export default () => {
   //TODO: REFACTORIZAR PUSH EN LOS FORM
 
   if (
-    form.getFieldInstance("mantenimiento") &&
-    !form.getFieldInstance("mantenimiento").props["checked"]
+    form.getFieldInstance('mantenimiento') &&
+    !form.getFieldInstance('mantenimiento').props['checked']
   ) {
-    if (!form.getFieldInstance("fr_mant1")) {
+    if (!form.getFieldInstance('fr_mant1')) {
       createMantenimiento(formMantenimiento);
     }
   }
 
-  if (!form.getFieldValue("mantenimiento")) {
+  if (!form.getFieldValue('mantenimiento')) {
     formMantenimiento.forEach((e) => {
       const key = e.key;
       testform.setFieldsValue({ [key]: null });
     });
     formMantenimiento = [];
     initialPanes.splice(
-      initialPanes.findIndex(({ key }) => key == "2"),
+      initialPanes.findIndex(({ key }) => key == '2'),
       1
     );
   }
 
   if (
-    form.getFieldInstance("recarga") &&
-    !form.getFieldInstance("recarga").props["checked"]
+    form.getFieldInstance('recarga') &&
+    !form.getFieldInstance('recarga').props['checked']
   ) {
-    if (!form.getFieldInstance("fr_recarga1")) {
+    if (!form.getFieldInstance('fr_recarga1')) {
       createRecarga(formRecarga);
     }
   }
 
-  if (!form.getFieldValue("recarga")) {
+  if (!form.getFieldValue('recarga')) {
     formRecarga.forEach((e) => {
       const key = e.key;
       testform.setFieldsValue({ [key]: null });
     });
     formRecarga = [];
     initialPanes.splice(
-      initialPanes.findIndex(({ key }) => key == "3"),
+      initialPanes.findIndex(({ key }) => key == '3'),
       1
     );
   }
 
   if (
-    form.getFieldInstance("presion") &&
-    !form.getFieldInstance("presion").props["checked"]
+    form.getFieldInstance('presion') &&
+    !form.getFieldInstance('presion').props['checked']
   ) {
-    if (!form.getFieldInstance("fr_presion1")) {
+    if (!form.getFieldInstance('fr_presion1')) {
       createPresion(formPresion);
     }
   }
 
-  if (!form.getFieldValue("presion")) {
+  if (!form.getFieldValue('presion')) {
     formPresion.forEach((e) => {
       const key = e.key;
       testform.setFieldsValue({ [key]: null });
     });
     formPresion = [];
     initialPanes.splice(
-      initialPanes.findIndex(({ key }) => key == "4"),
+      initialPanes.findIndex(({ key }) => key == '4'),
       1
     );
   }
 
+  // document
+  //   .querySelector('ant-form')
+  //   .addEventListener('submit', function (e) {
+  //     if (!isValid) {
+  //       e.preventDefault(); //stop form from submitting
+  //       ipcRenderer.send('add');
+  //     }
+  //   });
+  console.log(currentStep);
   if (currentStep === 0) {
     return (
       <Form
@@ -541,7 +554,11 @@ export default () => {
         </Steps>
 
         <div
-          style={{ background: "#f7f7f7", padding: "20px", margin: "30px 0" }}
+          style={{
+            background: '#f7f7f7',
+            padding: '20px',
+            margin: '30px 0',
+          }}
         >
           <fieldset>
             <legend>Información del cliente</legend>
@@ -564,11 +581,11 @@ export default () => {
             <FormBuilder form={form} meta={formServicio} />
           </fieldset>
         </div>
-        <Form.Item className="form-footer" style={{ textAlign: "right" }}>
+        <Form.Item className="form-footer" style={{ textAlign: 'right' }}>
           {currentStep > 0 && (
             <Button
               onClick={handleBack}
-              style={{ float: "left", marginTop: "5px" }}
+              style={{ float: 'left', marginTop: '5px' }}
             >
               Atras
             </Button>
@@ -578,7 +595,7 @@ export default () => {
             type="primary"
             onClick={isReview ? () => form.submit() : handleNext}
           >
-            {isReview ? "Guardar" : "Siguiente"}
+            {isReview ? 'Guardar' : 'Siguiente'}
           </Button>
         </Form.Item>
       </Form>
@@ -598,7 +615,11 @@ export default () => {
         </Steps>
 
         <div
-          style={{ background: "#f7f7f7", padding: "20px", margin: "30px 0" }}
+          style={{
+            background: '#f7f7f7',
+            padding: '20px',
+            margin: '30px 0',
+          }}
         >
           <Tabs type="card" size="large">
             {initialPanes.map((pane) => (
@@ -608,11 +629,11 @@ export default () => {
             ))}
           </Tabs>
         </div>
-        <Form.Item className="form-footer" style={{ textAlign: "right" }}>
+        <Form.Item className="form-footer" style={{ textAlign: 'right' }}>
           {currentStep > 0 && (
             <Button
               onClick={handleBack}
-              style={{ float: "left", marginTop: "5px" }}
+              style={{ float: 'left', marginTop: '5px' }}
             >
               Atras
             </Button>
@@ -622,7 +643,7 @@ export default () => {
             type="primary"
             onClick={isReview ? () => form.submit() : handleNext}
           >
-            {isReview ? "Guardar" : "Siguiente"}
+            {isReview ? 'Guardar' : 'Siguiente'}
           </Button>
         </Form.Item>
       </Form>
@@ -642,7 +663,11 @@ export default () => {
         </Steps>
 
         <div
-          style={{ background: "#f7f7f7", padding: "20px", margin: "30px 0" }}
+          style={{
+            background: '#f7f7f7',
+            padding: '20px',
+            margin: '30px 0',
+          }}
         >
           <FormBuilder
             viewMode={currentStep === stepsLength - 1}
@@ -651,11 +676,11 @@ export default () => {
             initialValues={dataForms}
           />
         </div>
-        <Form.Item className="form-footer" style={{ textAlign: "right" }}>
+        <Form.Item className="form-footer" style={{ textAlign: 'right' }}>
           {currentStep > 0 && (
             <Button
               onClick={handleBack}
-              style={{ float: "left", marginTop: "5px" }}
+              style={{ float: 'left', marginTop: '5px' }}
             >
               Atras
             </Button>
@@ -665,7 +690,7 @@ export default () => {
             type="primary"
             onClick={isReview ? () => form.submit() : handleNext}
           >
-            {isReview ? "Guardar" : "Siguiente"}
+            {isReview ? 'Guardar' : 'Siguiente'}
           </Button>
         </Form.Item>
       </Form>
