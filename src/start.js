@@ -6,6 +6,7 @@ const url = require('url');
 const Cliente = require('./models/clienteModel');
 const Extintor = require('./models/extintorModel');
 const Revision = require('./models/revisionModel');
+const Registro = require('./models/registroModel');
 
 require('dotenv').config();
 
@@ -65,12 +66,24 @@ app.on('activate', () => {
   }
 });
 
-ipcMain.on('add', async (e, cliente, extintor, revision) => {
-  try {
-    const cli = await Cliente.create(cliente);
-    const ext = await Extintor.create(extintor);
-    const rev = await Revision.create(revision);
-  } catch (err) {
-    console.log(err);
+ipcMain.on(
+  'add',
+  async (
+    e,
+    cliente,
+    extintor,
+    revision,
+    mantenimiento,
+    recarga,
+    presion
+  ) => {
+    try {
+      const cli = await Cliente.create(cliente);
+      const ext = await Extintor.create(extintor);
+      const rev = await Revision.create(revision);
+      // const reg = await Registro.create({ servicios: rev._id });
+    } catch (err) {
+      console.log(err);
+    }
   }
-});
+);

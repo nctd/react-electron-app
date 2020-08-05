@@ -530,14 +530,7 @@ export default () => {
     );
   }
 
-  // document
-  //   .querySelector('ant-form')
-  //   .addEventListener('submit', function (e) {
-  //     if (!isValid) {
-  //       e.preventDefault(); //stop form from submitting
-  //       ipcRenderer.send('add');
-  //     }
-  //   });
+  console.log(form.getFieldValue('fr_mant4'));
 
   if (currentStep === 0) {
     return (

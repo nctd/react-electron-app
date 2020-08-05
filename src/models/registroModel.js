@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-const clienteSchema = new mongoose.Schema({
+const registroSchema = new mongoose.Schema({
   nombreRep: {
     type: String,
     trim: true,
@@ -28,3 +28,7 @@ const clienteSchema = new mongoose.Schema({
     },
   ],
 });
+
+const Registro = mongoose.model('Registro', registroSchema);
+
+module.exports = Registro;
