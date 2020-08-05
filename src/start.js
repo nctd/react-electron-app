@@ -64,9 +64,9 @@ app.on('activate', () => {
   }
 });
 
-ipcMain.on('add', async (e, extintor) => {
+ipcMain.on('add', async (e, cliente, extintor) => {
   try {
-    // const cli = await Cliente.create(cliente);
+    const cli = await Cliente.create(cliente);
     const ext = await Extintor.create(extintor);
   } catch (err) {
     console.log(err);

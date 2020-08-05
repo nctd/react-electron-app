@@ -22,7 +22,7 @@ export const createOne = (form) => {
     fecha_servicio: moment(data_ext.fecha_servicio).format('DD/MM/YYYY'),
   };
 
-  ipcRenderer.send('add', extintor);
+  ipcRenderer.send('add', cliente, extintor);
   form.submit();
   // form.reset();
 };
