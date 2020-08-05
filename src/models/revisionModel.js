@@ -2,22 +2,23 @@ const mongoose = require('mongoose');
 
 const revisionSchema = new mongoose.Schema({
   encargado: { type: String },
-  norma_chilena: { type: String },
+  normaChilena: { type: String },
   manual: { type: Boolean },
-  razon_revision: {
+  razonRevision: {
     type: String,
     enum: ['puesta en servicio', 'segun programa', 'otra'],
+    lowercase: true,
   },
-  razon_comentario: { type: String },
-  resultado: [
+  razonComentario: { type: String },
+  resultados: [
     {
-      type: {
+      descripcion: {
         type: String,
       },
-      descripcion: String,
+      respuesta: String,
     },
   ],
-  resultado_comentario: { type: String },
+  resultadoComentario: { type: String },
 });
 
 const Revision = mongoose.model('Revision', revisionSchema);

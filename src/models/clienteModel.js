@@ -1,21 +1,21 @@
 const mongoose = require('mongoose');
 
 const clienteSchema = new mongoose.Schema({
-  nombre_cliente: {
+  nombre: {
     type: String,
     trim: true,
     required: [true, 'Debe ingresar un nombre'],
   },
-  direccion_cliente: {
+  direccion: {
     type: String,
   },
-  comuna_cliente: {
+  comuna: {
     type: String,
   },
-  telefono_cliente: {
+  telefono: {
     type: String,
   },
-  correo_cliente: {
+  correo: {
     type: String,
     lowercase: true,
   },

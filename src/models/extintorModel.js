@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 
 const extintorSchema = new mongoose.Schema({
-  num_extintor: {
+  numExtintor: {
     type: String,
     required: [true, 'Debe ingresar un nombre'],
   },
@@ -10,21 +10,22 @@ const extintorSchema = new mongoose.Schema({
   },
   tipo: {
     type: String,
-    enum: ['Recargable', 'No recargable'],
+    enum: ['recargable', 'no recargable'],
+    lowercase: true,
   },
-  agente_extincion: {
+  agenteExtincion: {
     type: String,
   },
-  presion_trabajo: {
+  presionTrabajo: {
     type: String,
   },
-  presion_prueba: {
+  presionPrueba: {
     type: String,
   },
   fabricacion: {
     type: String,
   },
-  fecha_servicio: {
+  fechaServicio: {
     type: Date,
   },
 });

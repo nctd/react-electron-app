@@ -5,6 +5,7 @@ const url = require('url');
 
 const Cliente = require('./models/clienteModel');
 const Extintor = require('./models/extintorModel');
+const Revision = require('./models/revisionModel');
 
 require('dotenv').config();
 
@@ -64,10 +65,11 @@ app.on('activate', () => {
   }
 });
 
-ipcMain.on('add', async (e, cliente, extintor) => {
+ipcMain.on('add', async (e, cliente, extintor, revision) => {
   try {
     const cli = await Cliente.create(cliente);
     const ext = await Extintor.create(extintor);
+    const rev = await Revision.create(revision);
   } catch (err) {
     console.log(err);
   }
