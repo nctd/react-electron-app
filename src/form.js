@@ -8,7 +8,7 @@ import { createRevision } from './forms/formRevision';
 import { createMantenimiento } from './forms/formMantenimiento';
 import { createPresion } from './forms/formPresion';
 import { createRecarga } from './forms/formRecarga';
-import { test1 } from './app';
+import { createOne } from './app';
 
 const { Step } = Steps;
 const DateView = ({ value }) =>
@@ -538,7 +538,7 @@ export default () => {
   //       ipcRenderer.send('add');
   //     }
   //   });
-  console.log(currentStep);
+
   if (currentStep === 0) {
     return (
       <Form
@@ -688,7 +688,7 @@ export default () => {
           <Button>Cancelar</Button>&nbsp; &nbsp;
           <Button
             type="primary"
-            onClick={isReview ? () => form.submit() : handleNext}
+            onClick={isReview ? () => createOne(form) : handleNext}
           >
             {isReview ? 'Guardar' : 'Siguiente'}
           </Button>

@@ -19,22 +19,6 @@ const clienteSchema = new mongoose.Schema({
     type: String,
     lowercase: true,
   },
-  //   nombre_rep: {
-  //     type: String,
-  //   },
-  //   telefono_rep: {
-  //     type: String,
-  //   },
-  //   correo_rep: {
-  //     type: String,
-  //     lowercase: true,
-  //   },
-  //   nombre_contacto: {
-  //     type: String,
-  //   },
-  //   telefono_contacto: {
-  //     type: String,
-  //   },
 });
 const Cliente = mongoose.model('Cliente', clienteSchema);
 

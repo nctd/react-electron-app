@@ -1,16 +1,16 @@
 const mongoose = require('mongoose');
 
 const extintorSchema = new mongoose.Schema({
-  num_id: {
+  num_extintor: {
     type: String,
     required: [true, 'Debe ingresar un nombre'],
   },
   marca: {
     type: String,
-    enum: ['Recargable', 'No recargable'],
   },
   tipo: {
     type: String,
+    enum: ['Recargable', 'No recargable'],
   },
   agente_extincion: {
     type: String,
@@ -22,9 +22,12 @@ const extintorSchema = new mongoose.Schema({
     type: String,
   },
   fabricacion: {
-    type: Date,
+    type: String,
   },
   fecha_servicio: {
     type: Date,
   },
 });
+const Extintor = mongoose.model('Extintor', extintorSchema);
+
+module.exports = Extintor;

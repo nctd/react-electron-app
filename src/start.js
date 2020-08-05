@@ -4,6 +4,7 @@ const path = require('path');
 const url = require('url');
 
 const Cliente = require('./models/clienteModel');
+const Extintor = require('./models/extintorModel');
 
 require('dotenv').config();
 
@@ -63,13 +64,11 @@ app.on('activate', () => {
   }
 });
 
-ipcMain.on('add', async (e) => {
-  const doc = await Cliente.create({
-    nombre_cliente: 'test',
-    direccion_cliente: 'test',
-    comuna_cliente: 'test',
-    telefono_cliente: 'test',
-    correo_cliente: 'test',
-  });
-  console.log(doc);
+ipcMain.on('add', async (e, extintor) => {
+  try {
+    // const cli = await Cliente.create(cliente);
+    const ext = await Extintor.create(extintor);
+  } catch (err) {
+    console.log(err);
+  }
 });
