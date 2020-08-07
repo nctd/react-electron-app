@@ -21,12 +21,85 @@ const registroSchema = new mongoose.Schema({
   correoContacto: {
     type: String,
   },
-  servicios: [
-    {
-      type: mongoose.Schema.ObjectId,
-      ref: 'Revision',
+  revision: {
+    encargado: { type: String },
+    normaChilena: { type: String },
+    manual: { type: Boolean },
+    razonRevision: {
+      type: String,
+      enum: ['puesta en servicio', 'segun programa', 'otra'],
+      lowercase: true,
     },
-  ],
+    razonComentario: { type: String },
+    resultados: {
+      type: [
+        {
+          descripcion: {
+            type: String,
+          },
+          respuesta: String,
+        },
+      ],
+      default: undefined,
+    },
+    resultadoComentario: { type: String },
+  },
+
+  mantenimiento: {
+    encargado: { type: String },
+    normaChilena: { type: String },
+    manual: { type: Boolean },
+    razonMantenimiento: {
+      type: String,
+      enum: ['por revision', 'segun programa', 'otra'],
+      lowercase: true,
+    },
+    razonComentario: { type: String },
+    resultados: {
+      type: [
+        {
+          descripcion: {
+            type: String,
+          },
+          respuesta: String,
+        },
+      ],
+      default: undefined,
+    },
+    resultadoComentario: { type: String },
+  },
+  recarga: {
+    encargado: { type: String },
+    normaChilena: { type: String },
+    manual: { type: Boolean },
+    agenteUtilizado: { type: String },
+    masaExtAntes: { type: String },
+    masaExtDespues: { type: String },
+    verificaEstanqueidad: {
+      type: String,
+      enum: ['si', 'no', 'no aplica'],
+      lowercase: true,
+    },
+    comentarios: { type: String },
+  },
+  presion: {
+    encargado: { type: String },
+    normaChilena: { type: String },
+    examenPrevio: { type: Boolean },
+    resultados: {
+      type: [
+        {
+          descripcion: {
+            type: String,
+          },
+          respuesta: String,
+        },
+      ],
+      default: undefined,
+    },
+    resultadoComentario: { type: String },
+  },
+  creacion: { type: Date, default: Date.now() },
 });
 
 const Registro = mongoose.model('Registro', registroSchema);

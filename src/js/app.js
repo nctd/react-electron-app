@@ -7,6 +7,9 @@ export const createOne = (form) => {
   const data_rep = form.getFieldValue('representante');
   const data_con = form.getFieldValue('contacto');
   let revision = null;
+  let mantenimiento = null;
+  let recarga = null;
+  let presion = null;
   const cliente = {
     nombre: data_cli.nombre,
     direccion: data_cli.direccion,
@@ -24,6 +27,7 @@ export const createOne = (form) => {
     fabricacion: moment(data_ext.fabricacion).format('MM/YYYY'),
     fechaServicio: moment(data_ext.fecha_servicio).format('DD/MM/YYYY'),
   };
+
   if (form.getFieldValue('revision')) {
     revision = {
       encargado: form.getFieldValue('fr_revision1'),
@@ -61,8 +65,9 @@ export const createOne = (form) => {
       resultadoComentario: form.getFieldValue('fr_revision12'),
     };
   }
+
   if (form.getFieldValue('mantenimiento')) {
-    revision = {
+    mantenimiento = {
       encargado: form.getFieldValue('fr_mant1'),
       normaChilena: form.getFieldValue('fr_mant2'),
       manual: form.getFieldValue('fr_mant3') === 'Si' ? true : false,
@@ -119,6 +124,52 @@ export const createOne = (form) => {
     };
   }
 
+  if (form.getFieldValue('recarga')) {
+    recarga = {
+      encargado: form.getFieldValue('fr_recarga1'),
+      normaChilena: form.getFieldValue('fr_recarga2'),
+      manual: form.getFieldValue('fr_recarga3') === 'Si' ? true : false,
+      agenteUtilizado: form.getFieldValue('fr_recarga4'),
+      masaExtAntes: form.getFieldValue('fr_recarga5'),
+      masaExtDespues: form.getFieldValue('fr_recarga6'),
+      verificaEstanqueidad: form.getFieldValue('fr_recarga7'),
+      comentarios: form.getFieldValue('fr_recarga8'),
+    };
+  }
+
+  if (form.getFieldValue('presion')) {
+    presion = {
+      encargado: form.getFieldValue('fr_presion1'),
+      normaChilena: form.getFieldValue('fr_presion2'),
+      examenPrevio:
+        form.getFieldValue('fr_presion3') === 'Si' ? true : false,
+      resultados: [
+        {
+          descripcion: 'cilindroTanque',
+          respuesta:
+            form.getFieldValue('fr_presion5') === 'Aceptado'
+              ? true
+              : false,
+        },
+        {
+          descripcion: 'cilindroGasExpelente',
+          respuesta:
+            form.getFieldValue('fr_presion6') === 'Aceptado'
+              ? true
+              : false,
+        },
+        {
+          descripcion: 'conjuntoManguera',
+          respuesta:
+            form.getFieldValue('fr_presion7') === 'Aceptado'
+              ? true
+              : false,
+        },
+      ],
+      resultadoComentario: form.getFieldValue('fr_presion8'),
+    };
+  }
+
   const registro = {
     nombreRep: data_rep.nombre,
     telefonoRep: data_rep.telefono,
@@ -126,9 +177,22 @@ export const createOne = (form) => {
     nombreContacto: data_con.nombre,
     telefonoContacto: data_con.telefono,
     correoContacto: data_con.email,
+    revision: revision,
+    mantenimiento: mantenimiento,
+    recarga: recarga,
+    presion: presion,
   };
 
-  ipcRenderer.send('add', cliente, extintor, revision, registro);
-  form.submit();
+  ipcRenderer.send(
+    'add',
+    cliente,
+    extintor,
+    revision,
+    mantenimiento,
+    recarga,
+    presion,
+    registro
+  );
+
   // form.reset();
 };

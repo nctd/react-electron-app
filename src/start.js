@@ -1,12 +1,12 @@
-const { app, BrowserWindow, ipcMain } = require('electron');
+const { app, BrowserWindow, ipcMain, dialog } = require('electron');
 const mongoose = require('mongoose');
 const path = require('path');
 const url = require('url');
 
 const Cliente = require('./models/clienteModel');
 const Extintor = require('./models/extintorModel');
-const Revision = require('./models/revisionModel');
 const Registro = require('./models/registroModel');
+const { message } = require('antd');
 
 require('dotenv').config();
 
@@ -17,7 +17,15 @@ mongoose
     useFindAndModify: false,
     useUnifiedTopology: false,
   })
-  .then(() => console.log('DB Connection successful'))
+  .then(() =>
+    dialog.showMessageBox(
+      null,
+      { message: 'DB Connection successful' },
+      (response) => {
+        console.log(response);
+      }
+    )
+  )
   .catch((err) => console.log(err));
 
 let mainWindow;
@@ -75,15 +83,23 @@ ipcMain.on(
     revision,
     mantenimiento,
     recarga,
-    presion
+    presion,
+    registro
   ) => {
     try {
       const cli = await Cliente.create(cliente);
       const ext = await Extintor.create(extintor);
-      const rev = await Revision.create(revision);
-      // const reg = await Registro.create({ servicios: rev._id });
+      const reg = await Registro.create(registro);
+      const type = 'success';
+      e.sender.send('add-reply', type);
     } catch (err) {
-      console.log(err);
+      const type = 'error';
+      e.sender.send('add-reply', type, err);
     }
   }
 );
+
+// TODO:
+// MENSAJES X
+// PDF
+// VALIDACIONES

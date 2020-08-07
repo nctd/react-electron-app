@@ -4,11 +4,12 @@ import { Form, Button, Steps, Tabs, Modal } from 'antd';
 import FormBuilder from 'antd-form-builder';
 import locale from 'antd/lib/date-picker/locale/es_ES';
 import moment from 'moment';
-import { createRevision } from './forms/formRevision';
-import { createMantenimiento } from './forms/formMantenimiento';
-import { createPresion } from './forms/formPresion';
-import { createRecarga } from './forms/formRecarga';
-import { createOne } from './app';
+import { createRevision } from '../forms/formRevision';
+import { createMantenimiento } from '../forms/formMantenimiento';
+import { createPresion } from '../forms/formPresion';
+import { createRecarga } from '../forms/formRecarga';
+import { createOne } from '../js/app';
+import { showAlert } from '../js/alert';
 
 const { Step } = Steps;
 const DateView = ({ value }) =>
@@ -343,6 +344,7 @@ export default () => {
     form.validateFields().then(() => {
       setCurrentStep(currentStep - 1);
     });
+
     formServicio.fields[3].formItemLayout = {
       labelCol: { span: 10 },
     };
@@ -401,6 +403,7 @@ export default () => {
   let recarga;
   let presion;
   let dataForms = [];
+
   if (form.getFieldValue('cliente')) {
     cliente = form.getFieldValue('cliente');
     extintor = form.getFieldValue('extintor');
@@ -530,8 +533,6 @@ export default () => {
     );
   }
 
-  console.log(form.getFieldValue('fr_mant4'));
-
   if (currentStep === 0) {
     return (
       <Form
@@ -642,6 +643,7 @@ export default () => {
       </Form>
     );
   } else {
+    showAlert();
     return (
       <Form
         layout="horizontal"
@@ -690,6 +692,3 @@ export default () => {
     );
   }
 };
-
-// TODO: CAMBIAR COLORES
-// TODO: SELECT OBLIGATORIO SERVICIOS

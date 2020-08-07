@@ -3,8 +3,8 @@ import ReactDOM from 'react-dom';
 // import "antd/dist/antd.css";
 import './css/custom-antd.css';
 import './css/index.css';
-import Header from './header';
-import Forms from './form';
+import Header from './views/header';
+import Forms from './views/form';
 import * as serviceWorker from './serviceWorker';
 
 ReactDOM.render(<Header />, document.getElementById('header'));

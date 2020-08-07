@@ -1,8 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 // import "antd/dist/antd.css";
-import './css/custom-antd.css';
-import './css/header.css';
+import '../css/custom-antd.css';
+import '../css/header.css';
 import { Layout } from 'antd';
 
 const { Header } = Layout;
