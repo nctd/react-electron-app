@@ -9,7 +9,6 @@ import { createMantenimiento } from '../forms/formMantenimiento';
 import { createPresion } from '../forms/formPresion';
 import { createRecarga } from '../forms/formRecarga';
 import { createOne } from '../js/app';
-import { showAlert } from '../js/alert';
 
 const { Step } = Steps;
 const DateView = ({ value }) =>
@@ -643,7 +642,6 @@ export default () => {
       </Form>
     );
   } else {
-    showAlert();
     return (
       <Form
         layout="horizontal"
