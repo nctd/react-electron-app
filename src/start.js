@@ -87,6 +87,7 @@ ipcMain.on(
     registro
   ) => {
     try {
+      // QUE PASA SI REGISTRA CLIENTE Y NO EXTINTOR,ETC
       const cli = await Cliente.create(cliente);
       const ext = await Extintor.create(extintor);
       const reg = await Registro.create(registro);

@@ -182,7 +182,7 @@ export const createOne = (form) => {
     recarga: recarga,
     presion: presion,
   };
-
+  form.submit();
   ipcRenderer.send(
     'add',
     cliente,
@@ -193,6 +193,4 @@ export const createOne = (form) => {
     presion,
     registro
   );
-
-  // form.reset();
 };
