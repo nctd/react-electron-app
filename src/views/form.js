@@ -336,8 +336,10 @@ export default () => {
       })
       .catch((err) => {
         err.errorFields.forEach((e) => {
-          console.log(e.name);
-          if (e.name[0].includes('recarga')) console.log(addIcon(3));
+          if (e.name[0].includes('revision')) addIcon(1);
+          if (e.name[0].includes('mant')) addIcon(2);
+          if (e.name[0].includes('recarga')) addIcon(3);
+          if (e.name[0].includes('presion')) addIcon(4);
         });
 
         return Modal.error({
@@ -355,8 +357,7 @@ export default () => {
   };
 
   const handleBack = () => {
-    // form.validateFields().then(() => {
-    // });
+    // form.validateFields().then(() => {});
     setCurrentStep(currentStep - 1);
 
     formServicio.fields[3].formItemLayout = {
@@ -373,7 +374,7 @@ export default () => {
 
   const initialPanes = [
     {
-      title: 'Revision',
+      title: 'Revisión',
       content: (
         <fieldset>
           <FormBuilder form={testform} meta={formRevision} />
