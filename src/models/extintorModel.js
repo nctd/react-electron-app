@@ -28,6 +28,7 @@ const extintorSchema = new mongoose.Schema({
   fechaServicio: {
     type: Date,
   },
+  creacion: { type: Date, default: Date.now() },
 });
 const Extintor = mongoose.model('Extintor', extintorSchema);
 

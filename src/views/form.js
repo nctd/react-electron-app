@@ -9,6 +9,7 @@ import { createMantenimiento } from '../forms/formMantenimiento';
 import { createPresion } from '../forms/formPresion';
 import { createRecarga } from '../forms/formRecarga';
 import { createOne } from '../js/app';
+import { addIcon } from '../js/icon';
 
 const { Step } = Steps;
 const DateView = ({ value }) =>
@@ -117,6 +118,7 @@ const formExtintor = {
       label: 'N° de identificacion',
       clear: 'both',
       // required: true,
+      // message: 'N° de identificacion es obligatorio',
       wrapperCol: { span: 12 },
     },
     {
@@ -327,9 +329,22 @@ export default () => {
       if (checkServicios(form)) return;
     }
 
-    form.validateFields().then(() => {
-      setCurrentStep(currentStep + 1);
-    });
+    form
+      .validateFields()
+      .then(() => {
+        setCurrentStep(currentStep + 1);
+      })
+      .catch((err) => {
+        err.errorFields.forEach((e) => {
+          console.log(e.name);
+          if (e.name[0].includes('recarga')) console.log(addIcon(3));
+        });
+
+        return Modal.error({
+          title: 'Error',
+          content: `Complete los campos requeridos`,
+        });
+      });
 
     if (currentStep == 1) {
       formServicio.fields[3].formItemLayout = {
@@ -340,9 +355,9 @@ export default () => {
   };
 
   const handleBack = () => {
-    form.validateFields().then(() => {
-      setCurrentStep(currentStep - 1);
-    });
+    // form.validateFields().then(() => {
+    // });
+    setCurrentStep(currentStep - 1);
 
     formServicio.fields[3].formItemLayout = {
       labelCol: { span: 10 },
@@ -616,7 +631,7 @@ export default () => {
         >
           <Tabs type="card" size="large">
             {initialPanes.map((pane) => (
-              <TabPane tab={pane.title} key={pane.key}>
+              <TabPane tab={pane.title} key={pane.key} forceRender={true}>
                 {pane.content}
               </TabPane>
             ))}

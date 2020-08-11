@@ -3,10 +3,9 @@ const mongoose = require('mongoose');
 const path = require('path');
 const url = require('url');
 
-const Cliente = require('./models/clienteModel');
-const Extintor = require('./models/extintorModel');
-const Registro = require('./models/registroModel');
-const { message } = require('antd');
+const Registro = require('./controllers/registroController');
+const Cliente = require('./controllers/clienteController');
+const Extintor = require('./controllers/extintorController');
 
 require('dotenv').config();
 
@@ -74,31 +73,20 @@ app.on('activate', () => {
   }
 });
 
-ipcMain.on(
-  'add',
-  async (
-    e,
-    cliente,
-    extintor,
-    revision,
-    mantenimiento,
-    recarga,
-    presion,
-    registro
-  ) => {
-    try {
-      // QUE PASA SI REGISTRA CLIENTE Y NO EXTINTOR,ETC
-      const cli = await Cliente.create(cliente);
-      const ext = await Extintor.create(extintor);
-      const reg = await Registro.create(registro);
-      const type = 'success';
-      e.sender.send('add-reply', type);
-    } catch (err) {
-      const type = 'error';
-      e.sender.send('add-reply', type, err);
-    }
+ipcMain.on('add', async (e, cliente, extintor, registro) => {
+  try {
+    // QUE PASA SI REGISTRA CLIENTE Y NO EXTINTOR,ETC
+    const cli = await Cliente.createCliente(cliente);
+    const ext = await Extintor.createExtintor(extintor);
+    const reg = await Registro.createRegistro(registro, cli, ext);
+
+    const type = 'success';
+    e.sender.send('add-reply', type);
+  } catch (err) {
+    const type = 'error';
+    e.sender.send('add-reply', type, err);
   }
-);
+});
 
 // TODO:
 // MENSAJES X

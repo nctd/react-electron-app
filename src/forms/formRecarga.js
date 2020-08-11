@@ -16,6 +16,7 @@ export const createRecarga = (meta) => {
         labelCol: { span: 9 },
         wrapperCol: { span: 8 },
       },
+      required: true,
     },
     {
       key: 'fr_recarga3',

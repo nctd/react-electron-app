@@ -99,6 +99,17 @@ const registroSchema = new mongoose.Schema({
     },
     resultadoComentario: { type: String },
   },
+  cliente: {
+    type: mongoose.Schema.ObjectId,
+    ref: 'Cliente',
+    required: [true, 'Se necesita un cliente asociado al registro'],
+  },
+  extintor: {
+    type: mongoose.Schema.ObjectId,
+    ref: 'Extintor',
+    required: [true, 'Se necesita un extintor asociado al registro'],
+  },
+
   creacion: { type: Date, default: Date.now() },
 });
 

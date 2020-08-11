@@ -11,7 +11,7 @@ export const showAlert = () => {
       });
     } else {
       return Modal.error({
-        title: 'Ocurrio un error al guardar',
+        title: 'Error!',
         content: `${err}`,
       });
     }

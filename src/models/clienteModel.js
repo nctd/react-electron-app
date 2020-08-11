@@ -8,6 +8,7 @@ const clienteSchema = new mongoose.Schema({
   },
   direccion: {
     type: String,
+    required: [true, 'Debe ingresar una direccion'],
   },
   comuna: {
     type: String,
@@ -19,6 +20,7 @@ const clienteSchema = new mongoose.Schema({
     type: String,
     lowercase: true,
   },
+  creacion: { type: Date, default: Date.now() },
 });
 const Cliente = mongoose.model('Cliente', clienteSchema);
 

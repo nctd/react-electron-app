@@ -183,14 +183,5 @@ export const createOne = (form) => {
     presion: presion,
   };
   form.submit();
-  ipcRenderer.send(
-    'add',
-    cliente,
-    extintor,
-    revision,
-    mantenimiento,
-    recarga,
-    presion,
-    registro
-  );
+  ipcRenderer.send('add', cliente, extintor, registro);
 };

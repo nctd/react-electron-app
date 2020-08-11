@@ -8,6 +8,8 @@ export const createPresion = (meta) => {
         labelCol: { span: 9 },
         wrapperCol: { span: 8 },
       },
+      required: true,
+      message: 'Ingrese la persona que realizó la recarga',
     },
     {
       key: 'fr_presion2',
