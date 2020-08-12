@@ -7,6 +7,8 @@ const Registro = require('./controllers/registroController');
 const Cliente = require('./controllers/clienteController');
 const Extintor = require('./controllers/extintorController');
 
+const PDF = require('./pdf');
+
 require('dotenv').config();
 
 mongoose
@@ -80,6 +82,7 @@ ipcMain.on('add', async (e, cliente, extintor, registro) => {
     const ext = await Extintor.createExtintor(extintor);
     const reg = await Registro.createRegistro(registro, cli, ext);
 
+    await PDF.createPDF();
     const type = 'success';
     e.sender.send('add-reply', type);
   } catch (err) {
