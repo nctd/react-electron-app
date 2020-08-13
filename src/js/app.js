@@ -25,7 +25,9 @@ export const createOne = (form) => {
     presionTrabajo: data_ext.p_trabajo,
     presionPrueba: data_ext.p_prueba,
     fabricacion: moment(data_ext.fabricacion).format('MM/YYYY'),
-    fechaServicio: moment(data_ext.fecha_servicio).format('DD/MM/YYYY'),
+    fechaServicio: moment(data_ext.fecha_servicio).format(
+      'YYYY-MM-DD[T00:00:00.000Z]'
+    ),
   };
 
   if (form.getFieldValue('revision')) {

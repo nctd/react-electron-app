@@ -37,15 +37,26 @@ exports.createPDF = async () => {
   // Get the width and height of the first page
   const { width, height } = firstPage.getSize();
 
-  firstPage.drawText('This text was added with JavaScript!', {
-    x: 5,
-    y: height / 2 + 300,
-    size: 50,
+  // firstPage.drawText('La floresta 3 Pasaje 13 #2683333333', {
+  //   x: 76,
+  //   y: 603,
+  //   maxWidth: 119,
+  //   lineHeight: 20,
+  //   size: 8,
+  //   wordBreaks:
+  //   font: helveticaFont,
+  //   color: rgb(0.95, 0.1, 0.1),
+
+  //   // rotate: degrees(-45),
+  // });
+  firstPage.moveTo(76, 603);
+  firstPage.drawText('La floresta 3 Pasaje 13 #26833', {
+    size: 8,
     font: helveticaFont,
-    color: rgb(0.95, 0.1, 0.1),
-    rotate: degrees(-45),
+    maxWidth: 118,
   });
   const pdfBytes = await pdfDoc.save();
   await writeFilePro(`${__dirname}/dev-data/test.pdf`, pdfBytes);
+  return height;
   //   return w;
 };
