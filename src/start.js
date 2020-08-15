@@ -82,11 +82,11 @@ ipcMain.on('add', async (e, cliente, extintor, registro) => {
     const ext = await Extintor.createExtintor(extintor);
     const reg = await Registro.createRegistro(registro, cli, ext);
 
-    const r = await PDF.createPDF();
+    // const r = await PDF.createPDF(cliente, extintor, registro);
 
-    dialog.showMessageBox(null, { message: `${r}` }, (response) => {
-      console.log(response);
-    });
+    // dialog.showMessageBox(null, { message: `${r}` }, (response) => {
+    //   console.log(response);
+    // });
     const type = 'success';
     e.sender.send('add-reply', type);
   } catch (err) {

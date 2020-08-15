@@ -10,7 +10,7 @@ import { createPresion } from '../forms/formPresion';
 import { createRecarga } from '../forms/formRecarga';
 import { createOne } from '../js/app';
 import { addIcon } from '../js/icon';
-
+import { renderPDF } from '../views/pdf/index-pdf';
 const { Step } = Steps;
 const DateView = ({ value }) =>
   value ? value.format('MMM Do YYYY') : 'N/A';
@@ -41,11 +41,13 @@ const formCliente = {
       clear: 'both',
       // required: true,
       wrapperCol: { span: 12 },
+      widgetProps: { maxLength: 40 },
     },
     {
       key: 'cliente.direccion',
       label: 'Dirección',
       wrapperCol: { span: 12 },
+      widgetProps: { maxLength: 30 },
     },
     {
       key: 'cliente.comuna',
@@ -697,7 +699,13 @@ export default () => {
           <Button>Cancelar</Button>&nbsp; &nbsp;
           <Button
             type="primary"
-            onClick={isReview ? () => createOne(form) : handleNext}
+            onClick={
+              isReview
+                ? () => {
+                    createOne(form), renderPDF();
+                  }
+                : handleNext
+            }
           >
             {isReview ? 'Guardar' : 'Siguiente'}
           </Button>

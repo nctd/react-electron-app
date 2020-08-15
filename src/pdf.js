@@ -24,7 +24,7 @@ const writeFilePro = (file, data) => {
   });
 };
 
-exports.createPDF = async () => {
+exports.createPDF = async (cliente, extintor, registro) => {
   const pdf = await readFilePro(`${__dirname}/dev-data/informe.pdf`);
 
   const pdfDoc = await PDFDocument.load(pdf);
@@ -37,24 +37,21 @@ exports.createPDF = async () => {
   // Get the width and height of the first page
   const { width, height } = firstPage.getSize();
 
-  // firstPage.drawText('La floresta 3 Pasaje 13 #2683333333', {
-  //   x: 76,
-  //   y: 603,
-  //   maxWidth: 119,
-  //   lineHeight: 20,
-  //   size: 8,
-  //   wordBreaks:
-  //   font: helveticaFont,
-  //   color: rgb(0.95, 0.1, 0.1),
-
-  //   // rotate: degrees(-45),
-  // });
-  firstPage.moveTo(76, 603);
-  firstPage.drawText('La floresta 3 Pasaje 13 #26833', {
+  firstPage.moveTo(247, 650);
+  firstPage.drawText(cliente.nombre, {
     size: 8,
     font: helveticaFont,
+    maxWidth: 308,
+    lineHeight: 14,
+  });
+  firstPage.moveTo(76, 603);
+  firstPage.drawText(cliente.direccion, {
+    size: 8,
+    font: helveticaFont,
+    lineHeight: 22,
     maxWidth: 118,
   });
+
   const pdfBytes = await pdfDoc.save();
   await writeFilePro(`${__dirname}/dev-data/test.pdf`, pdfBytes);
   return height;
