@@ -10,14 +10,14 @@ import {
   View,
 } from '@react-pdf/renderer';
 import Header from './header';
-import Experience from './body';
+import Detalle from './detalle';
 import Education from './education';
 
 const ReactPDF = window.require('@react-pdf/renderer');
 
 const styles = StyleSheet.create({
   page: {
-    padding: 30,
+    padding: 28,
   },
   container: {
     flex: 1,
@@ -42,68 +42,36 @@ const styles = StyleSheet.create({
       width: 200,
     },
   },
-  footer: {
-    fontSize: 12,
-    // fontFamily: 'Lato Bold',
-    textAlign: 'center',
-    marginTop: 25,
-    paddingTop: 10,
-    borderWidth: 3,
-    borderColor: 'gray',
-    borderStyle: 'dashed',
-    '@media orientation: landscape': {
-      marginTop: 10,
-    },
-  },
 });
 
-// Font.register({
-//   family: 'Open Sans',
-//   src: `${__dirname}/fonts/fonts/Open_Sans/OpenSans-Regular.ttf`,
-// });
-// Font.register({
-//   family: 'Lato Bold',
-//   src: LatoBold,
-// });
-// Font.register({
-//   family: 'Lato Italic',
-//   src: `${__dirname}/fonts/fonts/Lato/Lato-Italic.ttf`,
-// });
-// Font.register({
-//   family: 'Lato',
-//   src: `${__dirname}/fonts/fonts/Lato/Lato-Regular.ttf`,
-// });
-
-const Resume = (props) => (
-  <Page {...props} style={styles.page}>
+const Resume = (clienteData) => (
+  <Page style={styles.page}>
     <Header />
     <View style={styles.container}>
       <View style={styles.leftColumn}>
         <Image src="./public/sercoin.png" style={styles.image} />
         <Education />
       </View>
-      <Experience />
+      <Detalle clienteData={clienteData} />
     </View>
-    <Text style={styles.footer}>
-      This IS the candidate you are looking for
-    </Text>
   </Page>
 );
 
-const Output = () => (
+const Output = (clienteData) => (
   <Document
-    author="Luke Skywalker"
+    author="SERCOIN"
     keywords="awesome, resume, start wars"
-    subject="The resume of Luke Skywalker"
-    title="Resume"
+    subject="Informe al cliente"
+    title="Informe"
   >
-    <Resume size="A4" />
-    <Resume orientation="landscape" size="A4" />
-    <Resume size={[380, 1250]} />
+    <Resume size="A4" clienteData={clienteData} />
   </Document>
 );
 const xf = Date.now();
 
-export const renderPDF = () => {
-  ReactPDF.render(<Output />, `${__dirname}/informe-${xf}.pdf`);
+export const renderPDF = (clienteData) => {
+  ReactPDF.render(
+    <Output clienteData={clienteData} />,
+    `${__dirname}/informe-${xf}.pdf`
+  );
 };

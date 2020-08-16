@@ -6,8 +6,7 @@ const styles = StyleSheet.create({
   container: {
     flexDirection: 'row',
     borderBottomWidth: 2,
-    // borderBottomColor: '#d22b55',
-    borderBottomColor: '#112131',
+    borderBottomColor: '#000000',
     borderBottomStyle: 'solid',
     alignItems: 'stretch',
   },
@@ -24,15 +23,12 @@ const styles = StyleSheet.create({
   },
   name: {
     fontSize: 24,
-    // fontFamily: 'Lato Bold',
   },
   subtitle: {
     fontSize: 10,
     justifySelf: 'flex-end',
-    // fontFamily: 'Lato',
   },
   link: {
-    // fontFamily: 'Lato',
     fontSize: 10,
     color: 'black',
     textDecoration: 'none',
@@ -45,10 +41,6 @@ export default () => (
   <View style={styles.container}>
     <View style={styles.detailColumn}>
       <Text style={styles.name}>Informe al cliente</Text>
-      {/* <Text style={styles.subtitle}>Jedi Master</Text> */}
     </View>
-    {/* <View style={styles.linkColumn}>
-      <Link style={styles.link}>luke@theforce.com</Link>
-    </View> */}
   </View>
 );

@@ -2,6 +2,7 @@ import React from 'react';
 
 import Title from './title';
 import List, { Item } from './list';
+import { ItemSelect, ItemSelected } from './selectList';
 import { Text, View, StyleSheet, Font } from '@react-pdf/renderer';
 
 const styles = StyleSheet.create({
@@ -14,9 +15,6 @@ const styles = StyleSheet.create({
       paddingLeft: 0,
     },
   },
-  entryContainer: {
-    // marginBottom: 10,
-  },
   detailContainer: {
     flexDirection: 'row',
   },
@@ -25,12 +23,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     marginBottom: 10,
   },
-  title: {
-    fontSize: 11,
-    color: 'black',
-    textDecoration: 'none',
-    // fontFamily: 'Lato Bold',
-  },
+
   testContainer: {
     flexDirection: 'row',
     borderBottomWidth: 1,
@@ -46,12 +39,8 @@ const styles = StyleSheet.create({
 
   MarkUpContainer: {
     flexDirection: 'row',
-    // borderBottomWidth: 1,
     borderWidth: 1,
-    // borderLeftWidth: 1,
-    // borderRightWidth: 1,
     borderColor: '#000000',
-    // borderTopColor: '#000000',
     borderStyle: 'solid',
     alignItems: 'stretch',
   },
@@ -60,10 +49,10 @@ const styles = StyleSheet.create({
   },
 });
 
-const ExperienceEntry = ({ field, data }) => {
+const FormEntry = ({ field, data }) => {
   const title = `${field}: ${data}`;
   return (
-    <View style={styles.entryContainer}>
+    <View>
       <View style={styles.headerContainer}></View>
       <List>
         <Item style={styles.detailContainer}>{title}</Item>
@@ -73,7 +62,7 @@ const ExperienceEntry = ({ field, data }) => {
 };
 const LargeTextEntry = ({ data }) => {
   return (
-    <View style={styles.entryContainer}>
+    <View>
       <View style={styles.headerContainer}></View>
       <List>
         <Item style={styles.detailContainer}>{data}</Item>
@@ -81,29 +70,16 @@ const LargeTextEntry = ({ data }) => {
     </View>
   );
 };
-
-const clienteData = [
-  {
-    field: 'Nombre o razon social del cliente',
-    data: 'Nicolas Torres',
-  },
-  {
-    field: 'Direccion',
-    data: 'La floresta 3 pasaje 13',
-  },
-  {
-    field: 'Comuna',
-    data: 'Concepcion',
-  },
-  {
-    field: 'Telefono',
-    data: '+56956517901',
-  },
-  {
-    field: 'Correo electrónico',
-    data: 'nicotorresdiaz19@gmail.com',
-  },
-];
+const SelectEntry = ({ data }) => {
+  return (
+    <View>
+      <View style={styles.headerContainer}></View>
+      <List>
+        <ItemSelect style={styles.detailContainer}>{data}</ItemSelect>
+      </List>
+    </View>
+  );
+};
 
 const extintorData = [
   {
@@ -142,16 +118,22 @@ const servicioData = [
 const obsData =
   'and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.';
 
-const Experience = () => (
+const testData = 'Mantener en servicio';
+const testData2 =
+  'Retirar de servicio para mantenimiento y/o prueba de presion interna';
+const testData3 = 'Ser dado de baja';
+
+const Detalle = ({ clienteData }) => (
   <View style={styles.container}>
     <View style={styles.testContainer}>
       <View style={styles.testDetailColumn}>
         <Title>Datos del cliente</Title>
       </View>
     </View>
-    {clienteData.map(({ field, data }) => (
-      <ExperienceEntry field={field} key={field + data} data={data} />
+    {clienteData.clienteData.clienteData.map(({ field, data }) => (
+      <FormEntry field={field} key={field + data} data={data} />
     ))}
+    {console.log(clienteData.clienteData.clienteData)}
 
     <View style={styles.testContainer}>
       <View style={styles.testDetailColumn}>
@@ -159,7 +141,7 @@ const Experience = () => (
       </View>
     </View>
     {extintorData.map(({ field, data }) => (
-      <ExperienceEntry field={field} key={field + data} data={data} />
+      <FormEntry field={field} key={field + data} data={data} />
     ))}
 
     <View style={styles.testContainer}>
@@ -168,7 +150,7 @@ const Experience = () => (
       </View>
     </View>
     {servicioData.map(({ data }) => (
-      <LargeTextEntry data={data} />
+      <SelectEntry data={data} />
     ))}
 
     <View style={styles.testContainer}>
@@ -185,29 +167,23 @@ const Experience = () => (
     </View>
     <LargeTextEntry data={obsData} />
 
-    <View style={styles.MarkUpContainer}>
-      {/* <View style={styles.testDetailColumn}> */}
-      <Text style={styles.textFont}>Mantener en servicio</Text>
-      {/* </View> */}
-    </View>
-    <View style={styles.MarkUpContainer}>
-      <Text style={styles.textFont}>
-        Retirar de servicio para mantenimiento y/o prueba de presion
-        interna
-      </Text>
-    </View>
-    <View style={styles.MarkUpContainer}>
-      <Text style={styles.textFont}>Ser dado de baja</Text>
+    <View style={styles.testContainer}>
+      <View style={styles.testDetailColumn}>
+        <Title>El extintor se debe</Title>
+      </View>
     </View>
 
-    <LargeTextEntry data={obsData} />
-    {/* RAZONES */}
-    {/* <View style={styles.testContainer}>
+    <SelectEntry data={testData} />
+    <SelectEntry data={testData2} />
+    <SelectEntry data={testData3} />
+
+    <View style={styles.testContainer}>
       <View style={styles.testDetailColumn}>
         <Title>Razones</Title>
       </View>
-    </View> */}
+    </View>
+    <LargeTextEntry data={obsData} />
   </View>
 );
 
-export default Experience;
+export default Detalle;

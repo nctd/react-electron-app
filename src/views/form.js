@@ -699,13 +699,7 @@ export default () => {
           <Button>Cancelar</Button>&nbsp; &nbsp;
           <Button
             type="primary"
-            onClick={
-              isReview
-                ? () => {
-                    createOne(form), renderPDF();
-                  }
-                : handleNext
-            }
+            onClick={isReview ? () => createOne(form) : handleNext}
           >
             {isReview ? 'Guardar' : 'Siguiente'}
           </Button>

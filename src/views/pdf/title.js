@@ -5,7 +5,7 @@ import { Text, StyleSheet } from '@react-pdf/renderer';
 const styles = StyleSheet.create({
   title: {
     // fontFamily: 'Lato Bold',
-    fontSize: 12,
+    fontSize: 11,
     marginBottom: 1,
     textTransform: 'uppercase',
   },
