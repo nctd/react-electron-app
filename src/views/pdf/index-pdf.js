@@ -11,7 +11,7 @@ import {
 } from '@react-pdf/renderer';
 import Header from './header';
 import Detalle from './detalle';
-import Education from './education';
+import DatosEmpresa from './datosEmpresa';
 
 const ReactPDF = window.require('@react-pdf/renderer');
 
@@ -44,34 +44,79 @@ const styles = StyleSheet.create({
   },
 });
 
-const Resume = (clienteData) => (
+const Resume = (
+  clienteData,
+  extintorData,
+  servicioData,
+  representanteData,
+  contactoData,
+  comentariosData
+) => (
   <Page style={styles.page}>
     <Header />
     <View style={styles.container}>
       <View style={styles.leftColumn}>
         <Image src="./public/sercoin.png" style={styles.image} />
-        <Education />
+        <DatosEmpresa
+          clienteData={clienteData}
+          representanteData={representanteData}
+          contactoData={contactoData}
+        />
       </View>
-      <Detalle clienteData={clienteData} />
+      <Detalle
+        clienteData={clienteData}
+        extintorData={extintorData}
+        servicioData={servicioData}
+        comentariosData={comentariosData}
+      />
     </View>
   </Page>
 );
 
-const Output = (clienteData) => (
+const Output = (
+  clienteData,
+  extintorData,
+  servicioData,
+  representanteData,
+  contactoData,
+  comentariosData
+) => (
   <Document
     author="SERCOIN"
     keywords="awesome, resume, start wars"
     subject="Informe al cliente"
     title="Informe"
   >
-    <Resume size="A4" clienteData={clienteData} />
+    <Resume
+      size="A4"
+      clienteData={clienteData}
+      extintorData={extintorData}
+      servicioData={servicioData}
+      representanteData={representanteData}
+      contactoData={contactoData}
+      comentariosData={comentariosData}
+    />
   </Document>
 );
 const xf = Date.now();
 
-export const renderPDF = (clienteData) => {
+export const renderPDF = (
+  clienteData,
+  extintorData,
+  servicioData,
+  representanteData,
+  contactoData,
+  comentariosData
+) => {
   ReactPDF.render(
-    <Output clienteData={clienteData} />,
+    <Output
+      clienteData={clienteData}
+      extintorData={extintorData}
+      servicioData={servicioData}
+      representanteData={representanteData}
+      contactoData={contactoData}
+      comentariosData={comentariosData}
+    />,
     `${__dirname}/informe-${xf}.pdf`
   );
 };

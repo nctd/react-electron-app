@@ -81,7 +81,7 @@ ipcMain.on('add', async (e, cliente, extintor, registro) => {
     const reg = await Registro.createRegistro(registro, cli, ext);
 
     const type = 'success';
-    e.sender.send('add-reply', type, cliente);
+    e.sender.send('add-reply', type, cliente, extintor, registro);
   } catch (err) {
     const type = 'error';
     e.sender.send('add-reply', type, err);

@@ -70,50 +70,29 @@ const LargeTextEntry = ({ data }) => {
     </View>
   );
 };
-const SelectEntry = ({ data }) => {
-  return (
-    <View>
-      <View style={styles.headerContainer}></View>
-      <List>
-        <ItemSelect style={styles.detailContainer}>{data}</ItemSelect>
-      </List>
-    </View>
-  );
+const SelectEntry = ({ data, OptionSelect }) => {
+  if (OptionSelect == 'ItemSelected')
+    return (
+      <View>
+        <View style={styles.headerContainer}></View>
+        <List>
+          <ItemSelected style={styles.detailContainer}>
+            {data}
+          </ItemSelected>
+        </List>
+      </View>
+    );
+  else {
+    return (
+      <View>
+        <View style={styles.headerContainer}></View>
+        <List>
+          <ItemSelect style={styles.detailContainer}>{data}</ItemSelect>
+        </List>
+      </View>
+    );
+  }
 };
-
-const extintorData = [
-  {
-    field: 'Numero de identificacion del extintor',
-    data: 'MKVB2132131',
-  },
-  {
-    field: 'Marca del extintor',
-    data: 'TOYOTOMI',
-  },
-  {
-    field: 'Fecha del servicio',
-    data: '23/07/2020',
-  },
-  {
-    field: 'Nombre de la persona que realizo el servicio',
-    data: 'Nicolas Torres Diaz',
-  },
-];
-
-const servicioData = [
-  {
-    data: 'Revision',
-  },
-  {
-    data: 'Mantenimiento',
-  },
-  {
-    data: 'Recarga',
-  },
-  {
-    data: 'Prueba de presion interna',
-  },
-];
 
 const obsData =
   'and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.';
@@ -133,14 +112,13 @@ const Detalle = ({ clienteData }) => (
     {clienteData.clienteData.clienteData.map(({ field, data }) => (
       <FormEntry field={field} key={field + data} data={data} />
     ))}
-    {console.log(clienteData.clienteData.clienteData)}
 
     <View style={styles.testContainer}>
       <View style={styles.testDetailColumn}>
         <Title>Extintor</Title>
       </View>
     </View>
-    {extintorData.map(({ field, data }) => (
+    {clienteData.clienteData.extintorData.map(({ field, data }) => (
       <FormEntry field={field} key={field + data} data={data} />
     ))}
 
@@ -149,8 +127,8 @@ const Detalle = ({ clienteData }) => (
         <Title>Servicio realizado</Title>
       </View>
     </View>
-    {servicioData.map(({ data }) => (
-      <SelectEntry data={data} />
+    {clienteData.clienteData.servicioData.map(({ data, option }) => (
+      <SelectEntry data={data} key={data + option} OptionSelect={option} />
     ))}
 
     <View style={styles.testContainer}>
@@ -158,7 +136,10 @@ const Detalle = ({ clienteData }) => (
         <Title>Observaciones</Title>
       </View>
     </View>
-    <LargeTextEntry data={obsData} />
+    {/* <LargeTextEntry data={obsData} /> */}
+    {clienteData.clienteData.comentariosData.map(({ field, data }) => (
+      <FormEntry field={field} key={field + data} data={data} />
+    ))}
 
     <View style={styles.testContainer}>
       <View style={styles.testDetailColumn}>
@@ -173,9 +154,9 @@ const Detalle = ({ clienteData }) => (
       </View>
     </View>
 
-    <SelectEntry data={testData} />
-    <SelectEntry data={testData2} />
-    <SelectEntry data={testData3} />
+    <SelectEntry data={testData} OptionSelect="ItemSelect" />
+    <SelectEntry data={testData2} OptionSelect="ItemSelect" />
+    <SelectEntry data={testData3} OptionSelect="ItemSelect" />
 
     <View style={styles.testContainer}>
       <View style={styles.testDetailColumn}>
