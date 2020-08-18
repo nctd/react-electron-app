@@ -122,7 +122,7 @@ export const createOne = (form) => {
             form.getFieldValue('fr_mant15') === 'Si' ? true : false,
         },
       ],
-      resultadoComentario: form.getFieldValue('fr_revision16'),
+      resultadoComentario: form.getFieldValue('fr_mant16'),
     };
   }
 

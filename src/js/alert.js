@@ -33,6 +33,7 @@ export const showAlert = () => {
         ];
         let serviciosRealizados = [];
         let comentariosData = [];
+        let resultadosData = [];
 
         const realizoServicio = () => {
           if (registro.revision) {
@@ -72,10 +73,38 @@ export const showAlert = () => {
           if (registro.presion) {
             comentariosData.push({
               field: 'Prueba de presion interna',
-              data: 'No hay comentarios para este servicio',
+              data: 'N/A',
             });
           }
           return comentariosData;
+        };
+
+        const resultadosServicio = () => {
+          if (registro.revision) {
+            resultadosData.push({
+              field: 'Revision',
+              data: registro.revision.resultadoComentario,
+            });
+          }
+          if (registro.mantenimiento) {
+            resultadosData.push({
+              field: 'Mantenimiento',
+              data: registro.mantenimiento.resultadoComentario,
+            });
+          }
+          if (registro.recarga) {
+            resultadosData.push({
+              field: 'Recarga',
+              data: 'N/A',
+            });
+          }
+          if (registro.presion) {
+            resultadosData.push({
+              field: 'Prueba de presion interna',
+              data: registro.presion.resultadoComentario,
+            });
+          }
+          return resultadosData;
         };
 
         const extintorData = [
@@ -146,13 +175,15 @@ export const showAlert = () => {
           },
         ];
         comentariosServicio();
+        resultadosServicio();
         renderPDF(
           clienteData,
           extintorData,
           servicioData,
           representanteData,
           contactoData,
-          comentariosData
+          comentariosData,
+          resultadosData
         );
         return Modal.success({
           title: 'Operación exitosa',

@@ -146,7 +146,9 @@ const Detalle = ({ clienteData }) => (
         <Title>Conclusiones</Title>
       </View>
     </View>
-    <LargeTextEntry data={obsData} />
+    {clienteData.clienteData.resultadosData.map(({ field, data }) => (
+      <FormEntry field={field} key={field + data} data={data} />
+    ))}
 
     <View style={styles.testContainer}>
       <View style={styles.testDetailColumn}>

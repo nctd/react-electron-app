@@ -50,13 +50,14 @@ const Resume = (
   servicioData,
   representanteData,
   contactoData,
-  comentariosData
+  comentariosData,
+  resultadosData
 ) => (
   <Page style={styles.page}>
     <Header />
     <View style={styles.container}>
       <View style={styles.leftColumn}>
-        <Image src="./public/sercoin.png" style={styles.image} />
+        <Image src="./public/sercoinB.png" style={styles.image} />
         <DatosEmpresa
           clienteData={clienteData}
           representanteData={representanteData}
@@ -68,6 +69,7 @@ const Resume = (
         extintorData={extintorData}
         servicioData={servicioData}
         comentariosData={comentariosData}
+        resultadosData={resultadosData}
       />
     </View>
   </Page>
@@ -79,7 +81,8 @@ const Output = (
   servicioData,
   representanteData,
   contactoData,
-  comentariosData
+  comentariosData,
+  resultadosData
 ) => (
   <Document
     author="SERCOIN"
@@ -95,6 +98,7 @@ const Output = (
       representanteData={representanteData}
       contactoData={contactoData}
       comentariosData={comentariosData}
+      resultadosData={resultadosData}
     />
   </Document>
 );
@@ -106,7 +110,8 @@ export const renderPDF = (
   servicioData,
   representanteData,
   contactoData,
-  comentariosData
+  comentariosData,
+  resultadosData
 ) => {
   ReactPDF.render(
     <Output
@@ -116,6 +121,7 @@ export const renderPDF = (
       representanteData={representanteData}
       contactoData={contactoData}
       comentariosData={comentariosData}
+      resultadosData={resultadosData}
     />,
     `${__dirname}/informe-${xf}.pdf`
   );

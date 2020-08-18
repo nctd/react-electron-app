@@ -10,7 +10,7 @@ import { createPresion } from '../forms/formPresion';
 import { createRecarga } from '../forms/formRecarga';
 import { createOne } from '../js/app';
 import { addIcon } from '../js/icon';
-import { renderPDF } from '../views/pdf/index-pdf';
+
 const { Step } = Steps;
 const DateView = ({ value }) =>
   value ? value.format('MMM Do YYYY') : 'N/A';
@@ -248,6 +248,37 @@ const formServicio = {
   ],
 };
 
+const formConclusion = {
+  columns: 1,
+  fields: [
+    {
+      key: 'fr_conclusion1',
+      label: 'El extintor se debe',
+      widget: 'radio-group',
+      clear: 'both',
+      options: [
+        ['mantener en servicio', 'Mantener en servicio'],
+        [
+          'retirar de servicio',
+          'Retirar de servicio para mantenimiento y/o prueba de presión interna',
+        ],
+        ['ser dado de baja', 'Ser dado de baja'],
+      ],
+      labelCol: { span: 6 },
+    },
+    {
+      key: 'fr_conclusion2',
+      label: 'Razones',
+      widget: 'textarea',
+      clear: 'both',
+      formItemLayout: {
+        labelCol: { span: 6 },
+        wrapperCol: { span: 8 },
+      },
+    },
+  ],
+};
+
 let formRevision = [];
 let formMantenimiento = [];
 let formRecarga = [];
@@ -262,6 +293,10 @@ const wizardMeta = {
     {
       title: 'Servicio',
       formMeta: formServicio,
+    },
+    {
+      title: 'Conclusión',
+      formMeta: formConclusion,
     },
   ],
 };
@@ -286,17 +321,13 @@ const resumeForm = {
 export default () => {
   const [form] = FormBuilder.useForm();
   const [currentStep, setCurrentStep] = useState(0);
-  // const forceUpdate = FormBuilder.useForceUpdate()
+
   const handleFinish = useCallback(() => {
     console.log('Submit: ', form.getFieldsValue(true));
   }, [form]);
 
-  // Clone the meta for dynamic change
   const newWizardMeta = JSON.parse(JSON.stringify(wizardMeta));
-  // In a wizard, every field should be preserved when swtich steps.
-  // newWizardMeta.steps.forEach(s => s.formMeta.fields.forEach(f => (f.preserve = true)))
 
-  // Generate a general review step
   const reviewFields = [];
   resumeForm.steps.forEach((s, i) => {
     reviewFields.push(
@@ -639,6 +670,51 @@ export default () => {
               </TabPane>
             ))}
           </Tabs>
+        </div>
+        <Form.Item className="form-footer" style={{ textAlign: 'right' }}>
+          {currentStep > 0 && (
+            <Button
+              onClick={handleBack}
+              style={{ float: 'left', marginTop: '5px' }}
+            >
+              Atras
+            </Button>
+          )}
+          <Button>Cancelar</Button>&nbsp; &nbsp;
+          <Button
+            type="primary"
+            onClick={isReview ? () => form.submit() : handleNext}
+          >
+            {isReview ? 'Guardar' : 'Siguiente'}
+          </Button>
+        </Form.Item>
+      </Form>
+    );
+  } else if (currentStep === 2) {
+    return (
+      <Form
+        layout="horizontal"
+        form={form}
+        onValuesChange={form.handleValuesChange}
+        onFinish={handleFinish}
+      >
+        <Steps current={currentStep}>
+          {newWizardMeta.steps.map((s) => (
+            <Step key={s.title} title={s.title} />
+          ))}
+        </Steps>
+
+        <div
+          style={{
+            background: '#f7f7f7',
+            padding: '20px',
+            margin: '30px 0',
+          }}
+        >
+          <fieldset>
+            <legend>Conclusión</legend>
+            <FormBuilder form={form} meta={formConclusion} />
+          </fieldset>
         </div>
         <Form.Item className="form-footer" style={{ textAlign: 'right' }}>
           {currentStep > 0 && (
