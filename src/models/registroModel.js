@@ -109,7 +109,18 @@ const registroSchema = new mongoose.Schema({
     ref: 'Extintor',
     required: [true, 'Se necesita un extintor asociado al registro'],
   },
-
+  extintorDebe: {
+    type: String,
+    enum: [
+      'mantener en servicio',
+      'retirar de servicio',
+      'ser dado de baja',
+    ],
+    lowercase: true,
+  },
+  razones: {
+    type: String,
+  },
   creacion: { type: Date, default: Date.now() },
 });
 

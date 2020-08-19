@@ -6,6 +6,9 @@ export const createOne = (form) => {
   const data_ext = form.getFieldValue('extintor');
   const data_rep = form.getFieldValue('representante');
   const data_con = form.getFieldValue('contacto');
+  const extintorDebe = form.getFieldValue('fr_conclusion1');
+  const razones = form.getFieldValue('fr_conclusion2');
+
   let revision = null;
   let mantenimiento = null;
   let recarga = null;
@@ -183,8 +186,10 @@ export const createOne = (form) => {
     mantenimiento: mantenimiento,
     recarga: recarga,
     presion: presion,
+    extintorDebe: extintorDebe,
+    razones: razones,
   };
-  console.log(recarga);
+
   form.submit();
   ipcRenderer.send('add', cliente, extintor, registro);
 };

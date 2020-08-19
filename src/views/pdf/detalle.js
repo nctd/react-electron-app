@@ -97,11 +97,6 @@ const SelectEntry = ({ data, OptionSelect }) => {
 const obsData =
   'and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.';
 
-const testData = 'Mantener en servicio';
-const testData2 =
-  'Retirar de servicio para mantenimiento y/o prueba de presion interna';
-const testData3 = 'Ser dado de baja';
-
 const Detalle = ({ clienteData }) => (
   <View style={styles.container}>
     <View style={styles.testContainer}>
@@ -156,16 +151,19 @@ const Detalle = ({ clienteData }) => (
       </View>
     </View>
 
-    <SelectEntry data={testData} OptionSelect="ItemSelect" />
+    {clienteData.clienteData.conclusionData.map(({ data, option }) => (
+      <SelectEntry data={data} key={data + option} OptionSelect={option} />
+    ))}
+    {/* <SelectEntry data={testData} OptionSelect="ItemSelect" />
     <SelectEntry data={testData2} OptionSelect="ItemSelect" />
-    <SelectEntry data={testData3} OptionSelect="ItemSelect" />
+    <SelectEntry data={testData3} OptionSelect="ItemSelect" /> */}
 
     <View style={styles.testContainer}>
       <View style={styles.testDetailColumn}>
         <Title>Razones</Title>
       </View>
     </View>
-    <LargeTextEntry data={obsData} />
+    <LargeTextEntry data={clienteData.clienteData.razonesData} />
   </View>
 );
 

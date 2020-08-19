@@ -51,7 +51,9 @@ const Resume = (
   representanteData,
   contactoData,
   comentariosData,
-  resultadosData
+  resultadosData,
+  conclusionData,
+  razonesData
 ) => (
   <Page style={styles.page}>
     <Header />
@@ -70,6 +72,8 @@ const Resume = (
         servicioData={servicioData}
         comentariosData={comentariosData}
         resultadosData={resultadosData}
+        conclusionData={conclusionData}
+        razonesData={razonesData}
       />
     </View>
   </Page>
@@ -82,7 +86,9 @@ const Output = (
   representanteData,
   contactoData,
   comentariosData,
-  resultadosData
+  resultadosData,
+  conclusionData,
+  razonesData
 ) => (
   <Document
     author="SERCOIN"
@@ -99,6 +105,8 @@ const Output = (
       contactoData={contactoData}
       comentariosData={comentariosData}
       resultadosData={resultadosData}
+      conclusionData={conclusionData}
+      razonesData={razonesData}
     />
   </Document>
 );
@@ -111,7 +119,9 @@ export const renderPDF = (
   representanteData,
   contactoData,
   comentariosData,
-  resultadosData
+  resultadosData,
+  conclusionData,
+  razonesData
 ) => {
   ReactPDF.render(
     <Output
@@ -122,6 +132,8 @@ export const renderPDF = (
       contactoData={contactoData}
       comentariosData={comentariosData}
       resultadosData={resultadosData}
+      conclusionData={conclusionData}
+      razonesData={razonesData}
     />,
     `${__dirname}/informe-${xf}.pdf`
   );

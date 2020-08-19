@@ -31,6 +31,7 @@ export const showAlert = () => {
             data: cliente.correo,
           },
         ];
+
         let serviciosRealizados = [];
         let comentariosData = [];
         let resultadosData = [];
@@ -174,6 +175,34 @@ export const showAlert = () => {
             data: registro.correoContacto,
           },
         ];
+
+        const conclusionData = [
+          {
+            data: 'Mantener en servicio',
+            option:
+              registro.extintorDebe === 'mantener en servicio'
+                ? 'ItemSelected'
+                : 'ItemSelect',
+          },
+          {
+            data:
+              'Retirar de servicio para mantenimiento y/o prueba de presion interna',
+            option:
+              registro.extintorDebe === 'retirar de servicio'
+                ? 'ItemSelected'
+                : 'ItemSelect',
+          },
+          {
+            data: 'Ser dado de baja',
+            option:
+              registro.extintorDebe === 'ser dado de baja'
+                ? 'ItemSelected'
+                : 'ItemSelect',
+          },
+        ];
+
+        const razonesData = registro.razones;
+
         comentariosServicio();
         resultadosServicio();
         renderPDF(
@@ -183,7 +212,9 @@ export const showAlert = () => {
           representanteData,
           contactoData,
           comentariosData,
-          resultadosData
+          resultadosData,
+          conclusionData,
+          razonesData
         );
         return Modal.success({
           title: 'Operación exitosa',
