@@ -17,6 +17,7 @@ const styles = StyleSheet.create({
   },
   detailContainer: {
     flexDirection: 'row',
+    fontSize: 2,
   },
 
   headerContainer: {
@@ -94,6 +95,47 @@ const SelectEntry = ({ data, OptionSelect }) => {
   }
 };
 
+const revisionTitle = (data) => {
+  if (data.length > 0) {
+    return (
+      <View style={styles.testContainer}>
+        <View style={styles.testDetailColumn}>
+          <Title>Revisión</Title>
+        </View>
+      </View>
+    );
+  }
+};
+const revisionInfo = (data) => {
+  if (data.length > 0) {
+    return data
+      .splice(0, 5)
+      .map(({ field, data }) => (
+        <FormEntry field={field} key={field + data} data={data} />
+      ));
+  }
+};
+
+const revisionTitleResultado = (data) => {
+  if (data.length > 0) {
+    return (
+      <View style={styles.testContainer} break>
+        <View style={styles.testDetailColumn}>
+          <Title>Resultados revisión</Title>
+        </View>
+      </View>
+    );
+  }
+};
+
+const revisionResultado = (data) => {
+  if (data.length > 0) {
+    return data.map(({ field, data }) => (
+      <FormEntry field={field} key={field + data} data={data} />
+    ));
+  }
+};
+
 const RegistroCliente = ({ clienteData }) => (
   <View style={styles.container}>
     <View style={styles.testContainer}>
@@ -124,20 +166,14 @@ const RegistroCliente = ({ clienteData }) => (
     {clienteData.clienteData.servicioData.map(({ data, option }) => (
       <SelectEntry data={data} key={data + option} OptionSelect={option} />
     ))}
-    {clienteData.clienteData.revisionData.length > 0 ? (
-      <View style={styles.testContainer} break>
-        <View style={styles.testDetailColumn}>
-          <Title>Revisión</Title>
-        </View>
-      </View>
-    ) : null}
-    {clienteData.clienteData.revisionData.length > 0
-      ? clienteData.clienteData.revisionData.map(({ field, data }) => (
-          <FormEntry field={field} key={field + data} data={data} />
-        ))
-      : null}
-    {clienteData.clienteData.mantenimientoData.length > 0 ? (
-      <View style={styles.testContainer} break>
+    {revisionTitle(clienteData.clienteData.revisionData)}
+    {revisionInfo(clienteData.clienteData.revisionData)}
+    {revisionTitleResultado(clienteData.clienteData.revisionData)}
+    {revisionResultado(clienteData.clienteData.revisionData)}
+    {console.log(clienteData.clienteData.revisionData)}
+
+    {/* {clienteData.clienteData.mantenimientoData.length > 0 ? (
+      <View style={styles.testContainer}>
         <View style={styles.testDetailColumn}>
           <Title>Mantenimiento</Title>
         </View>
@@ -171,7 +207,7 @@ const RegistroCliente = ({ clienteData }) => (
       ? clienteData.clienteData.revisionData.map(({ field, data }) => (
           <FormEntry field={field} key={field + data} data={data} />
         ))
-      : null}
+      : null} */}
   </View>
 );
 

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 import {
   Text,
@@ -44,6 +44,7 @@ const styles = StyleSheet.create({
     },
   },
 });
+
 const Registro = (
   clienteData,
   extintorData,
