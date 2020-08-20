@@ -37,10 +37,10 @@ const styles = StyleSheet.create({
   },
 });
 
-export default () => (
+export default ({ title }) => (
   <View style={styles.container}>
-    <View style={styles.detailColumn}>
-      <Text style={styles.name}>Informe al cliente</Text>
+    <View style={styles.detailColumn} fixed>
+      <Text style={styles.name}>{title}</Text>
     </View>
   </View>
 );

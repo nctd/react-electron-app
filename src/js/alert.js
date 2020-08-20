@@ -11,11 +11,11 @@ export const showAlert = () => {
       if (type === 'success') {
         const clienteData = [
           {
-            field: 'Nombre o razon social del cliente',
+            field: 'Nombre o razón social del cliente',
             data: cliente.nombre,
           },
           {
-            field: 'Direccion',
+            field: 'Dirección',
             data: cliente.direccion,
           },
           {
@@ -23,7 +23,7 @@ export const showAlert = () => {
             data: cliente.comuna,
           },
           {
-            field: 'Telefono',
+            field: 'Teléfono',
             data: cliente.telefono,
           },
           {
@@ -35,6 +35,10 @@ export const showAlert = () => {
         let serviciosRealizados = [];
         let comentariosData = [];
         let resultadosData = [];
+        let revisionData = [];
+        let mantenimientoData = [];
+        let recargaData = [];
+        let presionData = [];
 
         const realizoServicio = () => {
           if (registro.revision) {
@@ -55,7 +59,7 @@ export const showAlert = () => {
         const comentariosServicio = () => {
           if (registro.revision) {
             comentariosData.push({
-              field: 'Revision',
+              field: 'Revisión',
               data: registro.revision.razonComentario,
             });
           }
@@ -73,7 +77,7 @@ export const showAlert = () => {
           }
           if (registro.presion) {
             comentariosData.push({
-              field: 'Prueba de presion interna',
+              field: 'Prueba de presión interna',
               data: 'N/A',
             });
           }
@@ -83,7 +87,7 @@ export const showAlert = () => {
         const resultadosServicio = () => {
           if (registro.revision) {
             resultadosData.push({
-              field: 'Revision',
+              field: 'Revisión',
               data: registro.revision.resultadoComentario,
             });
           }
@@ -101,7 +105,7 @@ export const showAlert = () => {
           }
           if (registro.presion) {
             resultadosData.push({
-              field: 'Prueba de presion interna',
+              field: 'Prueba de presión interna',
               data: registro.presion.resultadoComentario,
             });
           }
@@ -110,7 +114,7 @@ export const showAlert = () => {
 
         const extintorData = [
           {
-            field: 'Numero de identificacion del extintor',
+            field: 'Número de identificación del extintor',
             data: extintor.numExtintor,
           },
           {
@@ -118,18 +122,38 @@ export const showAlert = () => {
             data: extintor.marca,
           },
           {
+            field: 'Tipo del extintor',
+            data: extintor.tipo,
+          },
+          {
+            field: 'Naturaleza agente de extinción (NCh1430, cláusula 5)',
+            data: extintor.agenteExtincion,
+          },
+          {
+            field: 'Presión de trabajo',
+            data: extintor.presionTrabajo,
+          },
+          {
+            field: 'Presión de prueba',
+            data: extintor.presionPrueba,
+          },
+          {
+            field: 'Año y mes de fabricación del cilindro',
+            data: extintor.fabricacion,
+          },
+          {
             field: 'Fecha del servicio',
             data: moment.utc(extintor.fechaServicio).format('DD/MM/YYYY'),
           },
           {
-            field: 'Nombre de la persona que realizo el servicio',
+            field: 'Nombre de la persona que realizó el servicio',
             data: realizoServicio(),
           },
         ];
 
         const servicioData = [
           {
-            data: 'Revision',
+            data: 'Revisión',
             option: registro.revision ? 'ItemSelected' : 'ItemSelect',
           },
           {
@@ -141,7 +165,7 @@ export const showAlert = () => {
             option: registro.recarga ? 'ItemSelected' : 'ItemSelect',
           },
           {
-            data: 'Prueba de presion interna',
+            data: 'Prueba de presión interna',
             option: registro.presion ? 'ItemSelected' : 'ItemSelect',
           },
         ];
@@ -152,7 +176,7 @@ export const showAlert = () => {
             data: registro.nombreRep,
           },
           {
-            field: 'Telefono',
+            field: 'Teléfono',
             data: registro.telefonoRep,
           },
           {
@@ -167,7 +191,7 @@ export const showAlert = () => {
             data: registro.nombreContacto,
           },
           {
-            field: 'Telefono',
+            field: 'Teléfono',
             data: registro.telefonoContacto,
           },
           {
@@ -186,7 +210,7 @@ export const showAlert = () => {
           },
           {
             data:
-              'Retirar de servicio para mantenimiento y/o prueba de presion interna',
+              'Retirar de servicio para mantenimiento y/o prueba de presión interna',
             option:
               registro.extintorDebe === 'retirar de servicio'
                 ? 'ItemSelected'
@@ -201,6 +225,216 @@ export const showAlert = () => {
           },
         ];
 
+        if (registro.revision) {
+          const razon = () => {
+            if (registro.revision.razonRevision === 'puesta en servicio')
+              return 'Puesta en servicio';
+            if (registro.revision.razonRevision === 'segun programa')
+              return 'Según programa';
+            if (registro.revision.razonRevision === 'otra') return 'Otra';
+          };
+          revisionData = [
+            {
+              field: 'Persona que realizó la revisión',
+              data: registro.revision.encargado,
+            },
+            {
+              field: 'Normas Chilenas aplicadas',
+              data: registro.revision.normaChilena,
+            },
+            {
+              field: 'Se utilizo el manual del fabricante o armador',
+              data: registro.revision.manual === true ? 'Si' : 'No',
+            },
+            {
+              field: 'Razon de la revision',
+              data: razon(),
+            },
+            {
+              field: 'Comentarios',
+              data: registro.revision.razonComentario,
+            },
+            {
+              field: 'Cumple con NCh2056, 4.2.2',
+              data:
+                registro.revision.resultados[0].respuesta === true
+                  ? 'Si'
+                  : 'No',
+            },
+            {
+              field: 'Requiere de correcciones',
+              data:
+                registro.revision.resultados[1].respuesta === true
+                  ? 'Si'
+                  : 'No',
+            },
+            {
+              field: 'Requiere de mantenimiento',
+              data:
+                registro.revision.resultados[2].respuesta === true
+                  ? 'Si'
+                  : 'No',
+            },
+            {
+              field: 'Retirar de servicio (extintor desechable)',
+              data:
+                registro.revision.resultados[3].respuesta === true
+                  ? 'Si'
+                  : 'No',
+            },
+            {
+              field: 'Dar de baja (Obsolencia u otra razón)',
+              data:
+                registro.revision.resultados[4].respuesta === true
+                  ? 'Si'
+                  : 'No',
+            },
+            {
+              field: 'Comentarios',
+              data: registro.revision.resultadoComentario,
+            },
+          ];
+        }
+
+        if (registro.mantenimiento) {
+          mantenimientoData = [
+            {
+              field: 'Persona que realizó el mantenimiento',
+              data: registro.mantenimiento.encargado,
+            },
+            {
+              field: 'Normas Chilenas aplicadas',
+              data: registro.mantenimiento.normaChilena,
+            },
+            {
+              field: 'Se utilizo el manual del fabricante o armador',
+              data: registro.mantenimiento.manual === true ? 'Si' : 'No',
+            },
+            {
+              field: 'Razon del mantenimiento',
+              data: registro.mantenimiento.razonMantenimiento,
+            },
+            {
+              field: 'Comentarios',
+              data: registro.mantenimiento.razonComentario,
+            },
+            {
+              field:
+                'Equipo recuperación/vaciado agente de extinción es el adecuado',
+              data: registro.mantenimiento.resultados[0],
+            },
+            {
+              field: 'Reemplazo de partes',
+              data: registro.mantenimiento.resultados[1],
+            },
+            {
+              field:
+                'Repuestos según manual del fabricante, armador o importador',
+              data: registro.mantenimiento.resultados[2],
+            },
+            {
+              field:
+                'Indicador de presión de reemplazo cumple con normas (NCh1180/5; NCh2056)',
+              data: registro.mantenimiento.resultados[3],
+            },
+            {
+              field: 'Examen interno del cilindro/tanque',
+              data: registro.mantenimiento.resultados[4],
+            },
+            {
+              field: 'Examen interno del cartucho/botellín',
+              data: registro.mantenimiento.resultados[5],
+            },
+            {
+              field: 'Recarga/reemplazo agente de extinción',
+              data: registro.mantenimiento.resultados[6],
+            },
+            {
+              field: 'Se adoptaron medidas de seguridad',
+              data: registro.mantenimiento.resultados[7],
+            },
+            {
+              field: 'Se usaron elementos de protección personal',
+              data: registro.mantenimiento.resultados[8],
+            },
+            {
+              field: 'Comentarios',
+              data: registro.mantenimiento.resultadoComentario,
+            },
+          ];
+        }
+
+        if (registro.recarga) {
+          recargaData = [
+            {
+              field: 'Persona que realizó la recarga',
+              data: registro.recarga.encargado,
+            },
+            {
+              field: 'Normas Chilenas aplicadas',
+              data: registro.recarga.normaChilena,
+            },
+            {
+              field:
+                'Se utilizo el manual del fabricante, armador o importador',
+              data: registro.recarga.manual === true ? 'Si' : 'No',
+            },
+            {
+              field: 'Agente de extinción utilizado',
+              data: registro.recarga.agenteUtilizado,
+            },
+            {
+              field: 'Masa extintor antes de la recarga (kg)',
+              data: registro.recarga.masaExtAntes,
+            },
+            {
+              field: 'Masa extintor después de la recarga (kg)',
+              data: registro.recarga.masaExtDespues,
+            },
+            {
+              field: 'Verificación de estanqueidad después de la recarga',
+              data: registro.recarga.verificaEstanqueidad,
+            },
+            {
+              field: 'Comentarios',
+              data: registro.recarga.comentarios,
+            },
+          ];
+        }
+
+        if (registro.presion) {
+          presionData = [
+            {
+              field: 'Persona que realizó la prueba',
+              data: registro.presion.encargado,
+            },
+            {
+              field: 'Normas Chilenas aplicadas',
+              data: registro.presion.normaChilena,
+            },
+            {
+              field: 'Examen previo conforme a NCh2056, 5.1.3',
+              data: registro.presion.examenPrevio,
+            },
+            {
+              field: 'Cilindro/tanque',
+              data: registro.presion.resultados[0],
+            },
+            {
+              field: 'Cilindro/cartucho gas expelente',
+              data: registro.presion.resultados[1],
+            },
+            {
+              field: 'Conjunto manguera',
+              data: registro.presion.resultados[2],
+            },
+            {
+              field: 'Comentarios',
+              data: registro.presion.resultadoComentario,
+            },
+          ];
+        }
+
         const razonesData = registro.razones;
 
         comentariosServicio();
@@ -214,8 +448,13 @@ export const showAlert = () => {
           comentariosData,
           resultadosData,
           conclusionData,
-          razonesData
+          razonesData,
+          revisionData,
+          mantenimientoData,
+          recargaData,
+          presionData
         );
+
         return Modal.success({
           title: 'Operación exitosa',
           content: 'Registro de cliente guardado',

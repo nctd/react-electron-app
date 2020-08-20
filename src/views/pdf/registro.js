@@ -94,7 +94,7 @@ const SelectEntry = ({ data, OptionSelect }) => {
   }
 };
 
-const Detalle = ({ clienteData }) => (
+const RegistroCliente = ({ clienteData }) => (
   <View style={styles.container}>
     <View style={styles.testContainer}>
       <View style={styles.testDetailColumn}>
@@ -111,12 +111,7 @@ const Detalle = ({ clienteData }) => (
       </View>
     </View>
     {clienteData.clienteData.extintorData
-      .slice(0, 2)
-      .map(({ field, data }) => (
-        <FormEntry field={field} key={field + data} data={data} />
-      ))}
-    {clienteData.clienteData.extintorData
-      .slice(7, 9)
+      .slice(0, 8)
       .map(({ field, data }) => (
         <FormEntry field={field} key={field + data} data={data} />
       ))}
@@ -129,43 +124,55 @@ const Detalle = ({ clienteData }) => (
     {clienteData.clienteData.servicioData.map(({ data, option }) => (
       <SelectEntry data={data} key={data + option} OptionSelect={option} />
     ))}
-
-    <View style={styles.testContainer}>
-      <View style={styles.testDetailColumn}>
-        <Title>Observaciones</Title>
+    {clienteData.clienteData.revisionData.length > 0 ? (
+      <View style={styles.testContainer} break>
+        <View style={styles.testDetailColumn}>
+          <Title>Revisión</Title>
+        </View>
       </View>
-    </View>
-
-    {clienteData.clienteData.comentariosData.map(({ field, data }) => (
-      <FormEntry field={field} key={field + data} data={data} />
-    ))}
-
-    <View style={styles.testContainer}>
-      <View style={styles.testDetailColumn}>
-        <Title>Conclusiones</Title>
+    ) : null}
+    {clienteData.clienteData.revisionData.length > 0
+      ? clienteData.clienteData.revisionData.map(({ field, data }) => (
+          <FormEntry field={field} key={field + data} data={data} />
+        ))
+      : null}
+    {clienteData.clienteData.mantenimientoData.length > 0 ? (
+      <View style={styles.testContainer} break>
+        <View style={styles.testDetailColumn}>
+          <Title>Mantenimiento</Title>
+        </View>
       </View>
-    </View>
-    {clienteData.clienteData.resultadosData.map(({ field, data }) => (
-      <FormEntry field={field} key={field + data} data={data} />
-    ))}
-
-    <View style={styles.testContainer}>
-      <View style={styles.testDetailColumn}>
-        <Title>El extintor se debe</Title>
+    ) : null}
+    {clienteData.clienteData.mantenimientoData.length > 0
+      ? clienteData.clienteData.revisionData.map(({ field, data }) => (
+          <FormEntry field={field} key={field + data} data={data} />
+        ))
+      : null}
+    {clienteData.clienteData.recargaData.length > 0 ? (
+      <View style={styles.testContainer} break>
+        <View style={styles.testDetailColumn}>
+          <Title>Recarga</Title>
+        </View>
       </View>
-    </View>
-
-    {clienteData.clienteData.conclusionData.map(({ data, option }) => (
-      <SelectEntry data={data} key={data + option} OptionSelect={option} />
-    ))}
-
-    <View style={styles.testContainer}>
-      <View style={styles.testDetailColumn}>
-        <Title>Razones</Title>
+    ) : null}
+    {clienteData.clienteData.recargaData.length > 0
+      ? clienteData.clienteData.revisionData.map(({ field, data }) => (
+          <FormEntry field={field} key={field + data} data={data} />
+        ))
+      : null}
+    {clienteData.clienteData.presionData.length > 0 ? (
+      <View style={styles.testContainer} break>
+        <View style={styles.testDetailColumn}>
+          <Title>Prueba de presión interna</Title>
+        </View>
       </View>
-    </View>
-    <LargeTextEntry data={clienteData.clienteData.razonesData} />
+    ) : null}
+    {clienteData.clienteData.presionData.length > 0
+      ? clienteData.clienteData.revisionData.map(({ field, data }) => (
+          <FormEntry field={field} key={field + data} data={data} />
+        ))
+      : null}
   </View>
 );
 
-export default Detalle;
+export default RegistroCliente;

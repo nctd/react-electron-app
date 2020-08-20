@@ -3,23 +3,27 @@ const mongoose = require('mongoose');
 const registroSchema = new mongoose.Schema({
   nombreRep: {
     type: String,
-    trim: true,
+    required: [true, 'Se necesita el nombre del representante'],
   },
   telefonoRep: {
     type: String,
+    required: [true, 'Se necesita el telefono del representante'],
   },
   correoRep: {
     type: String,
+    required: [true, 'Se necesita el correo del representante'],
   },
   nombreContacto: {
     type: String,
-    trim: true,
+    required: [true, 'Se necesita el nombre del contacto en la empresa'],
   },
   telefonoContacto: {
     type: String,
+    required: [true, 'Se necesita el telefono del contacto en la empresa'],
   },
   correoContacto: {
     type: String,
+    required: [true, 'Se necesita el correo del contacto en la empresa'],
   },
   revision: {
     encargado: { type: String },
@@ -30,7 +34,7 @@ const registroSchema = new mongoose.Schema({
       enum: ['puesta en servicio', 'segun programa', 'otra'],
       lowercase: true,
     },
-    razonComentario: { type: String },
+    razonComentario: { type: String, default: 'N/A' },
     resultados: {
       type: [
         {

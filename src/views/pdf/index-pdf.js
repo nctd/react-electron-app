@@ -12,6 +12,7 @@ import {
 import Header from './header';
 import Detalle from './detalle';
 import DatosEmpresa from './datosEmpresa';
+import RegistroCliente from './registro';
 
 const ReactPDF = window.require('@react-pdf/renderer');
 
@@ -43,6 +44,40 @@ const styles = StyleSheet.create({
     },
   },
 });
+const Registro = (
+  clienteData,
+  extintorData,
+  servicioData,
+  representanteData,
+  contactoData,
+  revisionData,
+  mantenimientoData,
+  recargaData,
+  presionData
+) => (
+  <Page style={styles.page}>
+    <Header title={'Registro de cliente'} />
+    <View style={styles.container}>
+      <View style={styles.leftColumn}>
+        <Image src="./public/sercoinB.png" style={styles.image} />
+        <DatosEmpresa
+          clienteData={clienteData}
+          representanteData={representanteData}
+          contactoData={contactoData}
+        />
+      </View>
+      <RegistroCliente
+        clienteData={clienteData}
+        extintorData={extintorData}
+        servicioData={servicioData}
+        revisionData={revisionData}
+        mantenimientoData={mantenimientoData}
+        recargaData={recargaData}
+        presionData={presionData}
+      />
+    </View>
+  </Page>
+);
 
 const Resume = (
   clienteData,
@@ -56,7 +91,7 @@ const Resume = (
   razonesData
 ) => (
   <Page style={styles.page}>
-    <Header />
+    <Header title={'Informe al cliente'} />
     <View style={styles.container}>
       <View style={styles.leftColumn}>
         <Image src="./public/sercoinB.png" style={styles.image} />
@@ -88,14 +123,31 @@ const Output = (
   comentariosData,
   resultadosData,
   conclusionData,
-  razonesData
+  razonesData,
+  revisionData,
+  mantenimientoData,
+  recargaData,
+  presionData
 ) => (
   <Document
     author="SERCOIN"
-    keywords="awesome, resume, start wars"
+    keywords="informe,registro"
     subject="Informe al cliente"
     title="Informe"
   >
+    <Registro
+      size="A4"
+      clienteData={clienteData}
+      extintorData={extintorData}
+      servicioData={servicioData}
+      representanteData={representanteData}
+      contactoData={contactoData}
+      revisionData={revisionData}
+      mantenimientoData={mantenimientoData}
+      recargaData={recargaData}
+      presionData={presionData}
+    />
+
     <Resume
       size="A4"
       clienteData={clienteData}
@@ -121,7 +173,11 @@ export const renderPDF = (
   comentariosData,
   resultadosData,
   conclusionData,
-  razonesData
+  razonesData,
+  revisionData,
+  mantenimientoData,
+  recargaData,
+  presionData
 ) => {
   ReactPDF.render(
     <Output
@@ -134,6 +190,10 @@ export const renderPDF = (
       resultadosData={resultadosData}
       conclusionData={conclusionData}
       razonesData={razonesData}
+      revisionData={revisionData}
+      mantenimientoData={mantenimientoData}
+      recargaData={recargaData}
+      presionData={presionData}
     />,
     `${__dirname}/informe-${xf}.pdf`
   );
