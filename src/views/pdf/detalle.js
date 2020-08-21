@@ -149,7 +149,7 @@ const Detalle = ({ clienteData }) => (
       <FormEntry field={field} key={field + data} data={data} />
     ))}
 
-    <View style={styles.testContainer}>
+    <View style={styles.testContainer} break>
       <View style={styles.testDetailColumn}>
         <Title>El extintor se debe</Title>
       </View>

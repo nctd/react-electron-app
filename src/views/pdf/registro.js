@@ -95,40 +95,41 @@ const SelectEntry = ({ data, OptionSelect }) => {
   }
 };
 
-const revisionTitle = (data) => {
+const serviceTitle = (data, { title }) => {
   if (data.length > 0) {
     return (
       <View style={styles.testContainer}>
         <View style={styles.testDetailColumn}>
-          <Title>Revisión</Title>
+          <Title>{title}</Title>
         </View>
       </View>
     );
   }
 };
-const revisionInfo = (data) => {
+
+const serviceTitleResultado = (data, { title }) => {
+  if (data.length > 0) {
+    return (
+      <View style={styles.testContainer} break>
+        <View style={styles.testDetailColumn}>
+          <Title>{title}</Title>
+        </View>
+      </View>
+    );
+  }
+};
+
+const serviceInfo = (data, { cant }) => {
   if (data.length > 0) {
     return data
-      .splice(0, 5)
+      .splice(0, cant)
       .map(({ field, data }) => (
         <FormEntry field={field} key={field + data} data={data} />
       ));
   }
 };
 
-const revisionTitleResultado = (data) => {
-  if (data.length > 0) {
-    return (
-      <View style={styles.testContainer} break>
-        <View style={styles.testDetailColumn}>
-          <Title>Resultados revisión</Title>
-        </View>
-      </View>
-    );
-  }
-};
-
-const revisionResultado = (data) => {
+const serviceResultado = (data) => {
   if (data.length > 0) {
     return data.map(({ field, data }) => (
       <FormEntry field={field} key={field + data} data={data} />
@@ -166,48 +167,51 @@ const RegistroCliente = ({ clienteData }) => (
     {clienteData.clienteData.servicioData.map(({ data, option }) => (
       <SelectEntry data={data} key={data + option} OptionSelect={option} />
     ))}
-    {revisionTitle(clienteData.clienteData.revisionData)}
-    {revisionInfo(clienteData.clienteData.revisionData)}
-    {revisionTitleResultado(clienteData.clienteData.revisionData)}
-    {revisionResultado(clienteData.clienteData.revisionData)}
-    {console.log(clienteData.clienteData.revisionData)}
+    {/* REVISION */}
+    {serviceTitle(clienteData.clienteData.revisionData, {
+      title: 'Revisión',
+    })}
 
-    {/* {clienteData.clienteData.mantenimientoData.length > 0 ? (
-      <View style={styles.testContainer}>
-        <View style={styles.testDetailColumn}>
-          <Title>Mantenimiento</Title>
-        </View>
-      </View>
-    ) : null}
-    {clienteData.clienteData.mantenimientoData.length > 0
-      ? clienteData.clienteData.revisionData.map(({ field, data }) => (
-          <FormEntry field={field} key={field + data} data={data} />
-        ))
-      : null}
-    {clienteData.clienteData.recargaData.length > 0 ? (
-      <View style={styles.testContainer} break>
-        <View style={styles.testDetailColumn}>
-          <Title>Recarga</Title>
-        </View>
-      </View>
-    ) : null}
-    {clienteData.clienteData.recargaData.length > 0
-      ? clienteData.clienteData.revisionData.map(({ field, data }) => (
-          <FormEntry field={field} key={field + data} data={data} />
-        ))
-      : null}
-    {clienteData.clienteData.presionData.length > 0 ? (
-      <View style={styles.testContainer} break>
-        <View style={styles.testDetailColumn}>
-          <Title>Prueba de presión interna</Title>
-        </View>
-      </View>
-    ) : null}
-    {clienteData.clienteData.presionData.length > 0
-      ? clienteData.clienteData.revisionData.map(({ field, data }) => (
-          <FormEntry field={field} key={field + data} data={data} />
-        ))
-      : null} */}
+    {serviceInfo(clienteData.clienteData.revisionData, { cant: 5 })}
+
+    {serviceTitleResultado(clienteData.clienteData.revisionData, {
+      title: 'Resultados revisión',
+    })}
+
+    {serviceResultado(clienteData.clienteData.revisionData)}
+
+    {/* MANTENIMIENTO */}
+    {serviceTitle(clienteData.clienteData.mantenimientoData, {
+      title: 'Mantenimiento',
+    })}
+
+    {serviceInfo(clienteData.clienteData.mantenimientoData, { cant: 5 })}
+
+    {serviceTitleResultado(clienteData.clienteData.mantenimientoData, {
+      title: 'Acciones realizadas',
+    })}
+
+    {serviceResultado(clienteData.clienteData.mantenimientoData)}
+
+    {/* RECARGA */}
+    {serviceTitle(clienteData.clienteData.recargaData, {
+      title: 'Recarga',
+    })}
+
+    {serviceResultado(clienteData.clienteData.recargaData)}
+
+    {/* PRUEBA DE PRESION INTERNA */}
+    {serviceTitle(clienteData.clienteData.presionData, {
+      title: 'Prueba de presión interna',
+    })}
+
+    {serviceInfo(clienteData.clienteData.presionData, { cant: 3 })}
+
+    {serviceTitleResultado(clienteData.clienteData.presionData, {
+      title: 'Elemento del extintor',
+    })}
+
+    {serviceResultado(clienteData.clienteData.presionData)}
   </View>
 );
 
