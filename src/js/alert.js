@@ -321,6 +321,14 @@ export const showAlert = () => {
         }
 
         if (registro.mantenimiento) {
+          const razon = () => {
+            if (registro.revision.razonMantenimiento === 'por revision')
+              return 'Como consecuencia de la revisión';
+            if (registro.revision.razonMantenimiento === 'segun programa')
+              return 'Según programa';
+            if (registro.revision.razonMantenimiento === 'otra')
+              return 'Otra';
+          };
           mantenimientoData = [
             {
               field: 'Persona que realizó el mantenimiento',
@@ -336,7 +344,7 @@ export const showAlert = () => {
             },
             {
               field: 'Razon del mantenimiento',
-              data: registro.mantenimiento.razonMantenimiento,
+              data: razon(),
             },
             {
               field: 'Comentarios',

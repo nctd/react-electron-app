@@ -70,54 +70,45 @@ export const createOne = (form) => {
     mantenimiento = {
       encargado: form.getFieldValue('fr_mant1'),
       normaChilena: form.getFieldValue('fr_mant2'),
-      manual: form.getFieldValue('fr_mant3') === 'Si' ? true : false,
+      manual: form.getFieldValue('fr_mant3'),
       razonRevision: form.getFieldValue('fr_mant4'),
       razonComentario: form.getFieldValue('fr_mant5'),
       resultados: [
         {
           descripcion: 'equipoAdecuado',
-          respuesta:
-            form.getFieldValue('fr_mant7') === 'Si' ? true : false,
+          respuesta: form.getFieldValue('fr_mant7'),
         },
         {
           descripcion: 'reemplazoPartes',
-          respuesta:
-            form.getFieldValue('fr_mant8') === 'Si' ? true : false,
+          respuesta: form.getFieldValue('fr_mant8'),
         },
         {
           descripcion: 'respuestosManual',
-          respuesta:
-            form.getFieldValue('fr_mant9') === 'Si' ? true : false,
+          respuesta: form.getFieldValue('fr_mant9'),
         },
         {
           descripcion: 'indicadorNormas',
-          respuesta:
-            form.getFieldValue('fr_mant10') === 'Si' ? true : false,
+          respuesta: form.getFieldValue('fr_mant10'),
         },
         {
           descripcion: 'examenCilindro',
-          respuesta:
-            form.getFieldValue('fr_mant11') === 'Si' ? true : false,
+          respuesta: form.getFieldValue('fr_mant11'),
         },
         {
           descripcion: 'examenCartucho',
-          respuesta:
-            form.getFieldValue('fr_mant12') === 'Si' ? true : false,
+          respuesta: form.getFieldValue('fr_mant12'),
         },
         {
           descripcion: 'recargaAgente',
-          respuesta:
-            form.getFieldValue('fr_mant13') === 'Si' ? true : false,
+          respuesta: form.getFieldValue('fr_mant13'),
         },
         {
           descripcion: 'seguridad',
-          respuesta:
-            form.getFieldValue('fr_mant14') === 'Si' ? true : false,
+          respuesta: form.getFieldValue('fr_mant14'),
         },
         {
           descripcion: 'proteccionPersonal',
-          respuesta:
-            form.getFieldValue('fr_mant15') === 'Si' ? true : false,
+          respuesta: form.getFieldValue('fr_mant15'),
         },
       ],
       resultadoComentario: form.getFieldValue('fr_mant16'),

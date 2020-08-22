@@ -65,7 +65,7 @@ const registroSchema = new mongoose.Schema({
           descripcion: {
             type: String,
           },
-          respuesta: String,
+          respuesta: Boolean,
         },
       ],
       default: undefined,
