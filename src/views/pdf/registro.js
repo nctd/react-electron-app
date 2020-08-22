@@ -179,7 +179,7 @@ const RegistroCliente = ({ clienteData }) => (
     })}
 
     {serviceResultado(clienteData.clienteData.revisionData)}
-
+    {console.log(clienteData.clienteData.mantenimientoData)}
     {/* MANTENIMIENTO */}
     {serviceTitle(clienteData.clienteData.mantenimientoData, {
       title: 'Mantenimiento',
@@ -208,11 +208,10 @@ const RegistroCliente = ({ clienteData }) => (
     {serviceInfo(clienteData.clienteData.presionData, { cant: 3 })}
 
     {serviceTitleResultado(clienteData.clienteData.presionData, {
-      title: 'Elemento del extintor',
+      title: 'Resultados prueba',
     })}
 
     {serviceResultado(clienteData.clienteData.presionData)}
-    {console.log(clienteData.clienteData)}
   </View>
 );
 

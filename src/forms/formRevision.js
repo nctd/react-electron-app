@@ -8,6 +8,8 @@ export const createRevision = (meta) => {
         labelCol: { span: 9 },
         wrapperCol: { span: 8 },
       },
+      required: true,
+      message: 'Ingrese persona que realizó la revisión',
     },
     {
       key: 'fr_revision2',
@@ -16,6 +18,8 @@ export const createRevision = (meta) => {
         labelCol: { span: 9 },
         wrapperCol: { span: 8 },
       },
+      required: true,
+      message: 'Ingrese normas aplicadas',
     },
     {
       key: 'fr_revision3',
@@ -27,6 +31,8 @@ export const createRevision = (meta) => {
         [false, 'No'],
       ],
       labelCol: { span: 9 },
+      required: true,
+      message: 'Seleccione una opción',
     },
     {
       key: 'fr_revision4',
@@ -39,6 +45,8 @@ export const createRevision = (meta) => {
         ['otra', 'Otra'],
       ],
       labelCol: { span: 9 },
+      required: true,
+      message: 'Seleccione una opción',
     },
     {
       key: 'fr_revision5',
@@ -68,6 +76,8 @@ export const createRevision = (meta) => {
         [false, 'No'],
       ],
       labelCol: { span: 9 },
+      required: true,
+      message: 'Seleccione una opción',
     },
     {
       key: 'fr_revision8',
@@ -79,6 +89,8 @@ export const createRevision = (meta) => {
         [false, 'No'],
       ],
       labelCol: { span: 9 },
+      required: true,
+      message: 'Seleccione una opción',
     },
     {
       key: 'fr_revision9',
@@ -89,6 +101,8 @@ export const createRevision = (meta) => {
         [false, 'No'],
       ],
       labelCol: { span: 9 },
+      required: true,
+      message: 'Seleccione una opción',
     },
     {
       key: 'fr_revision10',
@@ -99,6 +113,8 @@ export const createRevision = (meta) => {
         [false, 'No'],
       ],
       labelCol: { span: 9 },
+      required: true,
+      message: 'Seleccione una opción',
     },
     {
       key: 'fr_revision11',
@@ -109,6 +125,8 @@ export const createRevision = (meta) => {
         [false, 'No'],
       ],
       labelCol: { span: 9 },
+      required: true,
+      message: 'Seleccione una opción',
     },
     {
       key: 'fr_revision12',

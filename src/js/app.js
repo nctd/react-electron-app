@@ -71,7 +71,7 @@ export const createOne = (form) => {
       encargado: form.getFieldValue('fr_mant1'),
       normaChilena: form.getFieldValue('fr_mant2'),
       manual: form.getFieldValue('fr_mant3'),
-      razonRevision: form.getFieldValue('fr_mant4'),
+      razonMantenimiento: form.getFieldValue('fr_mant4'),
       razonComentario: form.getFieldValue('fr_mant5'),
       resultados: [
         {
@@ -165,8 +165,6 @@ export const createOne = (form) => {
     extintorDebe: extintorDebe,
     razones: razones,
   };
-
-  console.log(registro);
 
   form.submit();
   ipcRenderer.send('add', cliente, extintor, registro);

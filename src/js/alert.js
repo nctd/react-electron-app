@@ -244,7 +244,7 @@ export const showAlert = () => {
         ];
 
         if (registro.revision) {
-          const razon = () => {
+          const razonRev = () => {
             if (registro.revision.razonRevision === 'puesta en servicio')
               return 'Puesta en servicio';
             if (registro.revision.razonRevision === 'segun programa')
@@ -265,8 +265,8 @@ export const showAlert = () => {
               data: registro.revision.manual === true ? 'Si' : 'No',
             },
             {
-              field: 'Razon de la revision',
-              data: razon(),
+              field: 'Razón de la revision',
+              data: razonRev(),
             },
             {
               field: 'Comentarios',
@@ -321,13 +321,21 @@ export const showAlert = () => {
         }
 
         if (registro.mantenimiento) {
-          const razon = () => {
-            if (registro.revision.razonMantenimiento === 'por revision')
+          const razonMant = () => {
+            if (
+              registro.mantenimiento.razonMantenimiento === 'por revision'
+            ) {
               return 'Como consecuencia de la revisión';
-            if (registro.revision.razonMantenimiento === 'segun programa')
+            }
+            if (
+              registro.mantenimiento.razonMantenimiento ===
+              'segun programa'
+            ) {
               return 'Según programa';
-            if (registro.revision.razonMantenimiento === 'otra')
+            }
+            if (registro.mantenimiento.razonMantenimiento === 'otra') {
               return 'Otra';
+            }
           };
           mantenimientoData = [
             {
@@ -343,8 +351,8 @@ export const showAlert = () => {
               data: registro.mantenimiento.manual === true ? 'Si' : 'No',
             },
             {
-              field: 'Razon del mantenimiento',
-              data: razon(),
+              field: 'Razón del mantenimiento',
+              data: razonMant(),
             },
             {
               field: 'Comentarios',
@@ -357,14 +365,14 @@ export const showAlert = () => {
               field:
                 'Equipo recuperación/vaciado agente de extinción es el adecuado',
               data:
-                registro.mantenimiento.resultados[0] === true
+                registro.mantenimiento.resultados[0].respuesta === true
                   ? 'Si'
                   : 'No',
             },
             {
               field: 'Reemplazo de partes',
               data:
-                registro.mantenimiento.resultados[1] === true
+                registro.mantenimiento.resultados[1].respuesta === true
                   ? 'Si'
                   : 'No',
             },
@@ -372,7 +380,7 @@ export const showAlert = () => {
               field:
                 'Repuestos según manual del fabricante, armador o importador',
               data:
-                registro.mantenimiento.resultados[2] === true
+                registro.mantenimiento.resultados[2].respuesta === true
                   ? 'Si'
                   : 'No',
             },
@@ -380,42 +388,42 @@ export const showAlert = () => {
               field:
                 'Indicador de presión de reemplazo cumple con normas (NCh1180/5; NCh2056)',
               data:
-                registro.mantenimiento.resultados[3] === true
+                registro.mantenimiento.resultados[3].respuesta === true
                   ? 'Si'
                   : 'No',
             },
             {
               field: 'Examen interno del cilindro/tanque',
               data:
-                registro.mantenimiento.resultados[4] === true
+                registro.mantenimiento.resultados[4].respuesta === true
                   ? 'Si'
                   : 'No',
             },
             {
               field: 'Examen interno del cartucho/botellín',
               data:
-                registro.mantenimiento.resultados[5] === true
+                registro.mantenimiento.resultados[5].respuesta === true
                   ? 'Si'
                   : 'No',
             },
             {
               field: 'Recarga/reemplazo agente de extinción',
               data:
-                registro.mantenimiento.resultados[6] === true
+                registro.mantenimiento.resultados[6].respuesta === true
                   ? 'Si'
                   : 'No',
             },
             {
               field: 'Se adoptaron medidas de seguridad',
               data:
-                registro.mantenimiento.resultados[7] === true
+                registro.mantenimiento.resultados[7].respuesta === true
                   ? 'Si'
                   : 'No',
             },
             {
               field: 'Se usaron elementos de protección personal',
               data:
-                registro.mantenimiento.resultados[8] === true
+                registro.mantenimiento.resultados[8].respuesta === true
                   ? 'Si'
                   : 'No',
             },
@@ -495,21 +503,21 @@ export const showAlert = () => {
             {
               field: 'Cilindro/tanque',
               data:
-                registro.presion.resultados[0] === true
+                registro.presion.resultados[0].respuesta === true
                   ? 'Aceptado'
                   : 'Rechazado',
             },
             {
               field: 'Cilindro/cartucho gas expelente',
               data:
-                registro.presion.resultados[1] === true
+                registro.presion.resultados[1].respuesta === true
                   ? 'Aceptado'
                   : 'Rechazado',
             },
             {
               field: 'Conjunto manguera',
               data:
-                registro.presion.resultados[2] === true
+                registro.presion.resultados[2].respuesta === true
                   ? 'Aceptado'
                   : 'Rechazado',
             },

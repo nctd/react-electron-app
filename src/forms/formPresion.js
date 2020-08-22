@@ -3,13 +3,13 @@ export const createPresion = (meta) => {
   meta.push(
     {
       key: 'fr_presion1',
-      label: 'Persona que realizó la recarga',
+      label: 'Persona que realizó la prueba',
       formItemLayout: {
         labelCol: { span: 9 },
         wrapperCol: { span: 8 },
       },
       required: true,
-      message: 'Ingrese la persona que realizó la recarga',
+      message: 'Ingrese la persona que realizó la prueba',
     },
     {
       key: 'fr_presion2',
@@ -18,6 +18,8 @@ export const createPresion = (meta) => {
         labelCol: { span: 9 },
         wrapperCol: { span: 8 },
       },
+      required: true,
+      message: 'Ingrese normas aplicadas',
     },
     {
       key: 'fr_presion3',
@@ -29,6 +31,8 @@ export const createPresion = (meta) => {
         [false, 'No'],
       ],
       labelCol: { span: 9 },
+      required: true,
+      message: 'Seleccione una opción',
     },
     {
       key: 'fr_presion4',
@@ -50,6 +54,8 @@ export const createPresion = (meta) => {
         [false, 'Rechazado'],
       ],
       labelCol: { span: 9 },
+      required: true,
+      message: 'Seleccione una opción',
     },
     {
       key: 'fr_presion6',
@@ -61,6 +67,8 @@ export const createPresion = (meta) => {
         [false, 'Rechazado'],
       ],
       labelCol: { span: 9 },
+      required: true,
+      message: 'Seleccione una opción',
     },
     {
       key: 'fr_presion7',
@@ -71,6 +79,8 @@ export const createPresion = (meta) => {
         [false, 'Rechazado'],
       ],
       labelCol: { span: 9 },
+      required: true,
+      message: 'Seleccione una opción',
     },
     {
       key: 'fr_presion8',

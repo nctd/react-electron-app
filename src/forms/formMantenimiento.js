@@ -8,6 +8,8 @@ export const createMantenimiento = (meta) => {
         labelCol: { span: 9 },
         wrapperCol: { span: 8 },
       },
+      required: true,
+      message: 'Ingrese persona que realizó la mantenimiento',
     },
     {
       key: 'fr_mant2',
@@ -16,6 +18,8 @@ export const createMantenimiento = (meta) => {
         labelCol: { span: 9 },
         wrapperCol: { span: 8 },
       },
+      required: true,
+      message: 'Ingrese normas aplicadas',
     },
     {
       key: 'fr_mant3',
@@ -27,6 +31,8 @@ export const createMantenimiento = (meta) => {
         [false, 'No'],
       ],
       labelCol: { span: 9 },
+      required: true,
+      message: 'Seleccione una opción',
     },
     {
       key: 'fr_mant4',
@@ -39,6 +45,8 @@ export const createMantenimiento = (meta) => {
         ['otra', 'Otra'],
       ],
       labelCol: { span: 9 },
+      required: true,
+      message: 'Seleccione una opción',
     },
     {
       key: 'fr_mant5',
@@ -70,6 +78,8 @@ export const createMantenimiento = (meta) => {
         [false, 'No'],
       ],
       labelCol: { span: 9 },
+      required: true,
+      message: 'Seleccione una opción',
     },
     {
       key: 'fr_mant8',
@@ -80,6 +90,8 @@ export const createMantenimiento = (meta) => {
         [false, 'No'],
       ],
       labelCol: { span: 9 },
+      required: true,
+      message: 'Seleccione una opción',
     },
     {
       key: 'fr_mant9',
@@ -90,6 +102,8 @@ export const createMantenimiento = (meta) => {
         [false, 'No'],
       ],
       labelCol: { span: 9 },
+      required: true,
+      message: 'Seleccione una opción',
     },
     {
       key: 'fr_mant10',
@@ -101,6 +115,8 @@ export const createMantenimiento = (meta) => {
         [false, 'No'],
       ],
       labelCol: { span: 9 },
+      required: true,
+      message: 'Seleccione una opción',
     },
     {
       key: 'fr_mant11',
@@ -111,6 +127,8 @@ export const createMantenimiento = (meta) => {
         [false, 'No'],
       ],
       labelCol: { span: 9 },
+      required: true,
+      message: 'Seleccione una opción',
     },
     {
       key: 'fr_mant12',
@@ -121,6 +139,8 @@ export const createMantenimiento = (meta) => {
         [false, 'No'],
       ],
       labelCol: { span: 9 },
+      required: true,
+      message: 'Seleccione una opción',
     },
     {
       key: 'fr_mant13',
@@ -131,6 +151,8 @@ export const createMantenimiento = (meta) => {
         [false, 'No'],
       ],
       labelCol: { span: 9 },
+      required: true,
+      message: 'Seleccione una opción',
     },
     {
       key: 'fr_mant14',
@@ -141,6 +163,8 @@ export const createMantenimiento = (meta) => {
         [false, 'No'],
       ],
       labelCol: { span: 9 },
+      required: true,
+      message: 'Seleccione una opción',
     },
     {
       key: 'fr_mant15',
@@ -151,6 +175,8 @@ export const createMantenimiento = (meta) => {
         [false, 'No'],
       ],
       labelCol: { span: 9 },
+      required: true,
+      message: 'Seleccione una opción',
     },
     {
       key: 'fr_mant16',
