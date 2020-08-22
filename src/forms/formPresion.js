@@ -24,7 +24,10 @@ export const createPresion = (meta) => {
       label: 'Examen previo conforme a NCh2056, 5.1.3',
       widget: 'radio-group',
       // forwardRef: true,
-      options: ['Si', 'No'],
+      options: [
+        [true, 'Si'],
+        [false, 'No'],
+      ],
       labelCol: { span: 9 },
     },
     {
@@ -42,7 +45,10 @@ export const createPresion = (meta) => {
       label: 'Cilindro/tanque',
       widget: 'radio-group',
       // forwardRef: true,
-      options: ['Aceptado', 'Rechazado'],
+      options: [
+        [true, 'Aceptado'],
+        [false, 'Rechazado'],
+      ],
       labelCol: { span: 9 },
     },
     {
@@ -50,15 +56,20 @@ export const createPresion = (meta) => {
       label: 'Cilindro/cartucho gas expelente',
       widget: 'radio-group',
       // forwardRef: true,
-      options: ['Aceptado', 'Rechazado'],
+      options: [
+        [true, 'Aceptado'],
+        [false, 'Rechazado'],
+      ],
       labelCol: { span: 9 },
     },
     {
       key: 'fr_presion7',
       label: 'Conjunto manguera',
       widget: 'radio-group',
-      // forwardRef: true,
-      options: ['Aceptado', 'Rechazado'],
+      options: [
+        [true, 'Aceptado'],
+        [false, 'Rechazado'],
+      ],
       labelCol: { span: 9 },
     },
     {

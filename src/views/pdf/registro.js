@@ -212,6 +212,7 @@ const RegistroCliente = ({ clienteData }) => (
     })}
 
     {serviceResultado(clienteData.clienteData.presionData)}
+    {console.log(clienteData.clienteData)}
   </View>
 );
 

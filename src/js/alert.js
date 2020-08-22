@@ -60,19 +60,28 @@ export const showAlert = () => {
           if (registro.revision) {
             comentariosData.push({
               field: 'Revisión',
-              data: registro.revision.razonComentario,
+              data:
+                registro.revision.razonComentario != undefined
+                  ? registro.revision.razonComentario
+                  : 'N/A',
             });
           }
           if (registro.mantenimiento) {
             comentariosData.push({
               field: 'Mantenimiento',
-              data: registro.mantenimiento.razonComentario,
+              data:
+                registro.mantenimiento.razonComentario != undefined
+                  ? registro.mantenimiento.razonComentario
+                  : 'N/A',
             });
           }
           if (registro.recarga) {
             comentariosData.push({
               field: 'Recarga',
-              data: registro.recarga.comentarios,
+              data:
+                registro.recarga.comentarios != undefined
+                  ? registro.recarga.comentarios
+                  : 'N/A',
             });
           }
           if (registro.presion) {
@@ -88,13 +97,19 @@ export const showAlert = () => {
           if (registro.revision) {
             resultadosData.push({
               field: 'Revisión',
-              data: registro.revision.resultadoComentario,
+              data:
+                registro.revision.resultadoComentario != undefined
+                  ? registro.revision.resultadoComentario
+                  : 'N/A',
             });
           }
           if (registro.mantenimiento) {
             resultadosData.push({
               field: 'Mantenimiento',
-              data: registro.mantenimiento.resultadoComentario,
+              data:
+                registro.mantenimiento.resultadoComentario != undefined
+                  ? registro.mantenimiento.resultadoComentario
+                  : 'N/A',
             });
           }
           if (registro.recarga) {
@@ -106,7 +121,10 @@ export const showAlert = () => {
           if (registro.presion) {
             resultadosData.push({
               field: 'Prueba de presión interna',
-              data: registro.presion.resultadoComentario,
+              data:
+                registro.presion.resultadoComentario != undefined
+                  ? registro.presion.resultadoComentario
+                  : 'N/A',
             });
           }
           return resultadosData;
@@ -252,7 +270,10 @@ export const showAlert = () => {
             },
             {
               field: 'Comentarios',
-              data: registro.revision.razonComentario,
+              data:
+                registro.revision.razonComentario != undefined
+                  ? registro.revision.razonComentario
+                  : 'N/A',
             },
             {
               field: 'Cumple con NCh2056, 4.2.2',
@@ -291,7 +312,10 @@ export const showAlert = () => {
             },
             {
               field: 'Comentarios',
-              data: registro.revision.resultadoComentario,
+              data:
+                registro.revision.resultadoComentario != undefined
+                  ? registro.revision.resultadoComentario
+                  : 'N/A',
             },
           ];
         }
@@ -316,55 +340,96 @@ export const showAlert = () => {
             },
             {
               field: 'Comentarios',
-              data: registro.mantenimiento.razonComentario,
+              data:
+                registro.mantenimiento.razonComentario != undefined
+                  ? registro.mantenimiento.razonComentario
+                  : 'N/A',
             },
             {
               field:
                 'Equipo recuperación/vaciado agente de extinción es el adecuado',
-              data: registro.mantenimiento.resultados[0],
+              data:
+                registro.mantenimiento.resultados[0] === true
+                  ? 'Si'
+                  : 'No',
             },
             {
               field: 'Reemplazo de partes',
-              data: registro.mantenimiento.resultados[1],
+              data:
+                registro.mantenimiento.resultados[1] === true
+                  ? 'Si'
+                  : 'No',
             },
             {
               field:
                 'Repuestos según manual del fabricante, armador o importador',
-              data: registro.mantenimiento.resultados[2],
+              data:
+                registro.mantenimiento.resultados[2] === true
+                  ? 'Si'
+                  : 'No',
             },
             {
               field:
                 'Indicador de presión de reemplazo cumple con normas (NCh1180/5; NCh2056)',
-              data: registro.mantenimiento.resultados[3],
+              data:
+                registro.mantenimiento.resultados[3] === true
+                  ? 'Si'
+                  : 'No',
             },
             {
               field: 'Examen interno del cilindro/tanque',
-              data: registro.mantenimiento.resultados[4],
+              data:
+                registro.mantenimiento.resultados[4] === true
+                  ? 'Si'
+                  : 'No',
             },
             {
               field: 'Examen interno del cartucho/botellín',
-              data: registro.mantenimiento.resultados[5],
+              data:
+                registro.mantenimiento.resultados[5] === true
+                  ? 'Si'
+                  : 'No',
             },
             {
               field: 'Recarga/reemplazo agente de extinción',
-              data: registro.mantenimiento.resultados[6],
+              data:
+                registro.mantenimiento.resultados[6] === true
+                  ? 'Si'
+                  : 'No',
             },
             {
               field: 'Se adoptaron medidas de seguridad',
-              data: registro.mantenimiento.resultados[7],
+              data:
+                registro.mantenimiento.resultados[7] === true
+                  ? 'Si'
+                  : 'No',
             },
             {
               field: 'Se usaron elementos de protección personal',
-              data: registro.mantenimiento.resultados[8],
+              data:
+                registro.mantenimiento.resultados[8] === true
+                  ? 'Si'
+                  : 'No',
             },
             {
               field: 'Comentarios',
-              data: registro.mantenimiento.resultadoComentario,
+              data:
+                registro.mantenimiento.resultadoComentario != undefined
+                  ? registro.mantenimiento.resultadoComentario
+                  : 'N/A',
             },
           ];
         }
 
         if (registro.recarga) {
+          const estanqueidad = () => {
+            if (registro.recarga.verificaEstanqueidad === 'si')
+              return 'Si';
+            if (registro.recarga.verificaEstanqueidad === 'no')
+              return 'No';
+            if (registro.recarga.verificaEstanqueidad === 'no aplica')
+              return 'No aplica';
+          };
           recargaData = [
             {
               field: 'Persona que realizó la recarga',
@@ -393,11 +458,14 @@ export const showAlert = () => {
             },
             {
               field: 'Verificación de estanqueidad después de la recarga',
-              data: registro.recarga.verificaEstanqueidad,
+              data: estanqueidad(),
             },
             {
               field: 'Comentarios',
-              data: registro.recarga.comentarios,
+              data:
+                registro.recarga.comentarios != undefined
+                  ? registro.recarga.comentarios
+                  : 'N/A',
             },
           ];
         }
@@ -414,23 +482,35 @@ export const showAlert = () => {
             },
             {
               field: 'Examen previo conforme a NCh2056, 5.1.3',
-              data: registro.presion.examenPrevio,
+              data: registro.presion.examenPrevio === true ? 'Si' : 'No',
             },
             {
               field: 'Cilindro/tanque',
-              data: registro.presion.resultados[0],
+              data:
+                registro.presion.resultados[0] === true
+                  ? 'Aceptado'
+                  : 'Rechazado',
             },
             {
               field: 'Cilindro/cartucho gas expelente',
-              data: registro.presion.resultados[1],
+              data:
+                registro.presion.resultados[1] === true
+                  ? 'Aceptado'
+                  : 'Rechazado',
             },
             {
               field: 'Conjunto manguera',
-              data: registro.presion.resultados[2],
+              data:
+                registro.presion.resultados[2] === true
+                  ? 'Aceptado'
+                  : 'Rechazado',
             },
             {
               field: 'Comentarios',
-              data: registro.presion.resultadoComentario,
+              data:
+                registro.presion.resultadoComentario != undefined
+                  ? registro.presion.resultadoComentario
+                  : 'N/A',
             },
           ];
         }

@@ -15,6 +15,8 @@ exports.createRegistro = async (registro, cliente, extintor) => {
     presion: registro.presion,
     cliente: cliente,
     extintor: extintor,
+    extintorDebe: registro.extintorDebe,
+    razones: registro.razones,
   });
   return reg;
 };

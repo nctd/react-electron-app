@@ -37,34 +37,29 @@ export const createOne = (form) => {
     revision = {
       encargado: form.getFieldValue('fr_revision1'),
       normaChilena: form.getFieldValue('fr_revision2'),
-      manual: form.getFieldValue('fr_revision3') === 'Si' ? true : false,
+      manual: form.getFieldValue('fr_revision3'),
       razonRevision: form.getFieldValue('fr_revision4'),
       razonComentario: form.getFieldValue('fr_revision5'),
       resultados: [
         {
           descripcion: 'nch2056',
-          respuesta:
-            form.getFieldValue('fr_revision7') === 'Si' ? true : false,
+          respuesta: form.getFieldValue('fr_revision7'),
         },
         {
           descripcion: 'correcciones',
-          respuesta:
-            form.getFieldValue('fr_revision8') === 'Si' ? true : false,
+          respuesta: form.getFieldValue('fr_revision8'),
         },
         {
           descripcion: 'mantenimiento',
-          respuesta:
-            form.getFieldValue('fr_revision9') === 'Si' ? true : false,
+          respuesta: form.getFieldValue('fr_revision9'),
         },
         {
           descripcion: 'retirarServicio',
-          respuesta:
-            form.getFieldValue('fr_revision10') === 'Si' ? true : false,
+          respuesta: form.getFieldValue('fr_revision10'),
         },
         {
           descripcion: 'darBaja',
-          respuesta:
-            form.getFieldValue('fr_revision11') === 'Si' ? true : false,
+          respuesta: form.getFieldValue('fr_revision11'),
         },
       ],
       resultadoComentario: form.getFieldValue('fr_revision12'),
@@ -133,7 +128,7 @@ export const createOne = (form) => {
     recarga = {
       encargado: form.getFieldValue('fr_recarga1'),
       normaChilena: form.getFieldValue('fr_recarga2'),
-      manual: form.getFieldValue('fr_recarga3') === 'Si' ? true : false,
+      manual: form.getFieldValue('fr_recarga3'),
       agenteUtilizado: form.getFieldValue('fr_recarga4'),
       masaExtAntes: form.getFieldValue('fr_recarga5'),
       masaExtDespues: form.getFieldValue('fr_recarga6'),
@@ -146,29 +141,19 @@ export const createOne = (form) => {
     presion = {
       encargado: form.getFieldValue('fr_presion1'),
       normaChilena: form.getFieldValue('fr_presion2'),
-      examenPrevio:
-        form.getFieldValue('fr_presion3') === 'Si' ? true : false,
+      examenPrevio: form.getFieldValue('fr_presion3'),
       resultados: [
         {
           descripcion: 'cilindroTanque',
-          respuesta:
-            form.getFieldValue('fr_presion5') === 'Aceptado'
-              ? true
-              : false,
+          respuesta: form.getFieldValue('fr_presion5'),
         },
         {
           descripcion: 'cilindroGasExpelente',
-          respuesta:
-            form.getFieldValue('fr_presion6') === 'Aceptado'
-              ? true
-              : false,
+          respuesta: form.getFieldValue('fr_presion6'),
         },
         {
           descripcion: 'conjuntoManguera',
-          respuesta:
-            form.getFieldValue('fr_presion7') === 'Aceptado'
-              ? true
-              : false,
+          respuesta: form.getFieldValue('fr_presion7'),
         },
       ],
       resultadoComentario: form.getFieldValue('fr_presion8'),
@@ -189,6 +174,8 @@ export const createOne = (form) => {
     extintorDebe: extintorDebe,
     razones: razones,
   };
+
+  console.log(registro);
 
   form.submit();
   ipcRenderer.send('add', cliente, extintor, registro);

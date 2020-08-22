@@ -8,6 +8,8 @@ export const createRecarga = (meta) => {
         labelCol: { span: 9 },
         wrapperCol: { span: 8 },
       },
+      required: true,
+      message: 'Ingrese persona que realizó la recarga',
     },
     {
       key: 'fr_recarga2',
@@ -17,14 +19,20 @@ export const createRecarga = (meta) => {
         wrapperCol: { span: 8 },
       },
       required: true,
+      message: 'Ingrese normas aplicadas',
     },
     {
       key: 'fr_recarga3',
       label: 'Se utilizó el manual del fabricante o armador',
       widget: 'radio-group',
       // forwardRef: true,
-      options: ['Si', 'No'],
+      options: [
+        [true, 'Si'],
+        [false, 'No'],
+      ],
       labelCol: { span: 9 },
+      required: true,
+      message: 'Seleccione una opción',
     },
     {
       key: 'fr_recarga4',
@@ -33,6 +41,8 @@ export const createRecarga = (meta) => {
         labelCol: { span: 9 },
         wrapperCol: { span: 8 },
       },
+      required: true,
+      message: 'Ingrese agente de extinción',
     },
     {
       key: 'fr_recarga5',
@@ -41,6 +51,8 @@ export const createRecarga = (meta) => {
         labelCol: { span: 9 },
         wrapperCol: { span: 8 },
       },
+      required: true,
+      message: 'Ingrese masa extintor antes de la recarga',
     },
     {
       key: 'fr_recarga6',
@@ -49,6 +61,8 @@ export const createRecarga = (meta) => {
         labelCol: { span: 9 },
         wrapperCol: { span: 8 },
       },
+      required: true,
+      message: 'Ingrese masa extintor después de la recarga',
     },
     {
       key: 'fr_recarga7',
@@ -61,6 +75,8 @@ export const createRecarga = (meta) => {
         ['no aplica', 'No aplica'],
       ],
       labelCol: { span: 9 },
+      required: true,
+      message: 'Seleccione una opción',
     },
     {
       key: 'fr_recarga8',

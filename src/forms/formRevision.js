@@ -22,7 +22,10 @@ export const createRevision = (meta) => {
       label: 'Se utilizó el manual del fabricante o armador',
       widget: 'radio-group',
       // forwardRef: true,
-      options: ['Si', 'No'],
+      options: [
+        [true, 'Si'],
+        [false, 'No'],
+      ],
       labelCol: { span: 9 },
     },
     {
@@ -60,7 +63,10 @@ export const createRevision = (meta) => {
       key: 'fr_revision7',
       label: 'Cumple con NCh2056, 4.2.2',
       widget: 'radio-group',
-      options: ['Si', 'No'],
+      options: [
+        [true, 'Si'],
+        [false, 'No'],
+      ],
       labelCol: { span: 9 },
     },
     {
@@ -68,28 +74,40 @@ export const createRevision = (meta) => {
       label: 'Requiere de correcciones',
       // tooltip: "Detallar correcciones en comentarios",
       widget: 'radio-group',
-      options: ['Si', 'No'],
+      options: [
+        [true, 'Si'],
+        [false, 'No'],
+      ],
       labelCol: { span: 9 },
     },
     {
       key: 'fr_revision9',
       label: 'Requiere de mantenimiento',
       widget: 'radio-group',
-      options: ['Si', 'No'],
+      options: [
+        [true, 'Si'],
+        [false, 'No'],
+      ],
       labelCol: { span: 9 },
     },
     {
       key: 'fr_revision10',
       label: 'Retirar de servicio',
       widget: 'radio-group',
-      options: ['Si', 'No'],
+      options: [
+        [true, 'Si'],
+        [false, 'No'],
+      ],
       labelCol: { span: 9 },
     },
     {
       key: 'fr_revision11',
       label: 'Dar de baja',
       widget: 'radio-group',
-      options: ['Si', 'No'],
+      options: [
+        [true, 'Si'],
+        [false, 'No'],
+      ],
       labelCol: { span: 9 },
     },
     {

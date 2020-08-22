@@ -300,7 +300,7 @@ const formConclusion = {
       ],
       labelCol: { span: 6 },
       required: true,
-      message: 'Seleccione una opcion',
+      message: 'Debe seleccionar una opción',
     },
     {
       key: 'fr_conclusion2',

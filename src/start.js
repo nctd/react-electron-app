@@ -84,7 +84,7 @@ ipcMain.on('add', async (e, cliente, extintor, registro) => {
     e.sender.send('add-reply', type, cliente, extintor, registro);
   } catch (err) {
     const type = 'error';
-    e.sender.send('add-reply', type, err);
+    e.sender.send('add-reply', type, cliente, extintor, registro, err);
   }
 });
 

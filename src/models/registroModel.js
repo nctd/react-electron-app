@@ -34,14 +34,14 @@ const registroSchema = new mongoose.Schema({
       enum: ['puesta en servicio', 'segun programa', 'otra'],
       lowercase: true,
     },
-    razonComentario: { type: String, default: 'N/A' },
+    razonComentario: { type: String },
     resultados: {
       type: [
         {
           descripcion: {
             type: String,
           },
-          respuesta: String,
+          respuesta: Boolean,
         },
       ],
       default: undefined,
@@ -73,12 +73,24 @@ const registroSchema = new mongoose.Schema({
     resultadoComentario: { type: String },
   },
   recarga: {
-    encargado: { type: String },
-    normaChilena: { type: String },
-    manual: { type: Boolean },
-    agenteUtilizado: { type: String },
-    masaExtAntes: { type: String },
-    masaExtDespues: { type: String },
+    encargado: {
+      type: String,
+    },
+    normaChilena: {
+      type: String,
+    },
+    manual: {
+      type: Boolean,
+    },
+    agenteUtilizado: {
+      type: String,
+    },
+    masaExtAntes: {
+      type: String,
+    },
+    masaExtDespues: {
+      type: String,
+    },
     verificaEstanqueidad: {
       type: String,
       enum: ['si', 'no', 'no aplica'],
@@ -87,16 +99,23 @@ const registroSchema = new mongoose.Schema({
     comentarios: { type: String },
   },
   presion: {
-    encargado: { type: String },
-    normaChilena: { type: String },
-    examenPrevio: { type: Boolean },
+    encargado: {
+      type: String,
+    },
+    normaChilena: {
+      type: String,
+    },
+
+    examenPrevio: {
+      type: Boolean,
+    },
     resultados: {
       type: [
         {
           descripcion: {
             type: String,
           },
-          respuesta: String,
+          respuesta: Boolean,
         },
       ],
       default: undefined,
@@ -121,9 +140,11 @@ const registroSchema = new mongoose.Schema({
       'ser dado de baja',
     ],
     lowercase: true,
+    required: [true, 'El campo extintorDebe no puede estar vacío'],
   },
   razones: {
     type: String,
+    required: [true, 'El campo razones no puede estar vacío'],
   },
   creacion: { type: Date, default: Date.now() },
 });
