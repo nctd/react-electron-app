@@ -1,6 +1,6 @@
 import React, { useCallback, useState } from 'react';
 import _ from 'lodash';
-import { Form, Button, Steps, Tabs, Modal } from 'antd';
+import { Form, Button, Steps, Tabs, Modal, message } from 'antd';
 import FormBuilder from 'antd-form-builder';
 import locale from 'antd/lib/date-picker/locale/es_ES';
 import moment from 'moment';
@@ -48,7 +48,7 @@ const formCliente = {
       key: 'cliente.direccion',
       label: 'Dirección',
       wrapperCol: { span: 12 },
-      widgetProps: { maxLength: 30 },
+      widgetProps: { maxLength: 40 },
       required: true,
       message: 'Ingrese dirección del cliente',
     },
@@ -56,6 +56,7 @@ const formCliente = {
       key: 'cliente.comuna',
       label: 'Comuna',
       wrapperCol: { span: 12 },
+      widgetProps: { maxLength: 40 },
       required: true,
       message: 'Ingrese comuna del cliente',
     },
@@ -63,6 +64,9 @@ const formCliente = {
       key: 'cliente.telefono',
       label: 'Teléfono',
       wrapperCol: { span: 12 },
+      widgetProps: { addonBefore: '+569', maxLength: 8 },
+      // widget: 'number',
+      rules: [{ min: 8, message: 'Complete el número telefónico' }],
       required: true,
       message: 'Ingrese teléfono del cliente',
     },
@@ -70,6 +74,7 @@ const formCliente = {
       key: 'cliente.email',
       label: 'Correo electrónico',
       wrapperCol: { span: 12 },
+      widgetProps: { maxLength: 40 },
       required: true,
       message: 'Ingrese correo electrónico del cliente',
     },
@@ -510,9 +515,9 @@ export default () => {
     }
     dataForms = {
       cliente: {
-        nombre: cliente.nombre == '' ? 'N/A' : cliente.nombre,
+        nombre: cliente.nombre,
         direccion: cliente.direccion,
-        telefono: cliente.telefono,
+        telefono: `+569${cliente.telefono}`,
         comuna: cliente.comuna,
         email: cliente.email,
       },

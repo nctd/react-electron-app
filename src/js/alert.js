@@ -555,9 +555,6 @@ export const showAlert = () => {
         return Modal.success({
           title: 'Operación exitosa',
           content: 'Registro de cliente guardado',
-          onOk: () => {
-            // window.location.reload();
-          },
         });
       } else {
         return Modal.error({

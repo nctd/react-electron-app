@@ -10,7 +10,7 @@ import {
   PDFViewer,
   PDFDownloadLink,
 } from '@react-pdf/renderer';
-import { Button } from 'antd';
+import { Button, Modal } from 'antd';
 import Header from './header';
 import Detalle from './detalle';
 import DatosEmpresa from './datosEmpresa';
@@ -46,6 +46,17 @@ const styles = StyleSheet.create({
     },
   },
 });
+
+const nuevoRegistro = () => {
+  return Modal.confirm({
+    title: 'Confirmación',
+    content: '¿Crear un nuevo registro?',
+    cancelText: 'Cancelar',
+    onOk: () => {
+      window.location.reload();
+    },
+  });
+};
 
 const Registro = (
   clienteData,
@@ -222,8 +233,16 @@ export const renderPDF = (
         }
         fileName={`informe-${reg}-${date}`}
       >
-        <Button type="primary">Descargar PDF</Button>
+        <Button style={{ float: 'left', marginTop: '5px' }} type="primary">
+          Descargar PDF
+        </Button>
       </PDFDownloadLink>
+      <Button
+        style={{ float: 'right', marginTop: '5px' }}
+        onClick={nuevoRegistro}
+      >
+        Nuevo registro
+      </Button>
     </div>,
     document.getElementById('root')
     // `${__dirname}/informe-${reg}-${date}.pdf`

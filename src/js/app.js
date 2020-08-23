@@ -16,8 +16,8 @@ export const createOne = (form) => {
   const cliente = {
     nombre: data_cli.nombre,
     direccion: data_cli.direccion,
-    comuna: data_cli.telefono,
-    telefono: data_cli.comuna,
+    comuna: data_cli.comuna,
+    telefono: `+569${data_cli.telefono}`,
     correo: data_cli.email,
   };
   const extintor = {
@@ -165,7 +165,7 @@ export const createOne = (form) => {
     extintorDebe: extintorDebe,
     razones: razones,
   };
-
+  console.log(cliente);
   form.submit();
   ipcRenderer.send('add', cliente, extintor, registro);
 };

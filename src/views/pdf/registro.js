@@ -199,7 +199,11 @@ const RegistroCliente = ({ clienteData }) => (
       title: 'Acciones realizadas',
     })}
 
-    {serviceResultado(clienteData.clienteData.mantenimientoData)}
+    {serviceInfo(clienteData.clienteData.mantenimientoData, {
+      ini: 5,
+      end: 15,
+    })}
+    {/* {serviceResultado(clienteData.clienteData.mantenimientoData)} */}
 
     {/* RECARGA */}
     {serviceTitle(clienteData.clienteData.recargaData, {
@@ -219,7 +223,11 @@ const RegistroCliente = ({ clienteData }) => (
       title: 'Resultados prueba',
     })}
 
-    {serviceResultado(clienteData.clienteData.presionData)}
+    {serviceInfo(clienteData.clienteData.presionData, {
+      ini: 3,
+      end: 7,
+    })}
+    {/* {serviceResultado(clienteData.clienteData.presionData)} */}
   </View>
 );
 
