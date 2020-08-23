@@ -36,6 +36,8 @@ function createWindow() {
     useContentSize: true,
     webPreferences: {
       nodeIntegration: true,
+      plugins: true,
+      webSecurity: false,
     },
   });
   mainWindow.maximize();
@@ -81,10 +83,18 @@ ipcMain.on('add', async (e, cliente, extintor, registro) => {
     const reg = await Registro.createRegistro(registro, cli, ext);
 
     const type = 'success';
-    e.sender.send('add-reply', type, cliente, extintor, registro);
+    e.sender.send('add-reply', type, cliente, extintor, registro, reg.id);
   } catch (err) {
     const type = 'error';
-    e.sender.send('add-reply', type, cliente, extintor, registro, err);
+    e.sender.send(
+      'add-reply',
+      type,
+      cliente,
+      extintor,
+      registro,
+      reg.id,
+      err
+    );
   }
 });
 

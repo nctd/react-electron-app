@@ -670,7 +670,7 @@ export default () => {
               Atras
             </Button>
           )}
-          <Button>Cancelar</Button>&nbsp; &nbsp;
+
           <Button
             type="primary"
             onClick={isReview ? () => form.submit() : handleNext}
@@ -718,7 +718,7 @@ export default () => {
               Atras
             </Button>
           )}
-          <Button>Cancelar</Button>&nbsp; &nbsp;
+
           <Button
             type="primary"
             onClick={isReview ? () => form.submit() : handleNext}
@@ -763,7 +763,7 @@ export default () => {
               Atras
             </Button>
           )}
-          <Button>Cancelar</Button>&nbsp; &nbsp;
+
           <Button
             type="primary"
             onClick={isReview ? () => form.submit() : handleNext}
@@ -810,7 +810,6 @@ export default () => {
               Atras
             </Button>
           )}
-          <Button>Cancelar</Button>&nbsp; &nbsp;
           <Button
             type="primary"
             onClick={isReview ? () => createOne(form) : handleNext}

@@ -119,10 +119,10 @@ const serviceTitleResultado = (data, { title }) => {
   }
 };
 
-const serviceInfo = (data, { cant }) => {
+const serviceInfo = (data, { ini, end }) => {
   if (data.length > 0) {
     return data
-      .splice(0, cant)
+      .slice(ini, end)
       .map(({ field, data }) => (
         <FormEntry field={field} key={field + data} data={data} />
       ));
@@ -172,20 +172,28 @@ const RegistroCliente = ({ clienteData }) => (
       title: 'Revisión',
     })}
 
-    {serviceInfo(clienteData.clienteData.revisionData, { cant: 5 })}
+    {serviceInfo(clienteData.clienteData.revisionData, { ini: 0, end: 5 })}
 
     {serviceTitleResultado(clienteData.clienteData.revisionData, {
       title: 'Resultados revisión',
     })}
 
-    {serviceResultado(clienteData.clienteData.revisionData)}
-    {console.log(clienteData.clienteData.mantenimientoData)}
+    {serviceInfo(clienteData.clienteData.revisionData, {
+      ini: 5,
+      end: 11,
+    })}
+    {/* 
+    {serviceResultado(clienteData.clienteData.revisionData)} */}
+
     {/* MANTENIMIENTO */}
     {serviceTitle(clienteData.clienteData.mantenimientoData, {
       title: 'Mantenimiento',
     })}
 
-    {serviceInfo(clienteData.clienteData.mantenimientoData, { cant: 5 })}
+    {serviceInfo(clienteData.clienteData.mantenimientoData, {
+      ini: 0,
+      end: 5,
+    })}
 
     {serviceTitleResultado(clienteData.clienteData.mantenimientoData, {
       title: 'Acciones realizadas',
@@ -205,7 +213,7 @@ const RegistroCliente = ({ clienteData }) => (
       title: 'Prueba de presión interna',
     })}
 
-    {serviceInfo(clienteData.clienteData.presionData, { cant: 3 })}
+    {serviceInfo(clienteData.clienteData.presionData, { ini: 0, end: 3 })}
 
     {serviceTitleResultado(clienteData.clienteData.presionData, {
       title: 'Resultados prueba',

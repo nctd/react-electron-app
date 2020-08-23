@@ -7,7 +7,7 @@ const moment = require('moment');
 export const showAlert = () => {
   ipcRenderer.on(
     'add-reply',
-    (e, type, cliente, extintor, registro, err) => {
+    (e, type, cliente, extintor, registro, reg, err) => {
       if (type === 'success') {
         const clienteData = [
           {
@@ -304,7 +304,7 @@ export const showAlert = () => {
                   : 'No',
             },
             {
-              field: 'Dar de baja (Obsolencia u otra razón)',
+              field: 'Dar de baja (obsolencia u otra razón)',
               data:
                 registro.revision.resultados[4].respuesta === true
                   ? 'Si'
@@ -548,12 +548,16 @@ export const showAlert = () => {
           revisionData,
           mantenimientoData,
           recargaData,
-          presionData
+          presionData,
+          reg
         );
 
         return Modal.success({
           title: 'Operación exitosa',
           content: 'Registro de cliente guardado',
+          onOk: () => {
+            // window.location.reload();
+          },
         });
       } else {
         return Modal.error({

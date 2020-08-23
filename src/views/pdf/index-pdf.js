@@ -1,14 +1,16 @@
 import React, { useState } from 'react';
-
+import ReactDOM from 'react-dom';
 import {
   Text,
   Document,
-  Font,
   Page,
   StyleSheet,
   Image,
   View,
+  PDFViewer,
+  PDFDownloadLink,
 } from '@react-pdf/renderer';
+import { Button } from 'antd';
 import Header from './header';
 import Detalle from './detalle';
 import DatosEmpresa from './datosEmpresa';
@@ -60,7 +62,7 @@ const Registro = (
     <Header title={'Registro de cliente'} />
     <View style={styles.container}>
       <View style={styles.leftColumn}>
-        <Image src="./public/sercoinB.png" style={styles.image} />
+        <Image src={'sercoinb.png'} style={styles.image} />
         <DatosEmpresa
           clienteData={clienteData}
           representanteData={representanteData}
@@ -95,7 +97,7 @@ const Resume = (
     <Header title={'Informe al cliente'} />
     <View style={styles.container}>
       <View style={styles.leftColumn}>
-        <Image src="./public/sercoinB.png" style={styles.image} />
+        <Image src={'sercoinb.png'} style={styles.image} />
         <DatosEmpresa
           clienteData={clienteData}
           representanteData={representanteData}
@@ -163,7 +165,7 @@ const Output = (
     />
   </Document>
 );
-const xf = Date.now();
+const date = Date.now();
 
 export const renderPDF = (
   clienteData,
@@ -178,24 +180,52 @@ export const renderPDF = (
   revisionData,
   mantenimientoData,
   recargaData,
-  presionData
+  presionData,
+  reg
 ) => {
-  ReactPDF.render(
-    <Output
-      clienteData={clienteData}
-      extintorData={extintorData}
-      servicioData={servicioData}
-      representanteData={representanteData}
-      contactoData={contactoData}
-      comentariosData={comentariosData}
-      resultadosData={resultadosData}
-      conclusionData={conclusionData}
-      razonesData={razonesData}
-      revisionData={revisionData}
-      mantenimientoData={mantenimientoData}
-      recargaData={recargaData}
-      presionData={presionData}
-    />,
-    `${__dirname}/informe-${xf}.pdf`
+  ReactDOM.render(
+    <div>
+      <PDFViewer style={{ width: '100%', height: '800px' }}>
+        <Output
+          clienteData={clienteData}
+          extintorData={extintorData}
+          servicioData={servicioData}
+          representanteData={representanteData}
+          contactoData={contactoData}
+          comentariosData={comentariosData}
+          resultadosData={resultadosData}
+          conclusionData={conclusionData}
+          razonesData={razonesData}
+          revisionData={revisionData}
+          mantenimientoData={mantenimientoData}
+          recargaData={recargaData}
+          presionData={presionData}
+        />
+      </PDFViewer>
+      <PDFDownloadLink
+        document={
+          <Output
+            clienteData={clienteData}
+            extintorData={extintorData}
+            servicioData={servicioData}
+            representanteData={representanteData}
+            contactoData={contactoData}
+            comentariosData={comentariosData}
+            resultadosData={resultadosData}
+            conclusionData={conclusionData}
+            razonesData={razonesData}
+            revisionData={revisionData}
+            mantenimientoData={mantenimientoData}
+            recargaData={recargaData}
+            presionData={presionData}
+          />
+        }
+        fileName={`informe-${reg}-${date}`}
+      >
+        <Button type="primary">Descargar PDF</Button>
+      </PDFDownloadLink>
+    </div>,
+    document.getElementById('root')
+    // `${__dirname}/informe-${reg}-${date}.pdf`
   );
 };
