@@ -8,6 +8,7 @@ export const createPresion = (meta) => {
         labelCol: { span: 9 },
         wrapperCol: { span: 8 },
       },
+      widgetProps: { maxLength: 40 },
       required: true,
       message: 'Ingrese la persona que realizó la prueba',
     },
@@ -18,6 +19,7 @@ export const createPresion = (meta) => {
         labelCol: { span: 9 },
         wrapperCol: { span: 8 },
       },
+      widgetProps: { maxLength: 40 },
       required: true,
       message: 'Ingrese normas aplicadas',
     },
@@ -90,6 +92,7 @@ export const createPresion = (meta) => {
         labelCol: { span: 9 },
         wrapperCol: { span: 8 },
       },
+      widgetProps: { maxLength: 150 },
       tooltip:
         'En caso de rechazo, indicar forma y responsable de destrucción',
     }

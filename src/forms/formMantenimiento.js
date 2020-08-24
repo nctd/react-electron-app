@@ -8,6 +8,7 @@ export const createMantenimiento = (meta) => {
         labelCol: { span: 9 },
         wrapperCol: { span: 8 },
       },
+      widgetProps: { maxLength: 40 },
       required: true,
       message: 'Ingrese persona que realizó la mantenimiento',
     },
@@ -18,6 +19,7 @@ export const createMantenimiento = (meta) => {
         labelCol: { span: 9 },
         wrapperCol: { span: 8 },
       },
+      widgetProps: { maxLength: 40 },
       required: true,
       message: 'Ingrese normas aplicadas',
     },
@@ -57,6 +59,7 @@ export const createMantenimiento = (meta) => {
         wrapperCol: { span: 8 },
       },
       placeholder: 'Detallar razón del mantenimiento',
+      widgetProps: { maxLength: 150 },
     },
     {
       key: 'fr_mant6',
@@ -186,6 +189,7 @@ export const createMantenimiento = (meta) => {
         labelCol: { span: 9 },
         wrapperCol: { span: 8 },
       },
+      widgetProps: { maxLength: 150 },
       placeholder:
         'Detallar partes y piezas reemplazadas; observaciones examen interno, medidas de seguridad adoptadas, agente de extinción',
     }

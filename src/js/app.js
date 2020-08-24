@@ -153,10 +153,10 @@ export const createOne = (form) => {
 
   const registro = {
     nombreRep: data_rep.nombre,
-    telefonoRep: data_rep.telefono,
+    telefonoRep: `+569${data_rep.telefono}`,
     correoRep: data_rep.email,
     nombreContacto: data_con.nombre,
-    telefonoContacto: data_con.telefono,
+    telefonoContacto: `+569${data_con.telefono}`,
     correoContacto: data_con.email,
     revision: revision,
     mantenimiento: mantenimiento,

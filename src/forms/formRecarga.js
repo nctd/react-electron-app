@@ -8,6 +8,7 @@ export const createRecarga = (meta) => {
         labelCol: { span: 9 },
         wrapperCol: { span: 8 },
       },
+      widgetProps: { maxLength: 40 },
       required: true,
       message: 'Ingrese persona que realizó la recarga',
     },
@@ -18,6 +19,7 @@ export const createRecarga = (meta) => {
         labelCol: { span: 9 },
         wrapperCol: { span: 8 },
       },
+      widgetProps: { maxLength: 40 },
       required: true,
       message: 'Ingrese normas aplicadas',
     },
@@ -41,6 +43,7 @@ export const createRecarga = (meta) => {
         labelCol: { span: 9 },
         wrapperCol: { span: 8 },
       },
+      widgetProps: { maxLength: 40 },
       required: true,
       message: 'Ingrese agente de extinción',
     },
@@ -51,6 +54,7 @@ export const createRecarga = (meta) => {
         labelCol: { span: 9 },
         wrapperCol: { span: 8 },
       },
+      widgetProps: { type: 'number' },
       required: true,
       message: 'Ingrese masa extintor antes de la recarga',
     },
@@ -61,6 +65,7 @@ export const createRecarga = (meta) => {
         labelCol: { span: 9 },
         wrapperCol: { span: 8 },
       },
+      widgetProps: { type: 'number' },
       required: true,
       message: 'Ingrese masa extintor después de la recarga',
     },
@@ -86,6 +91,7 @@ export const createRecarga = (meta) => {
         labelCol: { span: 9 },
         wrapperCol: { span: 8 },
       },
+      widgetProps: { maxLength: 150 },
     }
   );
 };

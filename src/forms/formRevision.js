@@ -8,6 +8,7 @@ export const createRevision = (meta) => {
         labelCol: { span: 9 },
         wrapperCol: { span: 8 },
       },
+      widgetProps: { maxLength: 40 },
       required: true,
       message: 'Ingrese persona que realizó la revisión',
     },
@@ -18,6 +19,7 @@ export const createRevision = (meta) => {
         labelCol: { span: 9 },
         wrapperCol: { span: 8 },
       },
+      widgetProps: { maxLength: 40 },
       required: true,
       message: 'Ingrese normas aplicadas',
     },
@@ -56,6 +58,7 @@ export const createRevision = (meta) => {
         labelCol: { span: 9 },
         wrapperCol: { span: 8 },
       },
+      widgetProps: { maxLength: 150 },
     },
     {
       key: 'fr_revision6',
@@ -137,6 +140,7 @@ export const createRevision = (meta) => {
         wrapperCol: { span: 8 },
       },
       placeholder: 'Detallar necesidades de mantenimiento',
+      widgetProps: { maxLength: 150 },
     }
   );
 };

@@ -231,7 +231,7 @@ export const renderPDF = (
             presionData={presionData}
           />
         }
-        fileName={`informe-${reg}-${date}`}
+        fileName={`informe-${reg}-${date}.pdf`}
       >
         <Button style={{ float: 'left', marginTop: '5px' }} type="primary">
           Descargar PDF
