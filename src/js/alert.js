@@ -28,7 +28,7 @@ export const showAlert = () => {
           },
           {
             field: 'Correo electrónico',
-            data: cliente.correo,
+            data: cliente.correo.toLowerCase(),
           },
         ];
 
@@ -199,7 +199,7 @@ export const showAlert = () => {
           },
           {
             field: 'Correo electrónico',
-            data: registro.correoRep,
+            data: registro.correoRep.toLowerCase(),
           },
         ];
 
@@ -214,7 +214,7 @@ export const showAlert = () => {
           },
           {
             field: 'Correo electrónico',
-            data: registro.correoContacto,
+            data: registro.correoContacto.toLowerCase(),
           },
         ];
 

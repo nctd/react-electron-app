@@ -12,6 +12,7 @@ const registroSchema = new mongoose.Schema({
   correoRep: {
     type: String,
     required: [true, 'Se necesita el correo del representante'],
+    lowercase: true,
   },
   nombreContacto: {
     type: String,
@@ -24,6 +25,7 @@ const registroSchema = new mongoose.Schema({
   correoContacto: {
     type: String,
     required: [true, 'Se necesita el correo del contacto en la empresa'],
+    lowercase: true,
   },
   revision: {
     encargado: { type: String },
