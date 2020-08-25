@@ -296,7 +296,7 @@ const formServicio = {
       label: 'Prueba de presión interna',
       widget: 'checkbox',
       formItemLayout: {
-        labelCol: { span: 10 },
+        labelCol: { span: 16 },
       },
     },
   ],
