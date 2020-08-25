@@ -30,7 +30,8 @@
     "postinstall": "install-app-deps"
   },
   "build": {
-    "appId": "com.electron.electron-with-create-react-app",
+    "appId": "electron.sercoin",
+    "productName": "Sercoin",
     "files": [
       "*.js",
       "views",
@@ -39,11 +40,15 @@
       "./build/**/*",
       "./src/**/*"
     ],
+    "win": {
+      "icon": ".././build/icon.ico"
+    },
     "extends": null,
     "directories": {
       "buildResources": "public"
     }
   },
+  "author": "Nicolas Torres D.",
   "eslintConfig": {
     "extends": "react-app"
   },

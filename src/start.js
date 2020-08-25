@@ -16,19 +16,14 @@ mongoose
     useFindAndModify: false,
     useUnifiedTopology: false,
   })
-  .then(() =>
+  .catch((err) =>
     dialog.showMessageBox(
       null,
-      { message: 'DB Connection successful' },
+      { message: `Error: No se encontro la base de datos, ${err}` },
       (response) => {
-        console.log(response);
+        console.log(err);
       }
     )
-  )
-  .catch((err) =>
-    dialog.showMessageBox(null, { message: 'Error' }, (response) => {
-      console.log(err);
-    })
   );
 
 let mainWindow;
@@ -36,8 +31,9 @@ let mainWindow;
 function createWindow() {
   mainWindow = new BrowserWindow({
     minWidth: 1600,
-    // icon: path.join(__dirname, '/../public/icon_sercoin.ico'),
+    icon: path.join(__dirname, '/../build/icon_sercoin.ico'),
     useContentSize: true,
+    title: 'Sercoin',
     webPreferences: {
       nodeIntegration: true,
       plugins: true,
@@ -47,7 +43,7 @@ function createWindow() {
   mainWindow.maximize();
 
   mainWindow.removeMenu();
-  mainWindow.webContents.openDevTools();
+
   mainWindow.loadURL(
     process.env.ELECTRON_START_URL ||
       url.format({
@@ -86,14 +82,6 @@ ipcMain.on('add', async (e, cliente, extintor, registro) => {
     e.sender.send('add-reply', type, cliente, extintor, registro, reg.id);
   } catch (err) {
     const type = 'error';
-    e.sender.send(
-      'add-reply',
-      type,
-      cliente,
-      extintor,
-      registro,
-      reg.id,
-      err
-    );
+    e.sender.send('add-reply', type, cliente, extintor, registro, err);
   }
 });

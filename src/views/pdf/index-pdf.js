@@ -73,7 +73,7 @@ const Registro = (
     <Header title={'Registro de cliente'} />
     <View style={styles.container}>
       <View style={styles.leftColumn}>
-        <Image src={'sercoinb.png'} style={styles.image} />
+        <Image src={'build/sercoinb.png'} style={styles.image} />
         <DatosEmpresa
           clienteData={clienteData}
           representanteData={representanteData}
