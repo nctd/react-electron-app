@@ -165,7 +165,7 @@ export const createOne = (form) => {
     extintorDebe: extintorDebe,
     razones: razones,
   };
-  console.log(cliente);
+
   form.submit();
   ipcRenderer.send('add', cliente, extintor, registro);
 };
