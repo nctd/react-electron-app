@@ -9,7 +9,6 @@
     "@testing-library/user-event": "^7.1.2",
     "antd": "^4.4.1",
     "dotenv": "^8.2.0",
-    "electron": "^9.1.0",
     "mongoose": "^5.9.26",
     "pdf-lib": "^1.10.0",
     "react": "^16.13.1",
@@ -26,15 +25,21 @@
     "electron": "electron .",
     "electron-start": "node src/start-react",
     "react-start": "set BROWSER && react-scripts start",
-    "pack": "build --dir",
-    "dist": "npm run build && build",
+    "pack": "electron-builder --dir",
+    "dist": "electron-builder",
     "postinstall": "install-app-deps"
   },
   "build": {
     "appId": "com.electron.electron-with-create-react-app",
-    "win": {
-      "iconUrl": "/../public/icon_sercoin.ico"
-    },
+    "files": [
+      "*.js",
+      "views",
+      "public",
+      "node_modules",
+      "./build/**/*",
+      "./src/**/*"
+    ],
+    "extends": null,
     "directories": {
       "buildResources": "public"
     }
@@ -56,6 +61,7 @@
   },
   "devDependencies": {
     "antd-form-builder": "^2.0.0",
-    "electron-builder": "^22.7.0"
+    "electron-builder": "^22.7.0",
+    "electron": "^9.1.0"
   }
 }

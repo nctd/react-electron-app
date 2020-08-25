@@ -10,7 +10,7 @@ const Extintor = require('./controllers/extintorController');
 require('dotenv').config();
 
 mongoose
-  .connect(process.env.DATABASE_LOCAL, {
+  .connect('mongodb://localhost:27017/sercoin-dev', {
     useNewUrlParser: true,
     useCreateIndex: true,
     useFindAndModify: false,
@@ -25,14 +25,18 @@ mongoose
       }
     )
   )
-  .catch((err) => console.log(err));
+  .catch((err) =>
+    dialog.showMessageBox(null, { message: 'Error' }, (response) => {
+      console.log(err);
+    })
+  );
 
 let mainWindow;
 
 function createWindow() {
   mainWindow = new BrowserWindow({
     minWidth: 1600,
-    icon: path.join(__dirname, '/../public/icon_sercoin.ico'),
+    // icon: path.join(__dirname, '/../public/icon_sercoin.ico'),
     useContentSize: true,
     webPreferences: {
       nodeIntegration: true,
@@ -41,16 +45,13 @@ function createWindow() {
     },
   });
   mainWindow.maximize();
-  // mainWindow.setResizable(false);
-  // mainWindow.on("unmaximize", () => mainWindow.maximize());
+
   mainWindow.removeMenu();
-
   mainWindow.webContents.openDevTools();
-
   mainWindow.loadURL(
     process.env.ELECTRON_START_URL ||
       url.format({
-        pathname: path.join(__dirname, '/../public/index.html'),
+        pathname: path.join(__dirname, '/../build/index.html'),
         protocol: 'file:',
         slashes: true,
       })
@@ -77,7 +78,6 @@ app.on('activate', () => {
 
 ipcMain.on('add', async (e, cliente, extintor, registro) => {
   try {
-    // QUE PASA SI REGISTRA CLIENTE Y NO EXTINTOR,ETC
     const cli = await Cliente.createCliente(cliente);
     const ext = await Extintor.createExtintor(extintor);
     const reg = await Registro.createRegistro(registro, cli, ext);
@@ -97,8 +97,3 @@ ipcMain.on('add', async (e, cliente, extintor, registro) => {
     );
   }
 });
-
-// TODO:
-// MENSAJES X
-// PDF
-// VALIDACIONES
