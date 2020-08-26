@@ -40,6 +40,7 @@ const formCliente = {
       label: 'Nombre o razón social',
       clear: 'both',
       wrapperCol: { span: 12 },
+      labelCol: { span: 12 },
       widgetProps: { maxLength: 40 },
       required: true,
       message: 'Ingrese nombre o razón social',
@@ -47,6 +48,7 @@ const formCliente = {
     {
       key: 'cliente.direccion',
       label: 'Dirección',
+      labelCol: { span: 12 },
       wrapperCol: { span: 12 },
       widgetProps: { maxLength: 40 },
       required: true,
@@ -64,6 +66,7 @@ const formCliente = {
       key: 'cliente.telefono',
       label: 'Teléfono',
       wrapperCol: { span: 12 },
+      labelCol: { span: 12 },
       widgetProps: { addonBefore: '+569', type: 'number' },
       rules: [{ len: 8, message: 'El número de teléfono es incorrecto' }],
       required: true,
@@ -89,6 +92,7 @@ const formRepresentante = {
       label: 'Nombre representante de la empresa',
       clear: 'both',
       wrapperCol: { span: 12 },
+      labelCol: { span: 12 },
       widgetProps: { maxLength: 40 },
       required: true,
       message: 'Ingrese nombre del representante',
@@ -97,6 +101,7 @@ const formRepresentante = {
       key: 'representante.telefono',
       label: 'Teléfono',
       wrapperCol: { span: 12 },
+      labelCol: { span: 12 },
       widgetProps: { addonBefore: '+569', type: 'number' },
       rules: [{ len: 8, message: 'El número de teléfono es incorrecto' }],
       required: true,
@@ -122,6 +127,7 @@ const formContacto = {
       label: 'Nombre contacto en la empresa',
       clear: 'both',
       wrapperCol: { span: 12 },
+      labelCol: { span: 12 },
       widgetProps: { maxLength: 40 },
       required: true,
       message: 'Ingrese nombre del contacto',
@@ -130,6 +136,7 @@ const formContacto = {
       key: 'contacto.telefono',
       label: 'Teléfono',
       wrapperCol: { span: 12 },
+      labelCol: { span: 12 },
       widgetProps: { addonBefore: '+569', type: 'number' },
       rules: [{ len: 8, message: 'El número de teléfono es incorrecto' }],
       required: true,
@@ -155,6 +162,7 @@ const formExtintor = {
       label: 'N° de identificación',
       clear: 'both',
       wrapperCol: { span: 12 },
+      labelCol: { span: 12 },
       widgetProps: { maxLength: 40 },
       required: true,
       message: 'Ingrese n° de identificación del extintor',
@@ -164,6 +172,7 @@ const formExtintor = {
       label: 'Marca',
       clear: 'both',
       wrapperCol: { span: 12 },
+      labelCol: { span: 12 },
       widgetProps: { maxLength: 40 },
       required: true,
       message: 'Ingrese marca del extintor',
@@ -176,6 +185,7 @@ const formExtintor = {
       options: ['Recargable', 'No recargable'],
       required: true,
       message: 'Ingrese tipo del extintor',
+      labelCol: { span: 12 },
     },
     {
       key: 'extintor.agente',
@@ -183,6 +193,7 @@ const formExtintor = {
       extra: 'NCh1430, cláusula 5',
       clear: 'both',
       wrapperCol: { span: 12 },
+      labelCol: { span: 12 },
       widgetProps: { maxLength: 40 },
       required: true,
       message: 'Ingrese agente de extinción del extintor',
@@ -191,6 +202,7 @@ const formExtintor = {
       key: 'extintor.p_trabajo',
       label: 'Presión de trabajo',
       wrapperCol: { span: 12 },
+      labelCol: { span: 12 },
       widgetProps: { maxLength: 10 },
       required: true,
       message: 'Ingrese presión de trabajo',
@@ -208,6 +220,7 @@ const formExtintor = {
       label: 'Fabricación del cílindro ',
       placeholder: 'Seleccionar fecha',
       widget: 'date-picker',
+      labelCol: { span: 12 },
       widgetProps: {
         style: { width: '100%' },
         picker: 'month',
@@ -272,7 +285,7 @@ const formServicio = {
       label: 'Revisión',
       widget: 'checkbox',
       formItemLayout: {
-        labelCol: { span: 8 },
+        labelCol: { span: 12 },
       },
     },
     {
@@ -280,7 +293,7 @@ const formServicio = {
       label: 'Mantenimiento',
       widget: 'checkbox',
       formItemLayout: {
-        labelCol: { span: 8 },
+        labelCol: { span: 12 },
       },
     },
     {
@@ -288,7 +301,7 @@ const formServicio = {
       label: 'Recarga',
       widget: 'checkbox',
       formItemLayout: {
-        labelCol: { span: 8 },
+        labelCol: { span: 12 },
       },
     },
     {
@@ -443,6 +456,9 @@ export default () => {
       formServicio.fields[3].formItemLayout = {
         labelCol: { span: 8 },
       };
+      formServicio.fields[1].formItemLayout = {
+        labelCol: { span: 8 },
+      };
       formExtintor.fields[3].extra = null;
     }
   };
@@ -452,7 +468,10 @@ export default () => {
     setCurrentStep(currentStep - 1);
 
     formServicio.fields[3].formItemLayout = {
-      labelCol: { span: 10 },
+      labelCol: { span: 16 },
+    };
+    formServicio.fields[1].formItemLayout = {
+      labelCol: { span: 12 },
     };
     formExtintor.fields[3].extra = 'NCh1430, cláusula 5';
   };
@@ -819,6 +838,7 @@ export default () => {
             form={form}
             meta={newWizardMeta.steps[currentStep].formMeta}
             initialValues={dataForms}
+            labelCol={{ span: 16 }}
           />
         </div>
         <Form.Item className="form-footer" style={{ textAlign: 'right' }}>

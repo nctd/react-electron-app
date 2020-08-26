@@ -43,6 +43,7 @@ function createWindow() {
   mainWindow.maximize();
 
   mainWindow.removeMenu();
+  mainWindow.webContents.openDevTools();
 
   mainWindow.loadURL(
     process.env.ELECTRON_START_URL ||

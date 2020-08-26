@@ -110,13 +110,13 @@ export const createMantenimiento = (meta) => {
     },
     {
       key: 'fr_mant10',
-      label:
-        'Indicador de presión de reemplazo cumple con normas (NCH1180/5; NCh2056)',
+      label: 'Indicador de presión de reemplazo cumple con normas',
       widget: 'radio-group',
       options: [
         [true, 'Si'],
         [false, 'No'],
       ],
+      tooltip: 'NCH1180/5; NCh2056',
       labelCol: { span: 9 },
       required: true,
       message: 'Seleccione una opción',
