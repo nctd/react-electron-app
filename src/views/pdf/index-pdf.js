@@ -73,7 +73,7 @@ const Registro = (
     <Header title={'Registro de cliente'} />
     <View style={styles.container}>
       <View style={styles.leftColumn}>
-        <Image src={'build/sercoinb.png'} style={styles.image} />
+        <Image src={'sercoinb.png'} style={styles.image} />
         <DatosEmpresa
           clienteData={clienteData}
           representanteData={representanteData}
@@ -245,6 +245,5 @@ export const renderPDF = (
       </Button>
     </div>,
     document.getElementById('root')
-    // `${__dirname}/informe-${reg}-${date}.pdf`
   );
 };
