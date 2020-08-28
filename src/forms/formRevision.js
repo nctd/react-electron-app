@@ -38,7 +38,7 @@ export const createRevision = (meta) => {
     },
     {
       key: 'fr_revision4',
-      label: 'Razon de la revisión',
+      label: 'Razón de la revisión',
       widget: 'radio-group',
       // forwardRef: true,
       options: [

@@ -38,7 +38,7 @@ export const createMantenimiento = (meta) => {
     },
     {
       key: 'fr_mant4',
-      label: 'Razon del mantenimiento',
+      label: 'Razón del mantenimiento',
       widget: 'radio-group',
       // forwardRef: true,
       options: [

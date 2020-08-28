@@ -217,7 +217,7 @@ const formExtintor = {
     },
     {
       key: 'extintor.fabricacion',
-      label: 'Fabricación del cílindro ',
+      label: 'Fabricación del cilindro ',
       placeholder: 'Seleccionar fecha',
       widget: 'date-picker',
       labelCol: { span: 12 },
