@@ -67,6 +67,6 @@
   "devDependencies": {
     "antd-form-builder": "^2.0.0",
     "electron-builder": "^22.7.0",
-    "electron": "^9.1.0"
+    "electron": "^18.3.7"
   }
 }
